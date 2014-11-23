@@ -3,8 +3,8 @@
 # Loads all shell configuration regarding the Homer framework as well
 # as the user's own shell configuration in `~/etc/profile.d`.
 
-# Load dependencies
-source "/usr/local/share/homer/antigen.zsh"
+# Load the framework
+source "/usr/local/lib/homer.zsh"
 
 # Load plugins
 source "$HOME/etc/plugins"
@@ -12,12 +12,7 @@ source "$HOME/etc/plugins"
 # Load aliases
 source "$HOME/etc/aliases"
 
-# Common profile configuration
-for file in `ls -a /usr/local/etc/homer/profile.d`; do
-  source "/usr/local/etc/homer/profile.d/$file"
-done
-
-# User's local profile configuration
+# Load user profile configuration
 for file in `ls $HOME/etc/profile.d`; do
   source "$HOME/etc/profile.d/$file"
 done
