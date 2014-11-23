@@ -2,10 +2,9 @@
 # This Makefile's overall structure was shamelessly stolen from
 # postmodern/ruby-install.
 
-
 SHELL=/usr/bin/env zsh
 NAME=homer
-VERSION=0.0.1
+VERSION=master
 AUTHOR=tubbo
 URL=https://github.com/$(AUTHOR)/$(NAME)
 
@@ -62,11 +61,6 @@ tag:
 
 release: update tag download sign
 
-rpm:
-	rpmdev-setuptree
-	spectool -g -R rpm/ruby-install.spec
-	rpmbuild -ba rpm/ruby-install.spec
-
 install:
 	for dir in $(INSTALL_DIRS); do mkdir -p $(PREFIX)/$$dir; done
 	for file in $(INSTALL_FILES); do cp $$file $(PREFIX)/$$file; done
@@ -77,4 +71,4 @@ uninstall:
 	for file in $(INSTALL_FILES); do rm -f $(PREFIX)/$$file; done
 	rm -rf $(DOC_DIR)
 
-.PHONY: build man download sign verify clean test tag release rpm install uninstall all
+.PHONY: build man download sign verify clean test tag release install uninstall all
