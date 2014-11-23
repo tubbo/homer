@@ -1,0 +1,15 @@
+#!/bin/zsh
+#
+# Executes Homer commands
+
+if [[ -e "/usr/local/bin/homer-${COMMAND}" ]]; then
+  homer-${COMMAND}
+else
+  echo <<TXT
+  Homer, your home directory manager. <http://tubbo.github.io/homer>
+
+  Usage: homer COMMAND [ARGUMENTS]
+
+  For more information, please type 'man homer'
+TXT
+fi

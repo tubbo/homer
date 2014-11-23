@@ -1,0 +1,6 @@
+#!/bin/zsh
+#
+# Initialize the home dir.
+
+cp -a $HOMER_PATH/share/home /Users/$USER/;
+git init /Users/$USER/

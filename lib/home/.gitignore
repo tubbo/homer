@@ -1,0 +1,58 @@
+# This gitignore is for files that should always be ignored from every
+# Git repo on the machine. It is *not* for time-savers that one might
+# generate for every gitignore on a given type of project.
+
+# OS X garbage
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+.Spotlight-V100
+.Trashes
+
+# Vim temporary files
+.*.sw[a-z]
+*.un~
+Session.vim
+.netrwhist
+
+# Mercurial repos
+/.hg/*
+*/.hg/*
+.hgignore
+
+# Local Bundler settings
+.bundle
+/vendor/gems
+/vendor/bundle
+
+# Environment configuration
+.env
+
+# CTags
+tags
+
+# Archives and packages
+*.7z
+*.jar
+*.rar
+*.zip
+*.gz
+*.bzip
+*.bz2
+*.xz
+*.lzma
+*.iso
+*.tar
+*.dmg
+*.xpi
+*.gem
+*.egg
+*.deb
+*.rpm
+
+# CTags
+tags
+
+# Directory info
+.info
