@@ -1,0 +1,7 @@
+#!/bin/zsh
+#
+# Copy a script to your $PATH
+
+let script=$1
+
+cp $script $HOME/bin/$script

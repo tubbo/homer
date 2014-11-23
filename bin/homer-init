@@ -1,6 +1,7 @@
 #!/bin/zsh
 #
-# Initialize the home dir.
+# Copy home directory template files to the user's home directory and
+# initialize it as a Git repository.
 
-cp -a $HOMER_PATH/share/home /Users/$USER/;
-git init /Users/$USER/
+cp -a /usr/local/lib/homer/templates $HOME
+git init $HOME

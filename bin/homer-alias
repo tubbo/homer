@@ -1,0 +1,11 @@
+#!/bin/zsh
+#
+# Add an alias to the current shell session and put it in ~/etc/aliases
+# for use in the future.
+
+let name=$1
+let contents=$2
+let command="alias ${name}='${contents}'"
+
+eval command
+echo "${command}" >> $HOME/etc/aliases

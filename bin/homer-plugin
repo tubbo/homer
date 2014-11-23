@@ -1,0 +1,27 @@
+#!/bin/zsh
+#
+# Install a shell plugin with Antigen, and save it in the
+# ~/etc/plugins file.
+
+pushd $HOME
+
+let cmd=$1
+let file=$HOME/etc/plugins
+let plugin=$2
+
+case "$cmd" in
+  install)
+    antigen install $plugin
+    echo "antigen bundle $plugin" >> $file
+    ;;
+  uninstall)
+    sed "/antigen bundle $plugin/,/" $file
+    ;;
+  *)
+    echo "Usage: homer plugin [install|uninstall] PLUGIN_NAME"
+    exit 1
+esac
+
+git commit $file -m "Added shell plugin '$plugin'"
+
+popd
