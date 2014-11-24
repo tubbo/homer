@@ -1,8 +1,0 @@
-#!/bin/zsh
-#
-# Install a shell plugin with Antigen, and save it in the
-# ~/etc/plugins file.
-
-pushd $HOME
-antigen bundle $1
-popd

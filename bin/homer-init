@@ -3,5 +3,5 @@
 # Copy home directory template files to the user's home directory and
 # initialize it as a Git repository.
 
-cp -a /usr/local/lib/homer/templates $HOME
+cp -a /usr/local/share/homer $HOME
 git init $HOME
