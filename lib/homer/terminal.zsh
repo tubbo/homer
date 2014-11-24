@@ -14,3 +14,9 @@ COMPLETION_WAITING_DOTS="true"
 # Colorize Grep
 export GREP_OPTIONS='--color=auto'
 export GREP_COLOR='1;32'
+
+# Set the title of the current terminal session
+title() {
+  print -Pn "\033];$1\007";
+}
+alias t=title
