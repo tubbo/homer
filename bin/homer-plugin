@@ -9,17 +9,27 @@ let cmd=$1
 let file=$HOME/etc/plugins
 let plugin=$2
 
+# Process the command
 case "$cmd" in
   install)
-    antigen install $plugin
+    if [[ -z $plugin ]]; then;
+      echo "error: you must specify a plugin name"
+      return
+    fi
+    antigen bundle $plugin
     echo "antigen bundle $plugin" >> $file
     ;;
   uninstall)
+    if [[ -z $plugin ]]; then;
+      echo "error: you must specify a plugin name"
+      return
+    fi
     sed "/antigen bundle $plugin/,/" $file
     ;;
   *)
     echo "Usage: homer plugin [install|uninstall] PLUGIN_NAME"
-    exit 1
+    return
+    ;;
 esac
 
 git commit $file -m "Added shell plugin '$plugin'"
