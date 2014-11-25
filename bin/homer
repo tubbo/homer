@@ -2,14 +2,23 @@
 #
 # Executes Homer commands
 
-if [[ -e "/usr/local/bin/homer-${COMMAND}" ]]; then
-  homer-${COMMAND}
+if [[ -z $HOMER_PREFIX ]]; then
+  HOMER_PREFIX=$(brew --prefix homer)
+fi
+HOMER_COMMAND=$1
+HOMER_EXECUTABLE=$HOMER_PREFIX/bin/homer-$HOMER_COMMAND
+
+if [[ -e $HOMER_EXECUTABLE ]]; then
+  $HOMER_EXECUTABLE
 else
-  echo <<TXT
+  echo "not found: $HOMER_EXECUTABLE"
+  echo "
   Homer, your home directory manager. <http://tubbo.github.io/homer>
 
   Usage: homer COMMAND [ARGUMENTS]
 
   For more information, please type 'man homer'
-TXT
+
+  Commands: init, load, save, alias, script, plugin, update
+"
 fi
