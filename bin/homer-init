@@ -3,5 +3,9 @@
 # Copy home directory template files to the user's home directory and
 # initialize it as a Git repository.
 
-cp -a /usr/local/share/homer $HOME
-git init $HOME
+if [[ -e "$HOME/.git" ]]; then;
+  echo "There is already an existing repo in your home dir."
+else
+  cp -a /usr/local/share/homer $HOME
+  git init $HOME
+fi
