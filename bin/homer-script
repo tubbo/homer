@@ -4,4 +4,8 @@
 
 let script=$1
 
-cp $script $HOME/bin/$script
+if [[ -e $script ]]; then
+  cp $script $HOME/bin/$script
+else
+  echo "error: $script was not found in your local path."
+fi
