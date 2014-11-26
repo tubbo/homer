@@ -23,3 +23,6 @@ done
 
 # Add user path on top so ~/bin files override the main $PATHs.
 export PATH=$HOME/bin:$PATH
+
+# Configure a basic prompt string
+PROMPT="♬  "
