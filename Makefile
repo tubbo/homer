@@ -20,7 +20,7 @@ test:
 	bats test
 
 dependencies:
-	pip install --user git+git://github.com/Lokaltog/powerline
+	pip install git+git://github.com/Lokaltog/powerline
 
 install: dependencies
 	for dir in $(INSTALL_DIRS); do mkdir -p $(PREFIX)/$$dir; done
@@ -30,6 +30,6 @@ uninstall: clean
 	for file in $(INSTALL_FILES); do rm -f $(PREFIX)/$$file; done
 
 clean:
-	pip uninstall --user powerline
+	pip uninstall powerline
 
 .PHONY: test dependencies install uninstall all
