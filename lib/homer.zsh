@@ -10,6 +10,12 @@ for file in `ls /usr/local/lib/homer`; do
   source "/usr/local/lib/homer/$file"
 done
 
+# Configure a basic prompt string
+export PROMPT="♬  "
+
+# Add user path on top so ~/bin files override the main $PATHs.
+export PATH=$HOME/bin:$PATH
+
 # Load user plugins
 source "$HOME/etc/plugins.zsh"
 
@@ -20,9 +26,3 @@ source "$HOME/etc/aliases.zsh"
 for file in `ls $HOME/etc/profile.d`; do
   source "$HOME/etc/profile.d/$file"
 done
-
-# Add user path on top so ~/bin files override the main $PATHs.
-export PATH=$HOME/bin:$PATH
-
-# Configure a basic prompt string
-PROMPT="♬  "
