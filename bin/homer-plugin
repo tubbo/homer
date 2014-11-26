@@ -6,7 +6,7 @@
 pushd $HOME
 
 let cmd=$1
-let file=$HOME/etc/plugins
+let file=$HOME/etc/plugins.zsh
 let plugin=$2
 
 # Process the command
