@@ -1,0 +1,17 @@
+{
+  "name": "homer",
+  "version": "0.0.1",
+  "description": "a home directory management tool",
+  "global": "1",
+  "install": "make install",
+  "scripts": [
+    "bin/homer",
+    "bin/homer-alias",
+    "bin/homer-init",
+    "bin/homer-plugin",
+    "bin/homer-save",
+    "bin/homer-script",
+    "bin/homer-update"
+  ]
+}
+
