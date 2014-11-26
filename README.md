@@ -63,6 +63,7 @@ dependencies installed:
 - python
 - pip
 - powerline
+- bats (only if you're developing on the project)
 
 Once they're all installed, run the following commands to install to
 `/usr/local`...
@@ -127,7 +128,10 @@ $ homer script bin/find-and-replace-in-project
 $ find-and-replace-in-project
 ```
 
-Homer isn't the smartest guy in the world, but he gets the job done.
+All of the aforementioned commands include automatic committing to your
+home dir's repo, so you never lose your place. Homer isn't the smartest
+guy in the world, but he gets the job done. He stays out of your way and
+if you want to change your shell around, he makes it easy.
 
 ### Conventions
 
@@ -143,6 +147,32 @@ you.
 ## Development
 
 Homer is written entirely in ZSH shell script. It uses [BATS][bats] to
-run its tests. All contributions must include tests.
+run its tests. All contributions must include tests. To run all tests,
+execute `make test` at the root of the project directory. Homer uses the
+MIT License, as described below
+
+```
+The MIT License (MIT)
+
+Copyright (c) 2014 Tom Scott
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+```
 
 [bats]: https://github.com/sstephenson/bats
