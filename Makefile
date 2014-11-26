@@ -17,7 +17,7 @@ PREFIX?=$(DESTDIR)/usr/local
 all: test install
 
 test:
-	bats test/*
+	bats test
 
 install:
 	for dir in $(INSTALL_DIRS); do mkdir -p $(PREFIX)/$$dir; done

@@ -11,6 +11,5 @@ HOMER_EXECUTABLE=$HOMER_PREFIX/bin/homer-$HOMER_COMMAND
 if [[ -e $HOMER_EXECUTABLE ]]; then
   $HOMER_EXECUTABLE
 else
-  $HOMER_PREFIX/bin/homer-usage
-  exit 1
+  $HOMER_PREFIX/bin/homer-help
 fi
