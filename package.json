@@ -1,6 +1,6 @@
 {
   "name": "homer",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "a home directory management tool",
   "global": "1",
   "install": "make install",
