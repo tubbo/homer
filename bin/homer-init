@@ -8,4 +8,5 @@ if [[ -e "$HOME/.git" ]]; then;
 else
   cp -a /usr/local/share/homer $HOME
   git init $HOME
+  echo "Your home directory has been initialized with Homer."
 fi
