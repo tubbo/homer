@@ -11,10 +11,10 @@ for file in `ls /usr/local/lib/homer`; do
 done
 
 # Load user plugins
-source "$HOME/etc/plugins"
+source "$HOME/etc/plugins.zsh"
 
 # Load user aliases
-source "$HOME/etc/aliases"
+source "$HOME/etc/aliases.zsh"
 
 # Load user profile configuration
 for file in `ls $HOME/etc/profile.d`; do
