@@ -1,8 +1,36 @@
 # Homer
 
-Homer keeps your home directory tidy and easy to navigate. It
-automatically stores content in various folders and can easily sync
-hidden-file configuration to a GitHub repository.
+Homer is a home directory manager for your shell. Using [Git][git], it
+tracks changes in your home directory configuration from anywhere on
+your machine. Its goal is to uncover the IDE-like possibilities of the
+shell and make such features more approachable to newer users, while
+still retaining its usefulness to power users.
+
+Homer is an opinionated, but minimal, framework. While most of what
+it assumes about your environment is strongly enforced across the
+framework, it attempts to assume very little about your system, instead
+allowing you to customize your shell the way you see fit. In many ways,
+Homer is really meant to just get rid of all the boilerplate code one
+would need to have a really stellar shell environment.
+
+## How It Works
+
+Homer is effectively a Git repo and shell manager that can be accessed
+from anywhere on the machine. It's written entirely in ZSH shell script
+in a way that's both performant and highly accurate. Homer is really
+nothing more than a set of conventions, a few shell scripts to make
+things easier, and some useful/sane defaults for ZSH. All of Homer's
+components are simply tools that wrap a Git repository, usually
+performing a command in the process (like adding an alias or copying a
+whole script) which involves changing a file in the home directory.
+
+Homer is very similar to tools like [GNU Stow][stow], its main
+difference is that instead of keeping a directory separate from
+`$HOME` and symlinking the necessary files over from some
+version-controlled directory when asked, Homer simply uses the home
+directory as a Git repo. This provides a number of benefits including
+the ability to keep entire directories of content tracked, omission of
+secret/large/irrelevant files with a whitelisted `~/.gitignore`, and 
 
 ## Features
 
@@ -13,14 +41,31 @@ hidden-file configuration to a GitHub repository.
 
 ## Installation
 
-Install Homer with Homebrew:
+There are a number of ways to install Homer...
+
+### From a Package Manager
+
+Currently, Homer is only available on Homebrew:
 
 ```bash
 $ brew tap tubbo/brewery
 $ brew install homer
 ```
 
-Or, you can clone this repo and install the bleeding-edge version.
+### From Source
+
+Before installing from source, make sure you have the following hard
+dependencies installed:
+
+- zsh
+- chruby
+- ruby-install
+- python
+- pip
+- powerline
+
+Once they're all installed, run the following commands to install to
+`/usr/local`...
 
 ```bash
 $ git clone https://github.com/tubbo/homer.git
@@ -33,9 +78,6 @@ When its installed, run the setup command:
 ```bash
 $ homer init
 ```
-
-This will turn your home directory into a Git repo and upload its
-initial commit to GitHub.
 
 ## Usage
 
@@ -75,7 +117,7 @@ $ gc -m "wow this is cool"
 It can also delete them.
 
 ```bash
-$ homer alias --delete gc
+$ homer alias -d gc
 ```
 
 Homer can copy useful scripts to your `$PATH`.
@@ -92,8 +134,11 @@ Homer isn't the smartest guy in the world, but he gets the job done.
 Homer establishes a number of conventions on your home directory. It
 uses the **bin/** directory to store user-made scripts which can be made
 available in the path. It creates an **etc/** directory and uses that to
-store files such as **etc/plugins** for defining shell plugins and
-**etc/aliases** for storing shell aliases you wish to recall later.
+store files such as **etc/plugins.zsh** for defining shell plugins and
+**etc/aliases.zsh** for storing shell aliases you wish to recall later.
+Note that the aforementioned files should not be edited manually, the
+`homer alias` and `homer plugin` tools are meant to manage the files for
+you.
 
 ## Development
 

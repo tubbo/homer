@@ -6,6 +6,10 @@ let script=$1
 
 if [[ -e $script ]]; then
   cp $script $HOME/bin/$script
+  pushd $HOME
+  git add bin/$script
+  git commit bin/$script -m "Added shell script '$script'"
+  popd
 else
   echo "error: $script was not found in your local path."
 fi

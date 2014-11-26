@@ -11,14 +11,6 @@ HOMER_EXECUTABLE=$HOMER_PREFIX/bin/homer-$HOMER_COMMAND
 if [[ -e $HOMER_EXECUTABLE ]]; then
   $HOMER_EXECUTABLE
 else
-  echo "not found: $HOMER_EXECUTABLE"
-  echo "
-  Homer, your home directory manager. <http://tubbo.github.io/homer>
-
-  Usage: homer COMMAND [ARGUMENTS]
-
-  For more information, please type 'man homer'
-
-  Commands: init, load, save, alias, script, plugin, update
-"
+  $HOMER_PREFIX/bin/homer-usage
+  exit 1
 fi
