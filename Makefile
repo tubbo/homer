@@ -19,12 +19,17 @@ all: test install
 test:
 	bats test
 
-install:
+dependencies:
+	pip install --user git+git://github.com/Lokaltog/powerline
+
+install: dependencies
 	for dir in $(INSTALL_DIRS); do mkdir -p $(PREFIX)/$$dir; done
 	for file in $(INSTALL_FILES); do cp $$file $(PREFIX)/$$file; done
 
-uninstall:
+uninstall: clean
 	for file in $(INSTALL_FILES); do rm -f $(PREFIX)/$$file; done
-	rm -rf $(DOC_DIR)
 
-.PHONY: test install uninstall all
+clean:
+	pip uninstall --user powerline
+
+.PHONY: test dependencies install uninstall all
