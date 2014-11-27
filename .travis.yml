@@ -1,3 +1,7 @@
+#
+# CI configuration
+#
+
 before_install:
   - sudo add-apt-repository ppa:duggan/bats --yes
   - sudo apt-get update -qq
