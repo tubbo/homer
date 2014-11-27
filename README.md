@@ -45,11 +45,18 @@ There are a number of ways to install Homer...
 
 ### From a Package Manager
 
-Currently, Homer is only available on Homebrew:
+As a package, Homer is currently only available on [Homebrew][brew]:
 
 ```bash
-$ brew tap tubbo/brewery
+$ brew tap tubbo/homebrew-tap
 $ brew install homer
+```
+
+You can also install the edge version of Homer, which is the latest
+commit of 'master' branch, by applying the **--HEAD** switch:
+
+```bash
+$ brew install homer --HEAD
 ```
 
 ### From Source
@@ -175,4 +182,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ```
 
+[git]: http://git-scm.com
+[brew]: http://brew.sh
 [bats]: https://github.com/sstephenson/bats
+[stow]: http://www.gnu.org/software/stow/
