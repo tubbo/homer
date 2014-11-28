@@ -16,43 +16,61 @@ homer \- your home directory manager
 .LP
 .PP
 Homer is a command\-line utility to manage your shell\[cq]s home directory\.
+.LP
+.PP
 For more information, check out:
+.LP
+.PP
 https:\[sl]\[sl]github\.com\[sl]tubbo\[sl]homer\[sh]readme
 .LP
 .SH ARGUMENTS
 .LP
-.HP
-\fICOMMAND\fP The command you wish to run\.
-\fIARGUMENTS\fP Arguments for said command\.
+.TP
+\fICOMMAND\fP
+The command you wish to run\.
+.LP
+.TP
+\fIARGUMENTS\fP
+Arguments for said command\.
 .LP
 .SH EXAMPLES
 .LP
 .PP
 Save a dotfile:
+.LP
+.PP
 \fB
 homer save .vimrc -m "Removed vim-rails"
 \fR
 .LP
 .PP
 Sync with your Git repo:
+.LP
+.PP
 \fB
 homer update
 \fR
 .LP
 .PP
 Install shell plugins:
+.LP
+.PP
 \fB
 homer plugin install zsh-users/zsh-syntax-highlighting
 \fR
 .LP
 .PP
 Remove shell plugins:
+.LP
+.PP
 \fB
 homer plugin uninstall zsh-users/zsh-syntax-highlighting
 \fR
 .LP
 .PP
 Save an alias for later use:
+.LP
+.PP
 \fB
 homer alias gc 'git commit'
 gc -m "wow this is cool"
@@ -60,12 +78,16 @@ gc -m "wow this is cool"
 .LP
 .PP
 Forget an alias:
+.LP
+.PP
 \fB
 homer alias --delete gc
 \fR
 .LP
 .PP
 Copy useful scripts to your \fB$PATH\fR:
+.LP
+.PP
 \fB
 homer script bin/find-and-replace-in-project
 find-and-replace-in-project
@@ -75,8 +97,14 @@ find-and-replace-in-project
 .LP
 .HP
 \fI\[ti]\[sl]bin:\fP User scripts directory\. Added to your \fB$PATH\fR automatically\.
+.LP
+.HP
 \fI\[ti]\[sl]etc\[sl]profile\.d\[sl]:\fP User configs directory
+.LP
+.HP
 \fI\[ti]\[sl]etc\[sl]plugins\.zsh:\fP Plugins configuration
+.LP
+.HP
 \fI\[ti]\[sl]etc\[sl]aliases\.zsh:\fP User aliases configuration
 .LP
 .SH AUTHOR
@@ -88,5 +116,7 @@ Tom Scott http:\[sl]\[sl]psychedeli\.ca
 .LP
 .SH SEE ALSO
 .LP
-.PP
+.RS
+.IP \(bu 2
 antigen(1)
+.RE
