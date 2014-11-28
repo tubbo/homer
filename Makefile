@@ -19,6 +19,12 @@ all: clean test install
 test:
 	bats test
 
+share/man/man1/homer.1: doc/man/homer.1.md
+	kramdown-man doc/man/homer.1.md > share/man/man1/homer.1
+
+man: share/man/man1/homer.1
+	git add share/man/man1/homer.1
+
 install:
 	for dir in $(INSTALL_DIRS); do mkdir -p $(PREFIX)/$$dir; done
 	for file in $(INSTALL_FILES); do cp $$file $(PREFIX)/$$file; done
