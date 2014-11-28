@@ -1,5 +1,7 @@
 # Homer
 
+[![Build Status](https://travis-ci.org/tubbo/homer.svg?branch=master)][ci]
+
 Homer is a home directory manager for your shell. Using [Git][git], it
 tracks changes in your home directory configuration from anywhere on
 your machine. Its goal is to uncover the IDE-like possibilities of the
@@ -156,7 +158,7 @@ you.
 Homer is written entirely in ZSH shell script. It uses [BATS][bats] to
 run its tests. All contributions must include tests. To run all tests,
 execute `make test` at the root of the project directory. Homer uses the
-MIT License, as described below
+MIT License, as described below:
 
 ```
 The MIT License (MIT)
@@ -182,7 +184,10 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ```
 
+Pull requests must pass [CI][ci] before being accepted.
+
 [git]: http://git-scm.com
 [brew]: http://brew.sh
 [bats]: https://github.com/sstephenson/bats
 [stow]: http://www.gnu.org/software/stow/
+[ci]: https://travis-ci.org/tubbo/homer
