@@ -14,7 +14,10 @@ INSTALL_FILES=`find $(DIRS) -type f`
 
 PREFIX?=$(DESTDIR)/usr/local
 
-all: clean test install
+all: clean test man install
+
+clean:
+	rm share/man/man1/homer.1
 
 test:
 	bats test
@@ -29,7 +32,7 @@ install:
 	for dir in $(INSTALL_DIRS); do mkdir -p $(PREFIX)/$$dir; done
 	for file in $(INSTALL_FILES); do cp $$file $(PREFIX)/$$file; done
 
-clean:
+uninstall:
 	for file in $(INSTALL_FILES); do rm -f $(PREFIX)/$$file; done
 
 .PHONY: test dependencies install clean all

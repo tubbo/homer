@@ -2,6 +2,11 @@
 .\" https://github.com/postmodern/kramdown-man#readme
 .TH homer 1 "Nov 2014" homer "User Manuals"
 .LP
+.SH NAME
+.LP
+.PP
+homer \- your home directory manager
+.LP
 .SH SYNOPSIS
 .LP
 .HP
@@ -11,74 +16,43 @@
 .LP
 .PP
 Homer is a command\-line utility to manage your shell\[cq]s home directory\.
-.LP
-.PP
 For more information, check out:
-.LP
-.PP
 https:\[sl]\[sl]github\.com\[sl]tubbo\[sl]homer\[sh]readme
 .LP
 .SH ARGUMENTS
 .LP
-.TP
-\fICOMMAND\fP
-The command you wish to run\.
-.LP
-.TP
-\fIARGUMENTS\fP
-Arguments for said command\.
-.LP
-.SH COMMANDS
-.LP
-.RS
-.IP \(bu 2
-init
-.IP \(bu 2
-save
-.IP \(bu 2
-update
-.IP \(bu 2
-load
-.RE
+.HP
+\fICOMMAND\fP The command you wish to run\.
+\fIARGUMENTS\fP Arguments for said command\.
 .LP
 .SH EXAMPLES
 .LP
 .PP
 Save a dotfile:
-.LP
-.PP
 \fB
 homer save .vimrc -m "Removed vim-rails"
 \fR
 .LP
 .PP
 Sync with your Git repo:
-.LP
-.PP
 \fB
 homer update
 \fR
 .LP
 .PP
 Install shell plugins:
-.LP
-.PP
 \fB
 homer plugin install zsh-users/zsh-syntax-highlighting
 \fR
 .LP
 .PP
 Remove shell plugins:
-.LP
-.PP
 \fB
 homer plugin uninstall zsh-users/zsh-syntax-highlighting
 \fR
 .LP
 .PP
 Save an alias for later use:
-.LP
-.PP
 \fB
 homer alias gc 'git commit'
 gc -m "wow this is cool"
@@ -86,45 +60,29 @@ gc -m "wow this is cool"
 .LP
 .PP
 Forget an alias:
-.LP
-.PP
 \fB
 homer alias --delete gc
 \fR
 .LP
 .PP
 Copy useful scripts to your \fB$PATH\fR:
-.LP
-.PP
 \fB
 homer script bin/find-and-replace-in-project
 find-and-replace-in-project
 \fR
 .LP
-.SH FILES
+.SH GENERATED FILES
 .LP
-.TP
-\fI\[ti]\[sl]etc\fP
-Config directory
-.LP
-.TP
-\fI\[ti]\[sl]etc\[sl]plugins\fP
-Plugins configuration
-.LP
-.TP
-\fI\[ti]\[sl]etc\[sl]aliases\fP
-User aliases configuration
-.LP
-.TP
-\fI\[ti]\[sl]bin\fP
-Binaries directory
+.HP
+\fI\[ti]\[sl]bin:\fP User scripts directory\. Added to your \fB$PATH\fR automatically\.
+\fI\[ti]\[sl]etc\[sl]profile\.d\[sl]:\fP User configs directory
+\fI\[ti]\[sl]etc\[sl]plugins\.zsh:\fP Plugins configuration
+\fI\[ti]\[sl]etc\[sl]aliases\.zsh:\fP User aliases configuration
 .LP
 .SH AUTHOR
 .LP
 .PP
-Tom Scott 
-.MT tubbo\[at]psychedeli\.ca
-.ME http:\[sl]\[sl]psychedeli\.ca
+Tom Scott http:\[sl]\[sl]psychedeli\.ca
 .UR http:\[sl]\[sl]psychedeli\.ca
 .UE
 .LP
