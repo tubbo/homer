@@ -3,6 +3,10 @@
 # Copy home directory template files to the user's home directory and
 # initialize it as a Git repository.
 
+if [[ -z $HOMER_PATH ]]; then
+  HOMER_PATH=$PWD
+fi
+
 if [[ -e "$HOME/.git" ]]; then;
   echo "There is already an existing repo in your home dir."
   exit 0
