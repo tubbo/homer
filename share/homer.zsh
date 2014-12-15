@@ -5,6 +5,9 @@
 # Remember the path to homer's code
 export HOMER_PATH="/usr/local/share/homer"
 
+# Set the version
+export HOMER_VERSION=homer_find_version()
+
 # Configure a basic prompt string
 export PROMPT="♬  "
 
