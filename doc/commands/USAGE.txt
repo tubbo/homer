@@ -5,4 +5,4 @@ plugins, aliases, and dotfiles. For more information on this software,
 type `man homer`. You can also type `homer help COMMAND` to get help on
 a particular command.
 
-Commands: init, alias, help, plugin, save, script, update
+Commands: init, alias, help, plugin, save, script, update, upgrade
