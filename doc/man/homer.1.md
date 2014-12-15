@@ -41,26 +41,25 @@ homer update
 Install shell plugins:
 
 ```
-homer plugin install zsh-users/zsh-syntax-highlighting
+homer plugin zsh-users/zsh-syntax-highlighting
 ```
 
 Remove shell plugins:
 
 ```
-homer plugin uninstall zsh-users/zsh-syntax-highlighting
+homer plugin zsh-users/zsh-syntax-highlighting -r
 ```
 
 Save an alias for later use:
 
 ```
 homer alias gc 'git commit'
-gc -m "wow this is cool"
 ```
 
 Forget an alias:
 
 ```
-homer alias --delete gc
+homer alias gc -r
 ```
 
 Copy useful scripts to your `$PATH`:
@@ -68,6 +67,24 @@ Copy useful scripts to your `$PATH`:
 ```
 homer script bin/find-and-replace-in-project
 find-and-replace-in-project
+```
+
+And remove them:
+
+```
+homer script find-and-replace-in-project -r
+```
+
+Homer can even upgrade itself:
+
+```
+homer upgrade
+```
+
+And update its codebase with Homebrew:
+
+```
+homer upgrade -p
 ```
 
 ## GENERATED FILES
@@ -88,4 +105,4 @@ Tom Scott <http://psychedeli.ca>
 
 ## SEE ALSO
 
-- antigen(1)
+antigen(1)
