@@ -46,13 +46,6 @@ homer_commit_all() {
   popd
 }
 
-# Find the current version of Homer.
-homer_find_version() {
-  pushd $HOMER_PATH
-  git tag | tail -n 1
-  popd
-}
-
 # Update the git repo in the home directory with the latest changes from
 # GitHub.
 homer_update_repo() {
