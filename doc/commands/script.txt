@@ -1,0 +1,10 @@
+homer script FILE [options]
+
+Copy a script from the given file path to ~/bin in your home directory,
+and add the script to Git using `homer save`. You can also remove
+scripts.
+
+OPTIONS:
+
+  -r            Remove a script
+  -m MESSAGE    Add a short message to be passed to `homer save`.

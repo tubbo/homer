@@ -1,0 +1,11 @@
+homer plugin NAME [options]
+
+Installs (or uninstalls) plugins for ZSH. Essentially a
+lightweight command-line interface for Antigen, this command manages its
+dependencies in your ~/etc/plugins.zsh file and can remove dependencies
+as well.
+
+OPTIONS:
+
+  -i    Add this plugin to ~/etc/plugins.zsh and install with Antigen.
+  -r    Remove this plugin

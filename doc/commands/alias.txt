@@ -1,0 +1,8 @@
+homer alias NAME 'COMMAND' [options]
+
+Saves an alias to ~/etc/aliases.zsh and runs `source` to apply it to the
+current session.
+
+OPTIONS:
+
+  -r    removes the alias from the file.

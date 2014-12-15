@@ -1,0 +1,9 @@
+Usage: homer COMMAND [ARGUMENTS]
+
+Homer is your home directory manager.
+
+For more information, type `man homer`.
+
+Commands: init, load, save, alias, script, plugin, update
+
+For more help on a specific command, type `homer help COMMAND`.

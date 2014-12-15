@@ -1,0 +1,10 @@
+homer save FILE [options]
+
+Save a file in your home directory to the Git repo. By default, all
+files in your home directory are ignored, allowing you to "whitelist"
+the files you which to store in Git, and the `homer save` command makes
+it easy to add or commit files to the repo.
+
+OPTIONS:
+
+  -m MESSAGE    Add a short commit message describing the change.

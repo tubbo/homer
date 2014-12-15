@@ -1,0 +1,11 @@
+homer init [options]
+
+Sets up your home directory for use with Homer. By default, it simply
+initializes a new Git repo in $HOME and copies template files into it,
+but you can optionally pass in a Git repo to use as an existing store
+for your home directory.
+
+OPTIONS:
+
+  -c    Instead of initializing a new Git repo, clones the existing one
+        to /tmp and merges your $HOME directory with it.

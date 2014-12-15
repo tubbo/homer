@@ -1,13 +1,19 @@
 #!/bin/zsh
 #
-# Show usage information
+# Show usage information or help with a particular command.
 
-echo "
-  Homer, your home directory manager. <http://tubbo.github.io/homer>
+# Set up the path at which we look for txt files describing each
+# command.
+DOCPATH=$HOMER_PATH/doc/commands
 
-  Usage: homer COMMAND [ARGUMENTS]
+# Determine the command to look up, defaults to USAGE if unspecified or
+# not found.
+if [[ -e $DOCPATH/$1.txt ]]; then
+  docfile=$1
+else
+  docfile="USAGE"
+fi
 
-  For more information, please type 'man homer'
-
-  Commands: init, load, save, alias, script, plugin, update
-"
+echo ""
+cat $DOCPATH/$docfile.txt
+echo ""
