@@ -4,16 +4,17 @@
 
 # Set up the path at which we look for txt files describing each
 # command.
-DOCPATH=$HOMER_PATH/doc/commands
+echo $HOMER_PATH
+HOMER_DOC_PATH=$HOMER_PATH/doc/commands
 
 # Determine the command to look up, defaults to USAGE if unspecified or
 # not found.
-if [[ -e $DOCPATH/$1.txt ]]; then
-  docfile=$1
+if [[ -e $HOMER_DOC_PATH/$2.txt ]]; then
+  docfile=$2
 else
   docfile="USAGE"
 fi
 
 echo ""
-cat $DOCPATH/$docfile.txt
+cat $HOMER_DOC_PATH/$docfile.txt
 echo ""

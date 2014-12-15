@@ -2,14 +2,17 @@
 #
 # Executes Homer commands
 
-if [[ -z $HOMER_PREFIX ]]; then
-  HOMER_PREFIX=$(brew --prefix homer)
-fi
+case $0 in
+ /*) HOMER_SCRIPT_FILE=$0;;
+  *) HOMER_SCRIPT_FILE=$PWD/$0;;
+esac
+
+HOMER_SCRIPT_PATH=$(dirname $HOMER_SCRIPT_FILE)
 HOMER_COMMAND=$1
-HOMER_EXECUTABLE=$HOMER_PREFIX/bin/homer-$HOMER_COMMAND
+HOMER_EXECUTABLE=$HOMER_SCRIPT_PATH/homer-$HOMER_COMMAND
 
 if [[ -e $HOMER_EXECUTABLE ]]; then
-  $HOMER_EXECUTABLE
+  $HOMER_EXECUTABLE $*
 else
   $HOMER_PREFIX/bin/homer-help
 fi
