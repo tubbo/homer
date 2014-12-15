@@ -15,7 +15,7 @@ clean:
 	rm share/man/man1/homer.1
 
 test:
-	bats test
+	bats test/test_helper.sh test
 
 share/man/man1/homer.1: doc/man/homer.1.md
 	kramdown-man doc/man/homer.1.md > share/man/man1/homer.1
