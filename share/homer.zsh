@@ -6,7 +6,7 @@
 export HOMER_PATH="/usr/local/share/homer"
 
 # Set the version
-export HOMER_VERSION=homer_find_version()
+export HOMER_VERSION="0.0.4.pre"
 
 # Configure a basic prompt string
 export PROMPT="♬  "
