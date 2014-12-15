@@ -3,7 +3,7 @@
 # Save a dotfile, either adding it for the first time or updating its
 # contents.
 
-file=$1
+file=$2
 message=""
 
 zparseopts -K -- m:=message

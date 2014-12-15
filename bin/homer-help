@@ -4,7 +4,6 @@
 
 # Set up the path at which we look for txt files describing each
 # command.
-echo $HOMER_PATH
 HOMER_DOC_PATH=$HOMER_PATH/doc/commands
 
 # Determine the command to look up, defaults to USAGE if unspecified or

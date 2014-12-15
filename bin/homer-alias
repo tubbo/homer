@@ -5,6 +5,20 @@
 
 name=$1
 cmd=$2
-line="alias ${name}='${cmd}'"
-echo "${line}" >> $HOME/etc/aliases.zsh
-source $file
+remove=false
+
+zparseopts -K -- r:=remove
+
+if [[ -z $name && -z $cmd ]]; then
+  echo "You must enter a name and command (name: $name, cmd: $cmd)"
+  exit 1
+else
+  if [[ $remove ]]; then
+    sed "s/alias ${line}=.*$//" $HOME/etc/aliases.zsh > /tmp/aliases
+    mv /tmp/aliases $HOME/aliases.zsh
+  else
+    line="alias ${name}='${cmd}'"
+    echo "${line}" >> $HOME/etc/aliases.zsh
+    homer save $HOME/etc/aliases.zsh -m "Add alias $name for '$cmd'"
+  fi
+fi

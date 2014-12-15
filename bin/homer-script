@@ -3,13 +3,29 @@
 # Copy a script to your $PATH
 
 let script=$1
+let remove=false
+let message=""
+
+zparseopts -K -- m:=message r:=remove
 
 if [[ -e $script ]]; then
-  cp $script $HOME/bin/$script
-  pushd $HOME
-  git add bin/$script
-  git commit bin/$script -m "Added shell script '$script'"
-  popd
+  if [[ $remove ]]; then
+    rm $HOME/bin/$script
+
+    if [[ $message -eq ""]]; then
+      message="Remove $script"
+    fi
+
+    homer save bin/$script -m $message
+  else
+    cp $script $HOME/bin/$script
+
+    if [[ $message -eq "" ]]; then
+      message="Add $script"
+    fi
+
+    homer save bin/$script -m $message
+  fi
 else
   echo "error: $script was not found in your local path."
 fi

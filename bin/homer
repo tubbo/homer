@@ -14,5 +14,5 @@ HOMER_EXECUTABLE=$HOMER_SCRIPT_PATH/homer-$HOMER_COMMAND
 if [[ -e $HOMER_EXECUTABLE ]]; then
   $HOMER_EXECUTABLE $*
 else
-  $HOMER_PREFIX/bin/homer-help
+  $HOMER_SCRIPT_PATH/homer-help
 fi
