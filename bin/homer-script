@@ -2,30 +2,28 @@
 #
 # Copy a script to your $PATH
 
-let script=$1
-let remove=false
-let message=""
+script=$2
 
 zparseopts -K -- m:=message r:=remove
 
-if [[ -e $script ]]; then
-  if [[ $remove ]]; then
-    rm $HOME/bin/$script
-
-    if [[ $message -eq ""]]; then
-      message="Remove $script"
-    fi
-
-    homer save bin/$script -m $message
-  else
-    cp $script $HOME/bin/$script
-
-    if [[ $message -eq "" ]]; then
-      message="Add $script"
-    fi
-
-    homer save bin/$script -m $message
-  fi
+if [ -n "${remove+x}" ]; then
+  action='Remove'
 else
-  echo "error: $script was not found in your local path."
+  action='Add'
 fi
+
+if [[ -z $message ]]; then
+  message="${action} script ${plugin}"
+fi
+
+case "$action" in
+  Add)
+    rm $HOME/bin/$script
+    homer_remove bin/$script $message
+    ;;
+  Remove)
+    scriptname=$(basename $script)
+    cp $script $HOME/bin/$scriptname
+    homer_add bin/$scriptname -m $message
+    ;;
+esac

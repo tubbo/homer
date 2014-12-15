@@ -1,0 +1,47 @@
+#!/bin/zsh
+#
+# Commands that help support Homer's CLI.
+
+# Save a file to Git.
+homer_add() {
+  file=$1
+  message=$2
+
+  if [[ -z $message ]]; then
+    echo "You must enter a message."
+    exit 1
+  fi
+
+  pushd $HOME
+  git add $file && git commit $file -m "${message}"
+  popd
+}
+
+# Remove a file from Git.
+homer_remove() {
+  file=$1
+  message=$2
+
+  if [[ -z $message ]]; then
+    echo "You must enter a message."
+    exit 1
+  fi
+
+  pushd $HOME
+  git rm -rf $file && git commit -m "${message}"
+  popd
+}
+
+# Commit all untracked files to Git.
+homer_commit_all() {
+  message=$1
+
+  if [[ -z $message ]]; then
+    echo "You must enter a message."
+    exit 1
+  fi
+
+  pushd $HOME
+  git add . && git commit -m $message
+  popd
+}

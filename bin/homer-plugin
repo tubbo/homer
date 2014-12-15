@@ -3,35 +3,35 @@
 # Install a shell plugin with Antigen, and save it in the
 # ~/etc/plugins file.
 
-pushd $HOME
+plugin=$2
+file=$HOME/etc/plugins.zsh
 
-let cmd=$1
-let file=$HOME/etc/plugins.zsh
-let plugin=$2
+if [[ -z $plugin ]]; then
+  echo "error: you must specify a plugin"
+  exit 1
+fi
 
-# Process the command
-case "$cmd" in
-  install)
-    if [[ -z $plugin ]]; then;
-      echo "error: you must specify a plugin name"
-      return
-    fi
+zparseopts -K -- m:=message r:=remove
+
+if [ -n "${remove+x}" ]; then
+  action='Remove'
+else
+  action='Add'
+fi
+
+if [[ -z $message ]]; then
+  message="${action} ZSH plugin ${plugin}"
+fi
+
+case "$action" in
+  Add)
     antigen bundle $plugin
     echo "antigen bundle $plugin" >> $file
+    homer_add $file $message
     ;;
-  uninstall)
-    if [[ -z $plugin ]]; then;
-      echo "error: you must specify a plugin name"
-      return
-    fi
+  Remove)
     sed "/antigen bundle $plugin/,/" $file
-    ;;
-  *)
-    echo "Usage: homer plugin [install|uninstall] PLUGIN_NAME"
-    return
+    source $file
+    homer_remove $file $message
     ;;
 esac
-
-git commit $file -m "Added shell plugin '$plugin'"
-
-popd

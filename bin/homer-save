@@ -4,17 +4,11 @@
 # contents.
 
 file=$2
-message=""
 
-zparseopts -K -- m:=message
+zparseopts -K -- m:=message r:=remove
 
-pushd $HOME
-
-if [[ $message -eq "" ]]; then
-  echo "You must enter a message."
-  exit 1
+if [ -n "${remove+x}" ]; then
+  homer_remove $file $message
 else
-  git commit $file -m "${message}"
+  homer_add $file $message
 fi
-
-popd

@@ -6,3 +6,4 @@ current session.
 OPTIONS:
 
   -r    removes the alias from the file.
+  -m    an optional message to pass to the Git commit

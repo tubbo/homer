@@ -5,8 +5,19 @@
 
 if [[ -e "$HOME/.git" ]]; then;
   echo "There is already an existing repo in your home dir."
-else
-  cp -a /usr/local/share/homer $HOME
-  git init $HOME
-  echo "Your home directory has been initialized with Homer."
+  exit 0
 fi
+
+zparseopts -K -- m:=message c:=repository
+
+if [[ -z $repository ]]; then
+  git clone $repository /tmp/home-directory
+  cp -a /tmp/home-directory/** $HOME
+  cp -a /tmp/home-directory/.* $HOME
+else
+  git init $HOME
+  cp -a $HOMER_PATH/share/homer/template/** $HOME
+  cp -a $HOMER_PATH/share/homer/template/.* $HOME
+  homer_commit_all "Initialize home directory."
+fi
+

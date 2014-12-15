@@ -8,3 +8,4 @@ it easy to add or commit files to the repo.
 OPTIONS:
 
   -m MESSAGE    Add a short commit message describing the change.
+  -r            Remove this file from the repo.
