@@ -1,20 +1,10 @@
-#!/usr/bin/env ruby
+#!/bin/zsh
 #
 # Add an alias to the current shell session and put it in ~/etc/aliases
 # for use in the future.
-#
-# TODO: Can this be written in shellscript?
 
-HOME = ENV['HOME']
-
-name = ARGV[0]
-cmd = ARGV[1]
-line = "alias #{name}='#{cmd}'"
-path = "#{HOME}/etc/aliases.zsh"
-file = File.read path
-
-if `#{line}` == "" && File.write(path, file+"\n#{line}")
-  exit 0
-else
-  puts "there was an error defining alias #{name} as '#{cmd}'"
-end
+name=$1
+cmd=$2
+line="alias ${name}='${cmd}'"
+echo "${line}" >> $HOME/etc/aliases.zsh
+source $file
