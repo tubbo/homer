@@ -3,11 +3,6 @@
 #
 
 SHELL=/usr/bin/env zsh
-NAME=homer
-VERSION=master
-AUTHOR=tubbo
-URL=https://github.com/$(AUTHOR)/$(NAME)
-
 DIRS=bin etc lib share
 INSTALL_DIRS=`find $(DIRS) -type d`
 INSTALL_FILES=`find $(DIRS) -type f`
@@ -34,5 +29,13 @@ install:
 
 uninstall:
 	for file in $(INSTALL_FILES); do rm -f $(PREFIX)/$$file; done
+
+command-bin:
+	cp share/homer/command/bin.sh bin/homer-${NAME}
+
+command-doc:
+	cp share/homer/command/doc.txt doc/commands/${NAME}.txt
+
+command: command-bin command-doc
 
 .PHONY: test dependencies install clean all

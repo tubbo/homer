@@ -1,0 +1,8 @@
+homer COMMAND [options]
+
+Short description of the command.
+
+OPTIONS:
+
+	-r 		Remove
+	-m 		(optional) A short message for the commit.
