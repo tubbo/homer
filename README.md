@@ -30,9 +30,10 @@ Homer is very similar to tools like [GNU Stow][stow], its main
 difference is that instead of keeping a directory separate from
 `$HOME` and symlinking the necessary files over from some
 version-controlled directory when asked, Homer simply uses the home
-directory as a Git repo. This provides a number of benefits including
-the ability to keep entire directories of content tracked, omission of
-secret/large/irrelevant files with a whitelisted `~/.gitignore`, and 
+directory as a Git repo. It also provides a few more services than Stow,
+such as alias and plugin management. Homer is not just for keeping dot
+files secure, it's a tool for managing all of the files in your home
+directory you wish to keep with Git.
 
 ## Features
 
