@@ -3,9 +3,5 @@
 # Save a dotfile, either adding it for the first time or updating its
 # contents.
 
-pushd $HOME
-git stash save
-git pull --rebase origin master
-git push origin master
-git stash pop
-popd
+homer_update_repo
+
