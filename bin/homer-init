@@ -10,7 +10,7 @@ fi
 
 zparseopts -K -- m:=message c:=repository
 
-if [[ -z $repository ]]; then
+if [[ -n "${repository+}" ]]; then
   git clone $repository /tmp/home-directory
   cp -a /tmp/home-directory/** $HOME
   cp -a /tmp/home-directory/.* $HOME
