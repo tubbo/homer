@@ -68,11 +68,8 @@ Before installing from source, make sure you have the following hard
 dependencies installed:
 
 - zsh
-- chruby
-- ruby-install
-- python
-- pip
-- powerline
+- antigen
+- keychain
 - bats (only if you're developing on the project)
 
 Once they're all installed, run the following commands to install to
