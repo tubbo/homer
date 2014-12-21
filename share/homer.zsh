@@ -15,8 +15,8 @@ export PROMPT="♬  "
 export PATH=$HOME/bin:$PATH
 
 # Load the framework
-for file in `ls $HOMER_PATH/*.zsh`; do
-  source "$HOMER_PATH/$file"
+for filepath in `ls $HOMER_PATH/*.zsh`; do
+  source "$filepath"
 done
 
 # Load user plugins
