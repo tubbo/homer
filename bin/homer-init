@@ -3,6 +3,8 @@
 # Copy home directory template files to the user's home directory and
 # initialize it as a Git repository.
 
+source "/usr/local/share/homer/git.zsh"
+
 if [[ -z $HOMER_PATH ]]; then
   HOMER_PATH=$PWD
 fi
