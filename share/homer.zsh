@@ -15,7 +15,7 @@ export PROMPT="♬  "
 export PATH=$HOME/bin:$PATH
 
 # Load the framework
-for file in `ls $HOMER_PATH`; do
+for file in `ls $HOMER_PATH/*.zsh`; do
   source "$HOMER_PATH/$file"
 done
 
