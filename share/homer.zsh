@@ -3,7 +3,9 @@
 # Set up the Homer shell framework.
 
 # Remember the path to homer's code
-export HOMER_PATH="/usr/local/share/homer"
+if [ -z $HOMER_PATH ]; then
+  export HOMER_PATH="/usr/local/share/homer"
+fi
 
 # Set the version
 export HOMER_VERSION="0.0.4.pre"

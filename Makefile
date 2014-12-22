@@ -12,6 +12,8 @@ INSTALL_FILES=`find $(DIRS) -type f`
 
 PREFIX?=$(DESTDIR)/usr/local
 
+HOMER_PATH?=$(PWD)
+
 # Install this script to /usr/local
 all: clean test man install
 
