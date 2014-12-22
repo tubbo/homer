@@ -13,6 +13,7 @@ INSTALL_FILES=`find $(DIRS) -type f`
 PREFIX?=$(DESTDIR)/usr/local
 
 HOMER_PATH?=$(PWD)
+HOMER_PREFIX?=$(PWD)
 
 # Install this script to /usr/local
 all: clean test man install
@@ -26,8 +27,8 @@ test:
 	bats test
 
 # Generate the man page from markdown
-share/man/man1/homer.1: doc/man/homer.1.md
-	kramdown-man doc/man/homer.1.md > share/man/man1/homer.1
+share/man/man1/homer.1: share/doc/man/homer.1.md
+	kramdown-man share/doc/man/homer.1.md > share/man/man1/homer.1
 
 # Commit man changes to Git
 man: share/man/man1/homer.1
@@ -48,7 +49,7 @@ command-bin:
 
 # Generate the documentation for a command
 command-doc:
-	cp share/homer/command/doc.txt doc/commands/${NAME}.txt
+	cp share/homer/command/doc.txt share/doc/commands/${NAME}.txt
 
 # Generate a new command
 command: command-bin command-doc

@@ -3,11 +3,11 @@
 # Copy home directory template files to the user's home directory and
 # initialize it as a Git repository.
 
-source "/usr/local/share/homer/git.zsh"
-
-if [[ -z $HOMER_PATH ]]; then
-  HOMER_PATH=$PWD
+if [ -z $HOMER_PREFIX ]; then
+  export HOMER_PREFIX="/usr/local/"
 fi
+
+source "$HOMER_PREFIX/share/homer/git.zsh"
 
 if [[ -e "$HOME/.git" ]]; then;
   echo "There is already an existing repo in your home dir."
@@ -22,8 +22,8 @@ if [[ -n "${repository+}" ]]; then
   cp -a /tmp/home-directory/.* $HOME
 else
   git init $HOME
-  cp -a $HOMER_PATH/share/homer/template/** $HOME
-  cp -a $HOMER_PATH/share/homer/template/.* $HOME
+  cp -a $HOMER_PREFIX/share/homer/template/** $HOME
+  cp -a $HOMER_PREFIX/share/homer/template/.* $HOME
   homer_commit_all "Initialize home directory."
 fi
 

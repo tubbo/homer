@@ -3,8 +3,8 @@
 # Set up the Homer shell framework.
 
 # Remember the path to homer's code
-if [ -z $HOMER_PATH ]; then
-  export HOMER_PATH="/usr/local/share/homer"
+if [ -z $HOMER_PREFIX ]; then
+  export HOMER_PREFIX="/usr/local"
 fi
 
 # Set the version
@@ -17,7 +17,7 @@ export PROMPT="♬  "
 export PATH=$HOME/bin:$PATH
 
 # Load the framework
-for filepath in `ls $HOMER_PATH/*.zsh`; do
+for filepath in `ls $HOMER_PATH/share/homer/*.zsh`; do
   source "$filepath"
 done
 
