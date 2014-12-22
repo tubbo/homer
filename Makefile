@@ -21,7 +21,7 @@ clean:
 
 # Run BATS test on Homer
 test:
-	bats test/test_helper.sh test
+	bats test
 
 # Generate the man page from markdown
 share/man/man1/homer.1: doc/man/homer.1.md
