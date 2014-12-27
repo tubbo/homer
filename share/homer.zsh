@@ -15,9 +15,10 @@ export PROMPT="♬  "
 
 # Add user path on top so ~/bin files override the main $PATHs.
 export PATH=$HOME/bin:$PATH
+export HOMER_PATH=$HOMER_PREFIX/share/homer
 
 # Load the framework
-for filepath in `ls $HOMER_PATH/share/homer/*.zsh`; do
+for filepath in `ls $HOMER_PATH/*.zsh`; do
   source "$filepath"
 done
 
