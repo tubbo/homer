@@ -2,6 +2,10 @@
 #
 # Commands that help support Homer's CLI.
 
+if [ -z $HOME_DIR ]; then
+  HOME_DIR=$HOME
+fi
+
 # Save a file to Git.
 homer_add() {
   file=$1
@@ -12,8 +16,8 @@ homer_add() {
     exit 1
   fi
 
-  pushd $HOME
-  git add $file && git commit $file -m "${message}"
+  pushd $HOME_DIR
+  git add -f $file && git commit $file -m "${message}"
   popd
 }
 
@@ -27,29 +31,21 @@ homer_remove() {
     exit 1
   fi
 
-  pushd $HOME
+  pushd $HOME_DIR
   git rm -rf $file && git commit -m "${message}"
   popd
 }
 
 # Commit all untracked files to Git.
-homer_commit_all() {
+homer_add_all() {
   message=$1
-
-  if [[ -z $message ]]; then
-    echo "You must enter a message."
-    exit 1
-  fi
-
-  pushd $HOME
-  git add . && git commit -m $message
-  popd
+  homer_add '.' $message
 }
 
 # Update the git repo in the home directory with the latest changes from
 # GitHub.
 homer_update_repo() {
-  pushd $HOME
+  pushd $HOME_DIR
   git stash save
   git pull --rebase origin master
   git push origin master

@@ -7,5 +7,6 @@ as well.
 
 OPTIONS:
 
-  -i    Add this plugin to ~/etc/plugins.zsh and install with Antigen.
-  -r    Remove this plugin
+  -r    Remove this plugin from ~/etc/aliases.zsh instead of adding it.
+
+  -m MESSAGE    Customize the Git message for this action.

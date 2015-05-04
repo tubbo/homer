@@ -7,4 +7,4 @@ scripts.
 OPTIONS:
 
   -r            Remove a script
-  -m MESSAGE    Add a short message to be passed to `homer save`.
+  -m MESSAGE MESSAGE    Add a short message to be passed to `homer save`.

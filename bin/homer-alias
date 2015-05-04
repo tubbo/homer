@@ -1,7 +1,6 @@
 #!/bin/zsh
 #
-# Add an alias to the current shell session and put it in ~/etc/aliases
-# for use in the future.
+# Add an alias to future shell sessions.
 
 name=$1
 cmd=$2

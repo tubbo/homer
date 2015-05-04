@@ -1,9 +1,10 @@
-homer alias NAME 'COMMAND' [options]
+homer alias NAME [COMMAND] [options]
 
-Saves an alias to ~/etc/aliases.zsh and runs `source` to apply it to the
-current session.
+Saves an alias to ~/etc/aliases.zsh for future shell sessions. Has the
+option of removing the file and customizing the commit message.
 
 OPTIONS:
 
-  -r    removes the alias from the file.
-  -m    an optional message to pass to the Git commit
+  -r    Removes the alias (by name) from ~/etc/aliases.zsh
+
+  -m MESSAGE    an optional message to pass to the Git commit
