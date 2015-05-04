@@ -2,8 +2,8 @@
 #
 # Add an alias to future shell sessions.
 
-name=$1
-cmd=$2
+name=$2
+cmd=$3
 
 if [[ -z $name && -z $cmd ]]; then
   echo "You must enter a name and command (name: $name, cmd: $cmd)"
