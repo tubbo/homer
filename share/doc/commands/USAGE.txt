@@ -2,7 +2,19 @@ Usage: homer COMMAND [ARGUMENTS]
 
 Homer is your home directory manager. It helps manage things like
 plugins, aliases, and dotfiles. For more information on this software,
-type `man homer`. You can also type `homer help COMMAND` to get help on
-a particular command.
+type `man homer`.
 
-Commands: init, alias, help, plugin, save, script, update
+
+COMMANDS
+========
+
+- alias   Save an alias in ~/etc/aliases.zsh.
+- init    Initialize a new home directory.
+- help    View this and other command help.
+- plugin  Install a plugin with Antigen to ~/etc/plugins.zsh.
+- save    Commit changes to the repo and push to origin.
+- script  Save a bin script to the repo.
+- update  Update the repo and stash current changes.
+
+Type `homer help COMMAND` to get help on a particular command.
+
