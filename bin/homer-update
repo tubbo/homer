@@ -3,5 +3,6 @@
 # Save a dotfile, either adding it for the first time or updating its
 # contents.
 
-homer_update_repo
+source "$HOMER_PATH/share/homer/cli.zsh"
 
+homer_update_repo

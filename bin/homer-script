@@ -2,6 +2,8 @@
 #
 # Copy a script to your $PATH
 
+source "$HOMER_PATH/share/homer/cli.zsh"
+
 script=$2
 
 zparseopts -K -- m:=message r:=remove
@@ -10,6 +12,11 @@ if [ -n "${remove+x}" ]; then
   action='Remove'
 else
   action='Add'
+fi
+
+if [[ -z $script ]]; then
+  homer_error "You must enter a script name"
+  exit 1
 fi
 
 if [[ -z $message ]]; then

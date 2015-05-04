@@ -2,11 +2,13 @@
 #
 # Add an alias to future shell sessions.
 
+source "$HOMER_PATH/share/homer/cli.zsh"
+
 name=$2
 cmd=$3
 
-if [[ -z $name && -z $cmd ]]; then
-  echo "You must enter a name and command (name: $name, cmd: $cmd)"
+if [[ -z $name || -z $cmd ]]; then
+  homer_error "You must enter a name and command."
   exit 1
 fi
 

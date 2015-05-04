@@ -1,4 +1,4 @@
-#!/bin/zsh
+#!zsh
 #
 # Install a shell plugin with Antigen, and save it in the
 # ~/etc/plugins file.
@@ -6,8 +6,10 @@
 plugin=$2
 file=$HOME/etc/plugins.zsh
 
+source "$HOMER_PATH/share/homer/cli.zsh"
+
 if [[ -z $plugin ]]; then
-  echo "error: you must specify a plugin"
+  homer_error "You must specify a plugin."
   exit 1
 fi
 

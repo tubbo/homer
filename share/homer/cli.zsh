@@ -6,6 +6,12 @@ if [ -z $HOME_DIR ]; then
   HOME_DIR=$HOME
 fi
 
+# Render an error.
+homer_error() {
+  message=$1
+  echo "ERROR: $message"
+}
+
 # Save a file to Git.
 homer_add() {
   file=$1

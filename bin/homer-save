@@ -5,6 +5,8 @@
 
 file=$2
 
+source "$HOMER_PATH/share/homer/cli.zsh"
+
 zparseopts -K -- m:=message r:=remove
 
 if [ -n "${remove+x}" ]; then
