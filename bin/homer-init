@@ -3,8 +3,6 @@
 # Copy home directory template files to the user's home directory and
 # initialize it as a Git repository.
 
-source "$HOMER_PATH/share/homer/cli.zsh"
-
 if [ -z $HOMER_PREFIX ]; then
   export HOMER_PREFIX="/usr/local"
 fi
@@ -15,8 +13,10 @@ if [ -z $HOMER_PATH ]; then
   HOMER_PATH=$HOME
 fi
 
+source "$HOMER_PATH/share/homer/cli.zsh"
+
 if [[ -e "$HOMER_PATH/.git" ]]; then
-  echo "There is already an existing Git repository in your home directory."
+  homer_error "There is already an existing Git repository in your home directory."
   exit 0
 fi
 
