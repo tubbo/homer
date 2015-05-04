@@ -17,4 +17,3 @@ COMMANDS
 - update  Update the repo and stash current changes.
 
 Type `homer help COMMAND` to get help on a particular command.
-

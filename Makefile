@@ -43,6 +43,9 @@ install:
 uninstall:
 	for file in $(INSTALL_FILES); do rm -f $(PREFIX)/$$file; done
 
+reinstall:
+	brew update && brew reinstall homer --HEAD
+
 # Generate the bin file for a command
 command-bin:
 	cp share/homer/command/bin.sh bin/homer-${NAME}
