@@ -4,9 +4,7 @@ Homer is your home directory manager. It helps manage things like
 plugins, aliases, and dotfiles. For more information on this software,
 type `man homer`.
 
-
-COMMANDS
-========
+Commands:
 
 - alias   Save an alias in ~/etc/aliases.zsh.
 - init    Initialize a new home directory.
