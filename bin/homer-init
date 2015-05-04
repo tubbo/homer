@@ -3,20 +3,20 @@
 # Copy home directory template files to the user's home directory and
 # initialize it as a Git repository.
 
-if [ -z $PREFIX ]; then
-  export PREFIX="/usr/local/"
+if [ -z $HOMER_PREFIX ]; then
+  export HOMER_PREFIX="/usr/local"
 fi
 
-dir=$2
+HOMER_PATH=$2
 
-if [ -z $dir ]; then
-  dir=$HOME
+if [ -z $HOMER_PATH ]; then
+  HOMER_PATH=$HOME
 fi
 
-source "$PREFIX/share/homer/git.zsh"
+source "$HOMER_PREFIX/share/homer/git.zsh"
 
-if [[ -e "$dir/.git" ]]; then
-  echo "There is already an existing repo in your home dir."
+if [[ -e "$HOMER_PATH/.git" ]]; then
+  echo "There is already an existing Git repository in your home directory."
   exit 0
 fi
 
@@ -28,13 +28,13 @@ fi
 
 if [[ -n "${repository+}" ]]; then
   git clone $repository /tmp/home-directory
-  cp -a /tmp/home-directory/** $dir
-  cp -a /tmp/home-directory/.* $dir
+  cp -a /tmp/home-directory/** $HOMER_PATH
+  cp -a /tmp/home-directory/.* $HOMER_PATH
   rm -rf /tmp/home-directory
 else
-  git init $dir
-  cp -a $PREFIX/share/homer/template/** $dir
-  cp -a $PREFIX/share/homer/template/.* $dir
+  git init $HOMER_PATH
+  cp -a $HOMER_PREFIX/share/homer/template/** $HOMER_PATH
+  cp -a $HOMER_PREFIX/share/homer/template/.* $HOMER_PATH
   homer_add_all $message
 fi
 
