@@ -1,9 +1,8 @@
-#
-# Makefile for Homer
-#
+# Build scripts for Homer. These tasks will generate documentation,
+# commands, and of course install the Homer scripts themselves to an
+# executable location.
 
-
-.PHONY: test dependencies install clean all
+.PHONY: test install uninstall reinstall clean command-doc command-bin command all
 
 SHELL=/usr/bin/env zsh
 DIRS=bin etc lib share
@@ -18,16 +17,20 @@ HOMER_PREFIX?=$(PWD)
 # Install this script to /usr/local
 all: clean test man install
 
+# Install gem dependencies
+vendor/bundle:
+	bundle check || bundle install
+
 # Remove generated files
 clean:
 	rm -rf share/man/man1/homer.1 tmp/
 
-# Run BATS test on Homer
+# Run BATS tests on Homer
 test:
 	bats test
 
 # Generate the man page from markdown
-share/man/man1/homer.1: share/doc/man/homer.1.md
+share/man/man1/homer.1: vendor/bundle share/doc/man/homer.1.md
 	kramdown-man share/doc/man/homer.1.md > share/man/man1/homer.1
 
 # Commit man changes to Git
@@ -43,6 +46,7 @@ install:
 uninstall:
 	for file in $(INSTALL_FILES); do rm -f $(PREFIX)/$$file; done
 
+# Reinstall the scripts with Homebrew.
 reinstall:
 	brew update && brew reinstall homer --HEAD
 

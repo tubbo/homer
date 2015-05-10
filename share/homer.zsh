@@ -22,6 +22,8 @@ for filepath in `ls $HOMER_PATH/*.zsh`; do
   source "$filepath"
 done
 
+source "$HOME/etc/plugins.zsh"
+
 # Load user plugins
 source "$HOME/etc/plugins.zsh"
 

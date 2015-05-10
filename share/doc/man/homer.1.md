@@ -11,6 +11,12 @@ homer - your home directory manager
 ## DESCRIPTION
 
 Homer is a command-line utility to manage your shell's home directory.
+It turns your entire home directory into a Git repo so you can
+version control non-sensitive configuration and data and synchronize
+them across machines. It also includes provisions for installing custom
+shell scripts, aliases and hooks for package management tooling. Homer
+is designed around the Unix philosophy, and stays out of your way as
+much as possible. It is written entirely in ZSH shell script.
 
 For more information, check out:
 
@@ -87,8 +93,35 @@ And update its codebase with Homebrew:
 homer upgrade -p
 ```
 
+It can also manage your Homebrew packages...
+
+```
+homer brew tap tubbo/tap
+```
+
+Taps...
+
+```
+homer brew package vim
+```
+
+And casks...
+
+```
+homer brew cask hipchat
+```
+
+Or you can pre-define a list and just run this command
+to install everything:
+
+```
+homer brew
+```
+
 ## GENERATED FILES
 
+The following files are generated when you run the `homer init`
+command...
 
 *~/bin:* User scripts directory. Added to your `$PATH` automatically.
 
@@ -97,6 +130,12 @@ homer upgrade -p
 *~/etc/plugins.zsh:* Plugins configuration
 
 *~/etc/aliases.zsh:* User aliases configuration
+
+*~/etc/brew/casks:* Homebrew casks to install
+
+*~/etc/brew/packages:* Homebrew packages to install
+
+*~/etc/brew/taps:* Homebrew taps to install
 
 
 ## AUTHOR

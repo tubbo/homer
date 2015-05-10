@@ -30,17 +30,19 @@ Homer is very similar to tools like [GNU Stow][stow], its main
 difference is that instead of keeping a directory separate from
 `$HOME` and symlinking the necessary files over from some
 version-controlled directory when asked, Homer simply uses the home
-directory as a Git repo. It also provides a few more services than Stow,
+directory as a Git repo and ignores any files it doesn't explicitly
+track. It also provides a few more services than Stow,
 such as alias and plugin management. Homer is not just for keeping dot
 files secure, it's a tool for managing all of the files in your home
 directory you wish to keep with Git.
 
 ## Features
 
-- Sync home directory configuration with GitHub
-- Keep music and media files in their respective folders (`~/Music`,
-  `~/Movies`, etc.)
-- Stores documents in ~/Documents.
+- Syncs home directory configuration with a Git repository
+- Manages shell aliases and custom shell scripts
+- Manages OS packages and custom package repositories
+- Exposes useful attributes and contains a small CLI plugin API that
+  allows for hooking into Homer and adding your own commands.
 
 ## Installation
 
@@ -78,7 +80,7 @@ Once they're all installed, run the following commands to install to
 ```bash
 $ git clone https://github.com/tubbo/homer.git
 $ cd homer
-$ make install
+$ make
 ```
 
 When its installed, run the setup command:
@@ -154,9 +156,33 @@ you.
 ## Development
 
 Homer is written entirely in ZSH shell script. It uses [BATS][bats] to
-run its tests. All contributions must include tests. To run all tests,
-execute `make test` at the root of the project directory. Homer uses the
-MIT License, as described below:
+run its tests. All contributions must include tests.
+
+To run tests, execute the following command at the root of the project
+directory:
+
+```bash
+$ make test
+```
+
+To generate Man documentation:
+
+```bash
+$ make man
+```
+
+You can also use the Makefile to generate a command:
+
+```bash
+$ make command NAME=test
+```
+
+This will generate `bin/homer-test` and `share/doc/commands/test.txt`
+with given templates.
+
+### License
+
+Homer uses the MIT License, as described below:
 
 ```
 The MIT License (MIT)
