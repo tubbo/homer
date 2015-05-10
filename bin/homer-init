@@ -38,3 +38,14 @@ else
   homer_add_all $message
 fi
 
+for tap in `cat $HOMER_PATH/etc/brew/taps`; do
+  brew tap $tap
+done
+
+for package in `cat $HOMER_PATH/etc/brew/packages`; do
+  brew install $package
+done
+
+for cask in `cat $HOMER_PATH/etc/brew/casks`; do
+  brew cask install $cask
+done
