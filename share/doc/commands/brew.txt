@@ -1,0 +1,10 @@
+homer brew tap|package|cask [NAME] [OPTIONS]
+
+Installs a formula with Homebrew and adds that formula to a particular
+bundle file to be installed on every machine that uses your home dir
+repo. By not passing a name, you can simply instruct the bundle to be
+installed.
+
+OPTIONS:
+
+  -m MESSAGE    Customize the initial message when committing to Git.

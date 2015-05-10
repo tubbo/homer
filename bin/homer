@@ -16,6 +16,10 @@ export HOMER_COMMAND=$1
 export HOMER_EXECUTABLE=$HOMER_SCRIPT_PATH/homer-$HOMER_COMMAND
 export HOMER_HOME=$HOME
 
+pushd $HOMER_PATH
+export HOMER_PREFIX=$PWD
+popd
+
 # Execute the command or run `homer help` if not found.
 if [[ -e $HOMER_EXECUTABLE ]]; then
   source "$HOMER_EXECUTABLE"

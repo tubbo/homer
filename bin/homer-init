@@ -33,16 +33,5 @@ else
   homer_add_all $message
 fi
 
-for tap in `cat $HOMER_HOME/etc/brew/taps`; do
-  brew tap $tap
-done
-
-brew update
-
-for package in `cat $HOMER_HOME/etc/brew/packages`; do
-  brew install $package
-done
-
-for cask in `cat $HOMER_HOME/etc/brew/casks`; do
-  brew cask install $cask
-done
+# Update Homebrew packages
+homer_brew

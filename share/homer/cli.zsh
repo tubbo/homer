@@ -56,3 +56,33 @@ homer_update_repo() {
   git stash pop
   popd
 }
+
+_homer_brew() {
+  case "$1" in
+    taps)
+      for tap in `cat $HOMER_HOME/etc/brew/taps`; do
+        brew tap $tap
+      done
+      ;;
+    packages)
+      for package in `cat $HOMER_HOME/etc/brew/packages`; do
+        brew install $package
+      done
+      ;;
+    casks)
+      for cask in `cat $HOMER_HOME/etc/brew/casks`; do
+        brew cask install $cask
+      done
+      ;;
+    *)
+      _homer_brew taps
+      _homer_brew packages
+      _homer_brew casks
+      ;;
+  esac
+}
+
+homer_brew() {
+  brew update
+  _homer_brew
+}
