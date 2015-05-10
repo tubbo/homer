@@ -145,3 +145,5 @@ Tom Scott <http://psychedeli.ca>
 ## SEE ALSO
 
 antigen(1)
+zsh(1)
+git(1)
