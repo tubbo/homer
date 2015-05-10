@@ -3,20 +3,15 @@
 # Copy home directory template files to the user's home directory and
 # initialize it as a Git repository.
 
-if [ -z $HOMER_PREFIX ]; then
-  export HOMER_PREFIX="/usr/local"
-fi
-
-HOMER_PATH=$2
-
-if [ -z $HOMER_PATH ]; then
-  HOMER_PATH=$HOME
+# Override $HOMER_HOME with the first argument to homer init if given.
+if [ ! -z "$2" ]; then
+  HOMER_HOME=$2
 fi
 
 source "$HOMER_PATH/share/homer/cli.zsh"
 
-if [[ -e "$HOMER_PATH/.git" ]]; then
-  homer_error "There is already an existing Git repository in your home directory."
+if [[ -e "$HOMER_HOME/.git" ]]; then
+  homer_error "There is already an existing Git repository in $HOMER_HOME."
   exit 0
 fi
 
@@ -28,24 +23,26 @@ fi
 
 if [[ -n "${repository+}" ]]; then
   git clone $repository /tmp/home-directory
-  cp -a /tmp/home-directory/** $HOMER_PATH
-  cp -a /tmp/home-directory/.* $HOMER_PATH
+  cp -a /tmp/home-directory/** $HOMER_HOME
+  cp -a /tmp/home-directory/.* $HOMER_HOME
   rm -rf /tmp/home-directory
 else
-  git init $HOMER_PATH
-  cp -a $HOMER_PREFIX/share/homer/template/** $HOMER_PATH
-  cp -a $HOMER_PREFIX/share/homer/template/.* $HOMER_PATH
+  git init $HOMER_HOME
+  cp -a $HOMER_PREFIX/share/homer/template/** $HOMER_HOME
+  cp -a $HOMER_PREFIX/share/homer/template/.* $HOMER_HOME
   homer_add_all $message
 fi
 
-for tap in `cat $HOMER_PATH/etc/brew/taps`; do
+for tap in `cat $HOMER_HOME/etc/brew/taps`; do
   brew tap $tap
 done
 
-for package in `cat $HOMER_PATH/etc/brew/packages`; do
+brew update
+
+for package in `cat $HOMER_HOME/etc/brew/packages`; do
   brew install $package
 done
 
-for cask in `cat $HOMER_PATH/etc/brew/casks`; do
+for cask in `cat $HOMER_HOME/etc/brew/casks`; do
   brew cask install $cask
 done

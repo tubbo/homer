@@ -2,18 +2,23 @@
 #
 # Executes Homer commands
 
+# All variables are based off this single key, which is the location of
+# this particular file.
 case $0 in
  /*) HOMER_SCRIPT_FILE=$0;;
   *) HOMER_SCRIPT_FILE=$PWD/$0;;
 esac
 
-HOMER_SCRIPT_PATH=$(dirname $HOMER_SCRIPT_FILE)
-HOMER_PATH=$HOMER_SCRIPT_PATH/..
-HOMER_COMMAND=$1
-HOMER_EXECUTABLE=$HOMER_SCRIPT_PATH/homer-$HOMER_COMMAND
+# Load global configuration
+export HOMER_SCRIPT_PATH=$(dirname $HOMER_SCRIPT_FILE)
+export HOMER_PATH=$HOMER_SCRIPT_PATH/..
+export HOMER_COMMAND=$1
+export HOMER_EXECUTABLE=$HOMER_SCRIPT_PATH/homer-$HOMER_COMMAND
+export HOMER_HOME=$HOME
 
+# Execute the command or run `homer help` if not found.
 if [[ -e $HOMER_EXECUTABLE ]]; then
-  $HOMER_EXECUTABLE $*
+  source "$HOMER_EXECUTABLE"
 else
-  $HOMER_SCRIPT_PATH/homer-help
+  source "$HOMER_SCRIPT_PATH/homer-help"
 fi
