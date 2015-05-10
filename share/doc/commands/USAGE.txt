@@ -7,8 +7,9 @@ type `man homer`.
 Commands:
 
 - alias   Save an alias in ~/etc/aliases.zsh.
-- init    Initialize a new home directory.
+- brew    Manage Homebrew formulae.
 - help    View this and other command help.
+- init    Initialize a new home directory.
 - plugin  Install a plugin with Antigen to ~/etc/plugins.zsh.
 - save    Commit changes to the repo and push to origin.
 - script  Save a bin script to the repo.
