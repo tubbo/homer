@@ -83,6 +83,8 @@ _homer_brew() {
 }
 
 homer_brew() {
-  brew update
-  _homer_brew
+  if (( $+commands[brew] )) ; then
+    brew update
+    _homer_brew
+  fi
 }
