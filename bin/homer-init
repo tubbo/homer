@@ -6,6 +6,8 @@
 # Override $HOMER_HOME with the first argument to homer init if given.
 if [ ! -z "$2" ]; then
   HOMER_HOME=$2
+else
+  HOMER_HOME=$HOME
 fi
 
 source "$HOMER_PATH/share/homer/cli.zsh"
@@ -34,4 +36,6 @@ else
 fi
 
 # Update Homebrew packages
-homer_brew
+if [[ -z "${SKIP_BREW+x}" ]]; then
+  homer_brew
+fi

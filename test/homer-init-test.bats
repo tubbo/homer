@@ -1,21 +1,16 @@
 #!/usr/bin/env bats
 
 setup() {
-  mkdir $PWD/tmp
-}
-
-teardown() {
-  rm -rf $PWD/tmp
+  export SKIP_BREW='true'
 }
 
 @test "initialize a git repo in the home dir" {
-  export HOME="$PWD/tmp"
-  ./bin/homer init
+  ./bin/homer init $BATS_TMPDIR/home
 }
 
 @test "print an error and exit if git repo already exists" {
-  export HOME=$PWD/tmp
-  mkdir -p $PWD/tmp/.git/
-  touch $PWD/tmp/.git/ORIG_HEAD
-  ./bin/homer init
+  mkdir -p $BATS_TMPDIR/home/.git
+  touch $BATS_TMPDIR/home/.git/ORIG_HEAD
+
+  ./bin/homer init $BATS_TMPDIR/home
 }
