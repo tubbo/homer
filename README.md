@@ -89,6 +89,15 @@ When its installed, run the setup command:
 $ homer init
 ```
 
+This will create a Git repo in your home directory and add
+a `~/.gitignore` file to control it, in addition to some
+default ZSH configuration. You can also pass the `-c REPO_URL`
+option to clone an existing dotfiles repo rather than creating
+a new one. It copies your existing home directory to `/tmp/home`,
+clones your existing Git repo in your home directory, then merges
+the `/tmp/home` directory back into home, wherein you can reset
+or commit any changes you wish to remove or keep, respectively.
+
 ## Usage
 
 Homer can save your dotfiles.
@@ -152,6 +161,13 @@ store files such as **etc/plugins.zsh** for defining shell plugins and
 Note that the aforementioned files should not be edited manually, the
 `homer alias` and `homer plugin` tools are meant to manage the files for
 you.
+
+In addition to creating these initial files, it also runs `git init` in your
+home directory, effectively making the entire thing a Git repository. In order
+to prevent massive repo sizes and accidentally checking in unsafe credentials,
+Homer does not initially add any files to this repo, except for a `.gitignore`
+which ignores all files by default. To add files to the repo, you need to use
+`homer save` or run `git add -f` in your home directory.
 
 ## Development
 
