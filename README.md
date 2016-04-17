@@ -2,6 +2,8 @@
 
 [![Build Status](https://travis-ci.org/tubbo/homer.svg?branch=master)][ci]
 
+![Homer Thinking](http://i.giphy.com/JDHMwstcLRza0.gif)
+
 Homer is a home directory manager for your shell. Using [Git][git], it
 tracks changes in your home directory configuration from anywhere on
 your machine. Its goal is to uncover the IDE-like possibilities of the
