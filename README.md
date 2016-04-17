@@ -163,7 +163,9 @@ store files such as **etc/plugins.zsh** for defining shell plugins and
 **etc/aliases.zsh** for storing shell aliases you wish to recall later.
 Note that the aforementioned files should not be edited manually, the
 `homer alias` and `homer plugin` tools are meant to manage the files for
-you.
+you. Any ZSH code you wish to load when the shell launches should be placed
+in initializer files within **etc/profile.d**, keeping **~/.zshrc** and
+**~/.zshenv** clear.
 
 In addition to creating these initial files, it also runs `git init` in your
 home directory, effectively making the entire thing a Git repository. In order
