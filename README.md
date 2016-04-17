@@ -98,6 +98,8 @@ clones your existing Git repo in your home directory, then merges
 the `/tmp/home` directory back into home, wherein you can reset
 or commit any changes you wish to remove or keep, respectively.
 
+**Make sure you add any files you wish to keep in your dotfiles repo when homer initializes.**
+
 ## Usage
 
 Homer can save your dotfiles.
