@@ -131,7 +131,8 @@ $ homer plugin uninstall zsh-users/zsh-syntax-highlighting
 Homer can add aliases and save them for later use.
 
 ```bash
-$ homer alias gc 'git commit'
+$ homer alias gs
+# in another shell
 $ gc -m "wow this is cool"
 ```
 
