@@ -17,7 +17,11 @@ fi
 
 # Execute as the configured editor.
 edit() {
-  $EDITOR $*
+  if [ -z "$*" ]; then
+    $EDITOR .
+  else
+    $EDITOR $*
+  fi
 }
 alias e=edit
 
