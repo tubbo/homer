@@ -8,6 +8,7 @@ Commands:
 
 - alias   Save an alias in ~/etc/aliases.zsh.
 - brew    Manage Homebrew formulae.
+- grep    Search Homer shared source and your own configs simultaneously
 - help    View this and other command help.
 - init    Initialize a new home directory.
 - plugin  Install a plugin with Antigen to ~/etc/plugins.zsh.

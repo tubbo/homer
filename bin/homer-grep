@@ -1,0 +1,16 @@
+#!/bin/zsh
+#
+# Run `git grep` on your home directory repo and Homer shared scripts
+# simultaneously.
+
+shift
+
+pushd $HOMER_HOME
+results=$(git grep --color='always' $*)
+popd
+
+for file in $(find $HOMER_PATH/**/*.zsh); do
+  results+=$(grep --color='always' -I $* $file /dev/null)
+done
+
+echo $results | less -r

@@ -1,0 +1,5 @@
+homer grep [OPTIONS] PATTERN [FILES]
+
+Searches your home directory repo with `git grep` and the Homer shared
+ZSH source with `grep`, then combines search results together. This
+command passes all options and arguments to `git grep` and `grep`.
