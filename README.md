@@ -12,31 +12,29 @@ still retaining its usefulness to power users.
 
 Homer is an opinionated, but minimal, framework. While most of what
 it assumes about your environment is strongly enforced across the
-framework, it attempts to assume very little about your system, instead
-allowing you to customize your shell the way you see fit. In many ways,
-Homer is really meant to just get rid of all the boilerplate code one
-would need to have a really stellar shell environment.
+framework, it attempts to assume little about your system, instead
+allowing you to customize your shell the way you see fit. Homer's main
+philosophy is that having a stellar shell configuration should be
+much easier.
 
 ## How It Works
 
-Homer is effectively a Git repo and shell manager that can be accessed
+Homer is effectively a Git repo and shell manager that is accessible
 from anywhere on the machine. It's written entirely in ZSH shell script
-in a way that's both performant and highly accurate. Homer is really
-nothing more than a set of conventions, a few shell scripts to make
-things easier, and some useful/sane defaults for ZSH. All of Homer's
-components are simply tools that wrap a Git repository, usually
-performing a command in the process (like adding an alias or copying a
-whole script) which involves changing a file in the home directory.
+in a way that's both performant and highly accurate. Homer is actually
+nothing more than a set of conventions, some shell scripts to make
+complex tasks easier, and some useful/sane defaults for ZSH. Homer's
+components are tools that wrap a Git repository and your ZSH
+configuration.
 
-Homer is very similar to tools like [GNU Stow][stow], its main
+Homer is comparable with tools like [GNU Stow][stow], its main
 difference is that instead of keeping a directory separate from
 `$HOME` and symlinking the necessary files over from some
-version-controlled directory when asked, Homer simply uses the home
-directory as a Git repo and ignores any files it doesn't explicitly
-track. It also provides a few more services than Stow,
-such as alias and plugin management. Homer is not just for keeping dot
-files secure, it's a tool for managing all of the files in your home
-directory you wish to keep with Git.
+version-controlled directory when asked, Homer uses the home
+directory as a Git repository and ignores any files it doesn't explicitly
+track. It also provides ZSH-specific alias and plugin management, which
+Stow as a more generalized system does not do. Homer is essentially a tool for
+managing any file in your home directory you wish to keep with Git.
 
 ## Features
 
@@ -48,11 +46,9 @@ directory you wish to keep with Git.
 
 ## Installation
 
-There are a number of ways to install Homer...
-
 ### From a Package Manager
 
-As a package, Homer is currently only available on [Homebrew][brew]:
+As a package, Homer is available on [Homebrew][brew]:
 
 ```bash
 $ brew tap tubbo/homebrew-tap
@@ -74,7 +70,7 @@ dependencies installed:
 - zsh
 - antigen
 - keychain
-- bats (only if you're developing on the project)
+- bats (if you're developing on the project)
 
 Once they're all installed, run the following commands to install to
 `/usr/local`...
@@ -91,8 +87,8 @@ When its installed, run the setup command:
 $ homer init
 ```
 
-This will create a Git repo in your home directory and add
-a `~/.gitignore` file to control it, in addition to some
+This will create a Git repo in your home directory, add
+a `~/.gitignore` file to control it, and some
 default ZSH configuration. You can also pass the `-c REPO_URL`
 option to clone an existing dotfiles repo rather than creating
 a new one. It copies your existing home directory to `/tmp/home`,
@@ -151,27 +147,25 @@ $ homer script bin/find-and-replace-in-project
 $ find-and-replace-in-project
 ```
 
-All of the aforementioned commands include automatic committing to your
-home dir's repo, so you never lose your place. Homer isn't the smartest
-guy in the world, but he gets the job done. He stays out of your way and
-if you want to change your shell around, he makes it easy.
+The above commands include automatic committing to your
+home dir's repo, so you never lose your place.
 
 ### Conventions
 
-Homer establishes a number of conventions on your home directory. It
-uses the **bin/** directory to store user-made scripts which can be made
+Homer establishes useful conventions on your home directory. It
+uses the **bin/** directory to store user-made scripts which are
 available in the path. It creates an **etc/** directory and uses that to
 store files such as **etc/plugins.zsh** for defining shell plugins and
 **etc/aliases.zsh** for storing shell aliases you wish to recall later.
-Note that the aforementioned files should not be edited manually, the
-`homer alias` and `homer plugin` tools are meant to manage the files for
-you. Any ZSH code you wish to load when the shell launches should be placed
+Note that you should not edit the manifest files mentioned above manually, the
+`homer alias` and `homer plugin` tools should manage the files for
+you. Place any ZSH code you wish to load when the shell launches
 in initializer files within **etc/profile.d**, keeping **~/.zshrc** and
 **~/.zshenv** clear.
 
-In addition to creating these initial files, it also runs `git init` in your
+As well as creating these initial files, it also runs `git init` in your
 home directory, effectively making the entire thing a Git repository. In order
-to prevent massive repo sizes and accidentally checking in unsafe credentials,
+to prevent massive repo sizes and checking in unsafe credentials,
 Homer does not initially add any files to this repo, except for a `.gitignore`
 which ignores all files by default. To add files to the repo, you need to use
 `homer save` or run `git add -f` in your home directory.
