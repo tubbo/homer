@@ -9,7 +9,7 @@ pushd $HOMER_HOME
 results=$(git grep --color='always' $*)
 popd
 
-for file in $(find $HOMER_PATH/**/*.zsh); do
+for file in $(find /usr/local/share/homer/**/*.zsh); do
   results+=$(grep --color='always' -I $* $file /dev/null)
 done
 
