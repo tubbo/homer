@@ -24,10 +24,10 @@ if [ -z $message ]; then
 fi
 
 if [[ -n "${repository+}" ]]; then
-  git clone $repository /tmp/home-directory
-  cp -a /tmp/home-directory/** $HOMER_HOME
-  cp -a /tmp/home-directory/.* $HOMER_HOME
-  rm -rf /tmp/home-directory
+  git clone --no-checkout $repository /tmp/home
+  pushd $HOME
+  mv /tmp/home/.git .git
+  git reset --hard HEAD
 else
   git init $HOMER_HOME
   cp -a $HOMER_PREFIX/share/homer/template/** $HOMER_HOME
