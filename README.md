@@ -112,43 +112,68 @@ Homer can sync with your Git repo.
 $ homer update
 ```
 
-(To update Homer itself, use Homebrew: `brew upgrade homer`)
+(To update Homer itself, run `homer upgrade`)
 
-Homer can install shell plugins.
+### Plugins
+
+Homer provides an easy way to manage ZSH plugins with [Antigen][].
+These plugins are automatically installed when you `init` your home
+directory on a new machine. Antigen is installed automatically upon
+initialization if it's not already installed.
+
+To install a new plugin:
 
 ```bash
-$ homer plugin install zsh-users/zsh-syntax-highlighting
+$ homer plugin zsh-users/zsh-syntax-highlighting
 ```
 
 As well as remove them.
 
 ```bash
-$ homer plugin uninstall zsh-users/zsh-syntax-highlighting
+$ homer plugin zsh-users/zsh-syntax-highlighting -r
 ```
 
-Homer can add aliases and save them for later use.
+### Aliases
+
+Homer can add aliases and save them for later use. These aliases are
+stored in `~/etc/aliases.zsh`, and tracked by Git so they can be shared
+in your home directory repository.
+
+To add a new alias:
 
 ```bash
 $ homer alias gc 'git commit'
-# in another shell
+```
+
+Reload your shell, and you can now use `gc` as an alias to `git commit`:
+
+```bash
 $ gc -m "wow this is cool"
 ```
 
-It can also delete them.
+To delete an alias:
 
 ```bash
 $ homer alias -d gc
 ```
 
-Homer can copy useful scripts to your `$PATH`.
+### User Scripts
+
+If you write a useful shell script or executable, Homer can copy this
+file to a directory in your `$PATH`. Homer uses the `~/bin` directory
+for this purpose, and keeps files in this directory checked in to Git so
+you can share them in your home directory repo.
 
 ```bash
 $ homer script bin/find-and-replace-in-project
 $ find-and-replace-in-project
 ```
 
-The above commands include automatic committing to your
-home dir's repo, so you never lose your place.
+You can also remove commands from this directory:
+
+```bash
+$ homer script bin/find-and-replace-in-project -r
+```
 
 ### Conventions
 
@@ -166,8 +191,9 @@ in initializer files within **etc/profile.d**, keeping **~/.zshrc** and
 As well as creating these initial files, it also runs `git init` in your
 home directory, effectively making the entire thing a Git repository. In order
 to prevent massive repo sizes and checking in unsafe credentials,
-Homer does not initially add any files to this repo, except for a `.gitignore`
-which ignores all files by default. To add files to the repo, you need to use
+Homer does not initially add any files to this repo, except for the ones
+it generates. One of these generated files is a `.gitignore`, which ignores all
+files in the home directory by default. To add files to the repo, you need to use
 `homer save` or run `git add -f` in your home directory.
 
 ## Development
@@ -175,14 +201,14 @@ which ignores all files by default. To add files to the repo, you need to use
 Homer is written entirely in ZSH shell script. It uses [BATS][bats] to
 run its tests. All contributions must include tests.
 
-To run tests, execute the following command at the root of the project
+Run tests by performing following command at the root of the project
 directory:
 
 ```bash
 $ make test
 ```
 
-To generate Man documentation:
+To generate manpages:
 
 ```bash
 $ make man
@@ -191,10 +217,10 @@ $ make man
 You can also use the Makefile to generate a command:
 
 ```bash
-$ make command NAME=test
+$ make command NAME=foo
 ```
 
-This will generate `bin/homer-test` and `share/doc/commands/test.txt`
+This will generate `bin/homer-foo` and `share/doc/commands/foo.txt`
 with given templates.
 
 ### License
@@ -204,7 +230,7 @@ Homer uses the MIT License, as described below:
 ```
 The MIT License (MIT)
 
-Copyright (c) 2014 Tom Scott
+Copyright (c) 2014-2019 Tom Scott
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -232,3 +258,4 @@ Pull requests must pass [CI][ci] before being accepted.
 [bats]: https://github.com/sstephenson/bats
 [stow]: http://www.gnu.org/software/stow/
 [ci]: https://travis-ci.org/tubbo/homer
+[Antigen]: https://github.com/zsh-users/antigen

@@ -34,8 +34,3 @@ else
   cp -a $HOMER_PREFIX/share/homer/template/.* $HOMER_HOME
   homer_add_all $message
 fi
-
-# Update Homebrew packages
-if [[ -z "${SKIP_BREW+x}" ]]; then
-  homer_brew
-fi

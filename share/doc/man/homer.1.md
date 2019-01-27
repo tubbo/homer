@@ -32,90 +32,91 @@ https://github.com/tubbo/homer#readme
 
 ## EXAMPLES
 
-Save a dotfile:
+Initialize your home directory as a new repo:
+
+```
+homer init
+```
+
+Or, clone an existing home directory repo:
+
+
+```
+homer init -c https://github.com/me/home.git
+```
+
+You can now save dotfiles to the repo:
 
 ```
 homer save .vimrc -m "Removed vim-rails"
 ```
 
-Sync with your Git repo:
+Or, sync with your Git repo if you made changes elsewhere:
 
 ```
 homer update
 ```
 
-Install shell plugins:
-
-```
-homer plugin zsh-users/zsh-syntax-highlighting
-```
-
-Remove shell plugins:
-
-```
-homer plugin zsh-users/zsh-syntax-highlighting -r
-```
-
-Save an alias for later use:
-
-```
-homer alias gc 'git commit'
-```
-
-Forget an alias:
-
-```
-homer alias gc -r
-```
-
-Copy useful scripts to your `$PATH`:
-
-```
-homer script bin/find-and-replace-in-project
-find-and-replace-in-project
-```
-
-And remove them:
-
-```
-homer script find-and-replace-in-project -r
-```
-
-Homer can even upgrade itself:
+Homer can even upgrade itself using the latest GitHub release:
 
 ```
 homer upgrade
 ```
 
-And update its codebase with Homebrew:
+### Shell Plugins
+
+Homer also provides an easy way to manage ZSH plugins with Antigen.
+These plugins are automatically installed when you `init` your home
+directory on a new machine.
 
 ```
-homer upgrade -p
+homer plugin zsh-users/zsh-syntax-highlighting
 ```
 
-It can also manage your Homebrew packages...
+You can also remove shell plugins from the manifest:
 
 ```
-homer brew tap tubbo/tap
+homer plugin zsh-users/zsh-syntax-highlighting -r
 ```
 
-Taps...
+Homer manages an `~/etc/aliases` file that includes your shell aliases.
+To add one, run the following command:
 
 ```
-homer brew package vim
+homer alias gc 'git commit'
 ```
 
-And casks...
+Or, forget an alias:
 
 ```
-homer brew cask hipchat
+homer alias gc -r
 ```
 
-Or you can pre-define a list and just run this command
-to install everything:
+**NOTE:** The shell will need to be reloaded in order for alias changes
+          to take effect.
+
+### User Scripts
+
+Homer establishes a `~/bin` directory for useful scripts that you might
+need access to as commands. This directory is added to `$PATH` so that
+its executable contents can be used as commands across the system.
+
+Adding a new command
 
 ```
-homer brew
+homer script path/to/your/script/find-and-replace-in-project
+```
+
+You can now use the script as if it was a command:
+
+```
+find-and-replace-in-project
+```
+
+To remove the script from `~/bin`:
+
+```
+homer script find-and-replace-in-project -r
 ```
 
 ## GENERATED FILES
@@ -130,12 +131,6 @@ command...
 *~/etc/plugins.zsh:* Plugins configuration
 
 *~/etc/aliases.zsh:* User aliases configuration
-
-*~/etc/brew/casks:* Homebrew casks to install
-
-*~/etc/brew/packages:* Homebrew packages to install
-
-*~/etc/brew/taps:* Homebrew taps to install
 
 
 ## AUTHOR
