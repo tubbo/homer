@@ -1,1 +1,4 @@
+---
 theme: jekyll-theme-hacker
+title: homer
+description: the home directory manager for zsh
