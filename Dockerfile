@@ -12,5 +12,5 @@ FROM ubuntu:latest
 RUN apt-get update -qq && apt-get install curl -yy
 
 # Install Homer with the one-liner script
-COPY ../../docs/install.sh install.sh
-RUN ./install.sh
+COPY docs/install.sh install.sh
+RUN bash install.sh

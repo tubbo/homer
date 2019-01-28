@@ -18,7 +18,7 @@ INSTALL_FILES=`find $(DIRS) -type f`
 VERSION=`cat share/homer/VERSION`
 
 # Install this script to /usr/local
-all: clean test share/man/man1/homer.1 install
+all: clean share/man/man1/homer.1 install
 
 # Install gem dependencies
 vendor/bundle:
