@@ -25,7 +25,7 @@ TAG=.git/refs/tags/$(VERSION)
 SIG=$(PKG).asc
 
 # Install this script to /usr/local
-build: clean share/man/man1/homer.1 $(PKG) $(SIG) verify
+build: clean share/man/man1/homer.1 $(PKG) $(SIG)
 
 # Install gem dependencies
 vendor/bundle:
@@ -75,16 +75,13 @@ $(PKG_DIR):
 $(PKG): $(PKG_DIR)
 	@git archive --output=$(PKG) --prefix=$(PKG_NAME)/ HEAD $(DIRS) ./Makefile
 
-# Verify the contents of a package
-verify: $(PKG) $(SIG)
-	@gpg --verify $(SIG) $(PKG)
-
 # Cryptographically sign the package so its contents can be verified at
 # a later date
 $(SIG): $(PKG)
 	@gpg --sign --detach-sign --armor $(PKG)
-	@git add -f $(PKG).asc
-	@git commit $(PKG).asc -m "Add PGP signature for $(VERSION)"
+	@gpg --verify $(SIG) $(PKG)
+	@git add -f $(SIG)
+	@git commit $(SIG) -m "Add PGP signature for $(VERSION)"
 
 # Release the latest version of Homer to GitHub
 release: $(TAG) $(PKG) $(SIG)
