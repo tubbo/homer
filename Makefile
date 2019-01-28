@@ -5,7 +5,7 @@
 # Shoutouts to @postmodern and @isaacs, I lifted most of their ideas to
 # make this...
 
-.PHONY: test check install uninstall clean command all
+.PHONY: test check install uninstall clean command all release
 
 PROGRAM=homer
 SHELL=/usr/bin/env zsh
@@ -49,3 +49,7 @@ uninstall:
 command:
 	@cp share/homer/command/bin.sh bin/homer-${NAME}
 	@cp share/homer/command/doc.txt share/doc/commands/${NAME}.txt
+
+# Create a new release
+release:
+	@git tag $(./bin/homer version) && git push --tags
