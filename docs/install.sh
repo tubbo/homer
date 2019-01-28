@@ -21,12 +21,8 @@ filename="homer-$version.tar.gz"
 pushd "$tmpdir" > /dev/null 2>&1
 
 # Ensure source code is in place
-if [ -f "$filename" ]; then
-  echo "Using cached version of Homer on disk: $filename"
-else
-  echo "Downloading Homer $version from GitHub..."
-  curl -sL "https://github.com/tubbo/homer/archive/$version.tar.gz" -o "$filename"
-fi
+echo "Downloading Homer $version from GitHub..."
+curl -sL "https://github.com/tubbo/homer/archive/$version.tar.gz" -o "$filename"
 
 # Extract source code from tarball
 tar -zxf "$filename"

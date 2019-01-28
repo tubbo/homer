@@ -2,10 +2,25 @@
 
 load test_helper
 
+setup() {
+  if [ ! -z "$(command -v docker)" ]; then
+    docker build -t homer:latest .
+  fi
+}
+
+teardown() {
+  if [ ! -z "$(command -v docker)" ]; then
+    docker image rm homer:latest
+  fi
+}
+
 @test "install the latest version with the installer script" {
-  skip "disabled for now because it's too slow"
-  run docker run --rm -it homer:latest homer version
+  if [ -z "$(command -v docker)" ]; then
+    skip "Install Docker to run integration tests"
+  fi
+
+  run docker run --rm -it homer:latest homer
 
   assert_success
-  assert_output $(cat $SOURCE_DIR/share/homer/VERSION)
+  assert_line --partial "Usage: homer COMMAND [ARGUMENTS]"
 }

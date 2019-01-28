@@ -3,6 +3,8 @@ env:
   - HOMER_PREFIX=$PWD
   global:
     secure: NJjmBaVFG0VRGX3orHApmiKhBUxY0r5eVi4GOQAxhKq9yC9Vhr2HCw3JYktE4yY7zM+VtmzMIa7PdqKDe7xKi5XY3EdcqybBn8eNw7isKJ1/0YqNSMIqfoeg9mm9F8pJiyqAXHudpDwUFa4mFDkJx9gXl4siYtPYSk6HoaE+oV8=
+services:
+- docker
 before_install:
 - sudo add-apt-repository ppa:duggan/bats --yes
 - sudo apt-get update -qq
