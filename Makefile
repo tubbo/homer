@@ -53,4 +53,4 @@ command:
 
 # Create a new release
 release:
-	@echo "git tag $(VERSION) && git push --tags"
+	@git tag $(VERSION) && git push --tags
