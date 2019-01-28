@@ -4,7 +4,7 @@
 # ~/etc/plugins file.
 
 plugin=$2
-file=$HOME/etc/plugins.zsh
+file=$HOMER_HOME/etc/plugins.zsh
 
 source "$HOMER_PATH/share/homer/cli.zsh"
 

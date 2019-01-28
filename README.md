@@ -15,13 +15,13 @@ it assumes about your environment is strongly enforced across the
 framework, it attempts to assume little about your system, instead
 allowing you to customize your shell the way you see fit. Homer's main
 philosophy is that having a stellar shell configuration should be
-much easier.
+much easier than it is today.
 
 ## How It Works
 
-Homer is effectively a Git repo and shell manager that is accessible
-from anywhere on the machine. It's written entirely in ZSH shell script
-in a way that's both performant and highly accurate. Homer is actually
+Homer is effectively a Git repo and shell extension manager that is accessible
+from anywhere on the machine. It's written entirely in [ZSH][] shell
+script, but you don't have to use ZSH to gain its benefits. Homer is actually
 nothing more than a set of conventions, some shell scripts to make
 complex tasks easier, and some useful/sane defaults for ZSH. Homer's
 components are tools that wrap a Git repository and your ZSH
@@ -45,6 +45,22 @@ managing any file in your home directory you wish to keep with Git.
   allows for hooking into Homer and adding your own commands.
 
 ## Installation
+
+The easiest way to install Homer is with the one-liner install script:
+
+```bash
+$ curl -o- -L https://homer.psychedeli.ca/install.sh | bash
+```
+
+It's a good practice to always [view the source code][installer] before
+running a command like this, but if you're busy, here's a short
+description of what the installer script does:
+
+1. Downloads the latest `.tar.gz` release of Homer
+2. Extracts the source code to a directory in `/tmp`
+3. Runs `sudo make` in the source code directory, this will require you
+   to type in your root password
+4. Removes all files in the `/tmp` directory created by the installer.
 
 ### From a Package Manager
 
@@ -209,11 +225,11 @@ files in the home directory by default. To add files to the repo, you need to us
 
 ## Development
 
-Homer is written entirely in ZSH shell script. It uses [BATS][bats] to
-run its tests. All contributions must include tests.
+Homer is written entirely in [ZSH][] shell script. It uses [BATS][bats] to
+run its tests, and a Makefile is provided to run the tests as well as
+build/install the project.
 
-Run tests by performing following command at the root of the project
-directory:
+To run tests:
 
 ```bash
 $ make test
@@ -267,3 +283,5 @@ Pull requests must pass [CI][ci] before being accepted.
 [stow]: http://www.gnu.org/software/stow/
 [ci]: https://travis-ci.org/tubbo/homer
 [Antigen]: https://github.com/zsh-users/antigen
+[ZSH]: http://zsh.sourceforge.net/
+[installer]: https://github.com/tubbo/homer/blob/master/docs/install.sh

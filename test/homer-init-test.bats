@@ -11,10 +11,6 @@ if [ -z "$HOMER_TEST_REPO_URL" ]; then
 fi
 
 @test "initialize a git repo as the home dir" {
-  export HOMER_HOME="$BATS_TMPDIR/home"
-  rm -rf $HOMER_HOME
-  mkdir -p $HOMER_HOME
-
   run $PWD/bin/homer init
 
   assert_success
@@ -24,10 +20,6 @@ fi
 }
 
 @test "clone an existing git repo into the home dir" {
-  export HOMER_HOME="$BATS_TMPDIR/home"
-  rm -rf $HOMER_HOME
-  mkdir -p $HOMER_HOME
-
   run $PWD/bin/homer init $HOMER_TEST_REPO_URL
 
   assert_success
@@ -37,10 +29,7 @@ fi
 }
 
 @test "print an error and exit if git repo already exists" {
-  export HOMER_HOME="$BATS_TMPDIR/home"
-  rm -rf $HOMER_HOME
   mkdir -p $HOMER_HOME/.git
-
   run $PWD/bin/homer init
 
   assert_failure
