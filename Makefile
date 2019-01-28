@@ -15,6 +15,7 @@ SOURCE_PATH?=$(PWD)
 DIRS=bin share
 INSTALL_DIRS=`find $(DIRS) -type d`
 INSTALL_FILES=`find $(DIRS) -type f`
+VERSION=`cat share/homer/VERSION`
 
 # Install this script to /usr/local
 all: clean test share/man/man1/homer.1 install
@@ -52,4 +53,4 @@ command:
 
 # Create a new release
 release:
-	@git tag $(./bin/homer version) && git push --tags
+	@echo "git tag $(VERSION) && git push --tags"

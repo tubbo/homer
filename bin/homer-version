@@ -1,5 +1,5 @@
 #!/bin/zsh
 #
-# Prints the current version of Homer
+# Print the current version of Homer
 
-echo "v0.0.7"
+cat $HOMER_PATH/share/homer/VERSION
