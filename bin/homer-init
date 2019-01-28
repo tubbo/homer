@@ -3,31 +3,28 @@
 # Copy home directory template files to the user's home directory and
 # initialize it as a Git repository.
 
-# Override $HOMER_HOME with the first argument to homer init if given.
-if [ ! -z "$2" ]; then
-  HOMER_HOME=$2
-else
-  HOMER_HOME=$HOME
-fi
-
 source "$HOMER_PATH/share/homer/cli.zsh"
 
 if [[ -e "$HOMER_HOME/.git" ]]; then
   homer_error "There is already an existing Git repository in $HOMER_HOME."
-  exit 0
+  exit 1
 fi
 
-zparseopts -K -- m:=message c:=repository
+zparseopts -K -- m:=message
 
-if [ -z $message ]; then
+if [ -z "$message[2]" ]; then
   message="Initialize home directory."
+else
+  message=$message[2]
 fi
 
-if [[ -n "${repository+}" ]]; then
-  git clone --no-checkout $repository /tmp/home
-  pushd $HOME
-  mv /tmp/home/.git .git
+if [ ! -z "$2" ]; then
+  repository=$2
+  git clone --no-checkout $repository /tmp/homer
+  pushd $HOMER_HOME
+  mv /tmp/homer/.git .git
   git reset --hard HEAD
+  popd
 else
   git init $HOMER_HOME
   cp -a $HOMER_PREFIX/share/homer/template/** $HOMER_HOME
