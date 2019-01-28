@@ -1,7 +1,7 @@
 #!/usr/local/bin/bash
 
-TEST_BREW_PREFIX="$(brew --prefix)"
+VENDOR_PATH=node_modules
 
-load "${TEST_BREW_PREFIX}/lib/bats-support/load.bash"
-load "${TEST_BREW_PREFIX}/lib/bats-assert/load.bash"
-load "${TEST_BREW_PREFIX}/lib/bats-file/load.bash"
+load "${VENDOR_PATH}/bats-support/load.bash"
+load "${VENDOR_PATH}/bats-assert/load.bash"
+load "${VENDOR_PATH}/bats-file/load.bash"
