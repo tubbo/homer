@@ -6,6 +6,10 @@ assert_error() {
   assert_output "ERROR: $1"
 }
 
+if [ -z "$HOMER_TEST_REPO_URL" ]; then
+  HOMER_TEST_REPO_URL=https://github.com/tubbo/home.git
+fi
+
 @test "initialize a git repo as the home dir" {
   export HOMER_HOME="$BATS_TMPDIR/home"
   rm -rf $HOMER_HOME
@@ -24,7 +28,7 @@ assert_error() {
   rm -rf $HOMER_HOME
   mkdir -p $HOMER_HOME
 
-  run $PWD/bin/homer init https://github.com/tubbo/home.git
+  run $PWD/bin/homer init $HOMER_TEST_REPO_URL
 
   assert_success
   assert_file_exist $HOMER_HOME/etc/aliases.zsh
