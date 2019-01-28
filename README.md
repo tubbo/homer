@@ -219,13 +219,7 @@ directory:
 $ make test
 ```
 
-To generate manpages:
-
-```bash
-$ make man
-```
-
-You can also use the Makefile to generate a command:
+You can also use the Makefile to generate a new command:
 
 ```bash
 $ make command NAME=foo
@@ -233,6 +227,9 @@ $ make command NAME=foo
 
 This will generate `bin/homer-foo` and `share/doc/commands/foo.txt`
 with given templates.
+
+The Makefile is also used to create releases. Change the version in
+`share/homer/VERSION` and run `make release`
 
 ### License
 
