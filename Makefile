@@ -5,7 +5,7 @@
 # Shoutouts to @postmodern and @isaacs, I lifted most of their ideas to
 # make this...
 
-.PHONY: test check install uninstall clean command all release
+.PHONY: build test check install uninstall clean command release
 
 PROGRAM=homer
 SHELL=/usr/bin/env zsh
@@ -15,10 +15,17 @@ SOURCE_PATH?=$(PWD)
 DIRS=bin share
 INSTALL_DIRS=`find $(DIRS) -type d`
 INSTALL_FILES=`find $(DIRS) -type f`
-VERSION=`cat share/homer/VERSION`
+VERSION_FILE=$(SOURCE_PATH)/share/homer/VERSION
+VERSION=$(shell cat ${VERSION_FILE})
+
+PKG_DIR=dist
+PKG_NAME=$(PROGRAM)-$(VERSION)
+PKG=$(PKG_DIR)/$(PKG_NAME).tar.gz
+TAG=.git/refs/tags/$(VERSION)
+SIG=$(PKG).asc
 
 # Install this script to /usr/local
-all: clean share/man/man1/homer.1 install
+build: clean share/man/man1/homer.1 $(PKG) $(SIG) verify
 
 # Install gem dependencies
 vendor/bundle:
@@ -26,7 +33,10 @@ vendor/bundle:
 
 # Remove generated files
 clean:
-	@rm -rf share/man/man1/homer.1 tmp/
+	@rm -rf tmp
+
+clobber: clean
+	@rm -rf share/man/man1 dist
 
 # Run BATS tests on Homer
 test:
@@ -34,13 +44,15 @@ test:
 check: test
 
 # Generate the man page from markdown
-share/man/man1/homer.1: vendor/bundle share/doc/man/homer.1.md
+share/man/man1:
+	@mkdir -p share/man/man1
+share/man/man1/homer.1: vendor/bundle share/doc/man/homer.1.md share/man/man1
 	@bundle exec kramdown-man share/doc/man/homer.1.md > share/man/man1/homer.1
 
 # Move scripts to /usr/local. Typically requires `sudo` access.
 install:
-	for dir in $(INSTALL_DIRS); do mkdir -p $(DESTDIR)$(PREFIX)/$$dir; done
-	for file in $(INSTALL_FILES); do cp $$file $(DESTDIR)$(PREFIX)/$$file; done
+	@for dir in $(INSTALL_DIRS); do mkdir -p $(DESTDIR)$(PREFIX)/$$dir; done
+	@for file in $(INSTALL_FILES); do cp $$file $(DESTDIR)$(PREFIX)/$$file; done
 
 # Remove scripts from /usr/local. Typically requires `sudo` access.
 uninstall:
@@ -51,6 +63,29 @@ command:
 	@cp share/homer/command/bin.sh bin/homer-${NAME}
 	@cp share/homer/command/doc.txt share/doc/commands/${NAME}.txt
 
-# Create a new release
-release:
-	@git tag $(VERSION) && git push --tags
+# Tag the current state of the codebase as a released version
+$(TAG):
+	@git tag v$(VERSION)
+
+# Create a package for the current version of the codebase. This
+# omits developer-centric files like tests and build manifests for the
+# released version of the package.
+$(PKG_DIR):
+	@mkdir -p $(PKG_DIR)
+$(PKG): $(PKG_DIR)
+	@git archive --output=$(PKG) --prefix=$(PKG_NAME)/ HEAD $(DIRS) ./Makefile
+
+# Verify the contents of a package
+verify: $(PKG) $(SIG)
+	@gpg --verify $(SIG) $(PKG)
+
+# Cryptographically sign the package so its contents can be verified at
+# a later date
+$(SIG): $(PKG)
+	@gpg --sign --detach-sign --armor $(PKG)
+	@git add -f $(PKG).asc
+	@git commit $(PKG).asc -m "Add PGP signature for $(VERSION)"
+
+# Release the latest version of Homer to GitHub
+release: $(TAG) $(PKG) $(SIG)
+	@git push --all --tags

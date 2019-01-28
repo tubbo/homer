@@ -5,12 +5,13 @@
 # an existing install on a machine.
 #
 
-# Install an operating system
+# Use the latest version of Ubuntu
 FROM ubuntu:latest
 
-# Install cURL
-RUN apt-get update -qq && apt-get install curl -yy
+# Build dependencies
+RUN apt-get update -qq && \
+    apt-get install sudo curl -yy
 
-# Install Homer with the one-liner script
+# Install Homer
 COPY docs/install.sh install.sh
 RUN bash install.sh

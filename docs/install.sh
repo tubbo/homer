@@ -20,18 +20,21 @@ filename="homer-$version.tar.gz"
 
 pushd "$tmpdir" > /dev/null 2>&1
 
-# Download release source code from GitHub
-echo "Downloading Homer $version from GitHub..."
-curl -sL "https://github.com/tubbo/homer/archive/$version.tar.gz" -o "$filename"
+# Ensure source code is in place
+if [ -f "$filename" ]; then
+  echo "Using cached version of Homer on disk: $filename"
+else
+  echo "Downloading Homer $version from GitHub..."
+  curl -sL "https://github.com/tubbo/homer/archive/$version.tar.gz" -o "$filename"
+fi
 
-# Extract the source code to /tmp
+# Extract source code from tarball
 tar -zxf "$filename"
-
-export SUDO=$([ "$(id -u)" == "0" ] && "sudo")
 
 # Install homer from source to /usr/local and capture exit code
 pushd "$sourcedir" > /dev/null 2>&1
-output=$($SUDO make)
+echo "Installing Homer..."
+sudo make install
 code=$?
 
 # Print whether Homer was installed or not
