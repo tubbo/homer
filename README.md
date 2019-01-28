@@ -89,14 +89,22 @@ $ homer init
 
 This will create a Git repo in your home directory, add
 a `~/.gitignore` file to control it, and some
-default ZSH configuration. You can also pass the `-c REPO_URL`
-option to clone an existing dotfiles repo rather than creating
-a new one. It copies your existing home directory to `/tmp/home`,
-clones your existing Git repo in your home directory, then merges
-the `/tmp/home` directory back into home, wherein you can reset
-or commit any changes you wish to remove or keep, respectively.
+default ZSH configuration.
 
-**Make sure you add any files you wish to keep in your dotfiles repo when homer initializes.**
+**Make sure you `git add` any files you wish to keep in your dotfiles repo when homer initializes.**
+
+If you already have a home directory repo that was initialized using
+Homer, you can copy it down to your machine with the following command:
+
+```bash
+$ homer init https://url.to/your/home/directory/repo.git
+```
+
+This will clone the Git repo at the URL provided to `/tmp/homer` without
+actually checking out a working copy. After copying the `.git` directory
+(the actual data contents of the repo) to your home directory, it will
+run `git reset --hard HEAD` to "rehydrate" all the files of the working
+copy in the home directory rather than in the place it was checked out.
 
 ## Usage
 
@@ -106,7 +114,7 @@ Homer can save your dotfiles.
 $ homer save .vimrc -m "Removed vim-rails"
 ```
 
-Homer can sync with your Git repo.
+Homer can sync with your remote Git repo.
 
 ```bash
 $ homer update
@@ -119,7 +127,8 @@ $ homer update
 Homer provides an easy way to manage ZSH plugins with [Antigen][].
 These plugins are automatically installed when you `init` your home
 directory on a new machine. Antigen is installed automatically upon
-initialization if it's not already installed.
+initialization if it's not already installed. The plugin manifest can be
+found in `~/etc/plugins.zsh`.
 
 To install a new plugin:
 
@@ -162,7 +171,9 @@ $ homer alias -d gc
 If you write a useful shell script or executable, Homer can copy this
 file to a directory in your `$PATH`. Homer uses the `~/bin` directory
 for this purpose, and keeps files in this directory checked in to Git so
-you can share them in your home directory repo.
+you can share them in your home directory repo. Upon initialization,
+Homer will also `chmod +x` this entire directory to ensure that files
+created within it will default to be executable by the current user.
 
 ```bash
 $ homer script bin/find-and-replace-in-project
