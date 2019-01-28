@@ -15,5 +15,6 @@ Commands:
 - save      Commit changes to the repo and push to origin.
 - script    Save a bin script to the repo.
 - update    Update the repo and stash current changes.
+- version   Print the current version of Homer
 
 Type `homer help COMMAND` to get help on a particular command.

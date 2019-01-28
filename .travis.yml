@@ -9,4 +9,6 @@ before_install:
   - sudo apt-get update -qq
   - sudo apt-get install -qq bats zsh
 
+install: yarn
+
 script: make test

@@ -1,62 +1,51 @@
 # Build scripts for Homer. These tasks will generate documentation,
 # commands, and of course install the Homer scripts themselves to an
 # executable location.
+#
+# Shoutouts to @postmodern and @isaacs, I lifted most of their ideas to
+# make this...
 
-.PHONY: test install uninstall reinstall clean command-doc command-bin command all
+.PHONY: test check install uninstall clean command all
 
+PROGRAM=homer
 SHELL=/usr/bin/env zsh
-DIRS=bin etc lib share
+PREFIX?=$(DESTDIR)/usr/local
+HOMER_PATH?=$(PWD)
+SOURCE_PATH?=$(PWD)
+DIRS=bin share
 INSTALL_DIRS=`find $(DIRS) -type d`
 INSTALL_FILES=`find $(DIRS) -type f`
 
-PREFIX?=$(DESTDIR)/usr/local
-
-HOMER_PATH?=$(PWD)
-HOMER_PREFIX?=$(PWD)
-
 # Install this script to /usr/local
-all: clean test man install
+all: clean test share/man/man1/homer.1 install
 
 # Install gem dependencies
 vendor/bundle:
-	bundle check || bundle install
+	@bundle check || bundle install
 
 # Remove generated files
 clean:
-	rm -rf share/man/man1/homer.1 tmp/
+	@rm -rf share/man/man1/homer.1 tmp/
 
 # Run BATS tests on Homer
 test:
-	bats test
+	@bats test
+check: test
 
 # Generate the man page from markdown
 share/man/man1/homer.1: vendor/bundle share/doc/man/homer.1.md
-	kramdown-man share/doc/man/homer.1.md > share/man/man1/homer.1
+	@bundle exec kramdown-man share/doc/man/homer.1.md > share/man/man1/homer.1
 
-# Commit man changes to Git
-man: share/man/man1/homer.1
-	git add share/man/man1/homer.1
-
-# Move scripts to /usr/local
+# Move scripts to /usr/local. Typically requires `sudo` access.
 install:
-	for dir in $(INSTALL_DIRS); do mkdir -p $(PREFIX)/$$dir; done
-	for file in $(INSTALL_FILES); do cp $$file $(PREFIX)/$$file; done
+	for dir in $(INSTALL_DIRS); do mkdir -p $(DESTDIR)$(PREFIX)/$$dir; done
+	for file in $(INSTALL_FILES); do cp $$file $(DESTDIR)$(PREFIX)/$$file; done
 
-# Remove scripts from /usr/local
+# Remove scripts from /usr/local. Typically requires `sudo` access.
 uninstall:
-	for file in $(INSTALL_FILES); do rm -f $(PREFIX)/$$file; done
-
-# Reinstall the scripts with Homebrew.
-reinstall:
-	brew update && brew reinstall homer --HEAD
-
-# Generate the bin file for a command
-command-bin:
-	cp share/homer/command/bin.sh bin/homer-${NAME}
-
-# Generate the documentation for a command
-command-doc:
-	cp share/homer/command/doc.txt share/doc/commands/${NAME}.txt
+	@rm -rf $(PREFIX)/$(DIRS)/$(PROGRAM)
 
 # Generate a new command
-command: command-bin command-doc
+command:
+	@cp share/homer/command/bin.sh bin/homer-${NAME}
+	@cp share/homer/command/doc.txt share/doc/commands/${NAME}.txt

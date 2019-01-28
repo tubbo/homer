@@ -78,7 +78,7 @@ Once they're all installed, run the following commands to install to
 ```bash
 $ git clone https://github.com/tubbo/homer.git
 $ cd homer
-$ make
+$ sudo make
 ```
 
 When its installed, run the setup command:

@@ -2,3 +2,5 @@
 tags
 /vendor
 docs/_site
+node_modules
+yarn.lock
