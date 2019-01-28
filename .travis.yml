@@ -8,4 +8,16 @@ before_install:
 - sudo apt-get update -qq
 - sudo apt-get install -qq bats zsh
 install: yarn
+before_script: make clean
 script: make test
+before_deploy: make
+deploy:
+  provider: releases
+  api_key:
+    secure: B4ZW/vN6+2XsOB9P3LC9aM9JihaJPkEdQJbyDJP0VwwOoqPnbJgZb1JrQ+GRd+9rS0hWIqEkH34OXA1Tg637aXnQOvdWBO3hvMCOQtQ6w2zIKjWaB+x2bci7QDhhKVOQR9ccc1GYGivl3QSIIpN2A2ymnfSilcCHAT+vJsx94bc=
+  file: dist/homer-*.tar.gz*
+  file_glob: true
+  on:
+    success: true
+    repo: tubbo/homer
+    tags: true

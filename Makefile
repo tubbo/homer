@@ -5,7 +5,7 @@
 # Shoutouts to @postmodern and @isaacs, I lifted most of their ideas to
 # make this...
 
-.PHONY: build test check install uninstall clean command release
+.PHONY: build test check install uninstall clean command release verify
 
 PROGRAM=homer
 SHELL=/usr/bin/env zsh
@@ -25,7 +25,7 @@ TAG=.git/refs/tags/$(VERSION)
 SIG=$(PKG).asc
 
 # Install this script to /usr/local
-build: clean share/man/man1/homer.1 $(PKG) $(SIG)
+build: share/man/man1/homer.1 $(PKG) $(SIG)
 
 # Install gem dependencies
 vendor/bundle:
@@ -33,10 +33,7 @@ vendor/bundle:
 
 # Remove generated files
 clean:
-	@rm -rf tmp
-
-clobber: clean
-	@rm -rf share/man/man1 dist
+	@rm -rf tmp dist share/man/man1
 
 # Run BATS tests on Homer
 test:
@@ -79,10 +76,11 @@ $(PKG): $(PKG_DIR)
 # a later date
 $(SIG): $(PKG)
 	@gpg --sign --detach-sign --armor $(PKG)
-	@gpg --verify $(SIG) $(PKG)
-	@git add -f $(SIG)
-	@git commit $(SIG) -m "Add PGP signature for $(VERSION)"
 
 # Release the latest version of Homer to GitHub
 release: $(TAG) $(PKG) $(SIG)
 	@git push --all --tags
+
+# Verify the contents of a package
+verify: $(PKG) $(SIG)
+	@gpg --verify $(SIG) $(PKG)
