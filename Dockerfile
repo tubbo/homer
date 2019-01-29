@@ -13,5 +13,4 @@ RUN apt-get update -qq && apt-get install build-essential sudo curl zsh -yy
 
 # Install Homer
 COPY docs/install.sh install.sh
-COPY
 RUN bash install.sh
