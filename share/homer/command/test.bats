@@ -1,3 +1,7 @@
 #!/usr/bin/env bats
 
-# TODO write tests for your new command
+load test_helper
+
+test "your new command" {
+  assert [ "it works" ]
+}
