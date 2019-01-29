@@ -1,4 +1,4 @@
-#!/bin/zsh
+#!/usr/bin/env homer
 #
 # Short description of the command
 

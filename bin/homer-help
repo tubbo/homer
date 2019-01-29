@@ -4,7 +4,7 @@
 
 # Set up the path at which we look for txt files describing each
 # command.
-HOMER_DOC_PATH=$HOMER_PREFIX/share/doc/commands
+HOMER_DOC_PATH=$HOMER_PREFIX/share/doc/homer
 
 # Determine the command to look up, defaults to USAGE if unspecified or
 # not found.

@@ -241,11 +241,12 @@ You can also use the Makefile to generate a new command:
 $ make command NAME=foo
 ```
 
-This will generate `bin/homer-foo` and `share/doc/commands/foo.txt`
-with given templates.
+This will generate `bin/homer-foo`, `share/doc/homer/foo.txt`, and
+`test/homer-foo-test.bats` with given templates.
 
 The Makefile is also used to create releases. Change the version in
-`share/homer/VERSION` and run `make release`
+`share/homer/VERSION` and run `make release` to generate a new tarball,
+sign it, tag the latest version with Git, and push changes to GitHub.
 
 ### License
 
@@ -274,8 +275,6 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ```
-
-Pull requests must pass [CI][ci] before being accepted.
 
 [git]: http://git-scm.com
 [brew]: http://brew.sh

@@ -58,7 +58,7 @@ uninstall:
 # Generate a new command
 command:
 	@cp share/homer/command/bin.sh bin/homer-${NAME}
-	@cp share/homer/command/doc.txt share/doc/commands/${NAME}.txt
+	@cp share/homer/command/doc.txt share/doc/homer/${NAME}.txt
 
 # Tag the current state of the codebase as a released version
 $(TAG):
