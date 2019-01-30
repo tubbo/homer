@@ -11,7 +11,7 @@ if [ -z "$HOMER_TEST_REPO_URL" ]; then
 fi
 
 @test "initialize a git repo as the home dir" {
-  run $PWD/bin/homer init
+  run $HOMER init
 
   assert_success
   assert_file_exist $HOMER_HOME/etc/aliases.zsh
@@ -20,7 +20,7 @@ fi
 }
 
 @test "clone an existing git repo into the home dir" {
-  run $PWD/bin/homer init $HOMER_TEST_REPO_URL
+  run $HOMER init $HOMER_TEST_REPO_URL
 
   assert_success
   assert_file_exist $HOMER_HOME/etc/aliases.zsh
@@ -30,7 +30,7 @@ fi
 
 @test "print an error and exit if git repo already exists" {
   mkdir -p $HOMER_HOME/.git
-  run $PWD/bin/homer init
+  run $HOMER init
 
   assert_failure
   assert_error "There is already an existing Git repository in $HOMER_HOME."
