@@ -1,4 +1,4 @@
-#!/bin/zsh
+#!/usr/bin/env zsh
 #
 # Save a dotfile, either adding it for the first time or updating its
 # contents.
@@ -7,10 +7,10 @@ file=$2
 
 source "$HOMER_PATH/share/homer/cli.zsh"
 
-zparseopts -K -- m:=message r:=remove
+zparseopts -E -- m:=message r=remove
 
-if [ -n "${remove+x}" ]; then
-  homer_remove $file $message
+if [ $remove ]; then
+  homer_remove $file $message[2]
 else
-  homer_add $file $message
+  homer_add $file $message[2]
 fi

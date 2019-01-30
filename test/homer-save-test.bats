@@ -1,26 +1,29 @@
 #!/usr/bin/env bats
 
-setup() {
-  export HOME="$PWD/tmp"
-  ./bin/homer init
+load test_helper
+
+@test "save a dotfile to the home dir" {
+  $HOMER init
+  touch $HOMER_HOME/.dotfile
+  run $HOMER save .dotfile -m "Added dotfile"
+
+  assert_success
+  assert_line --partial "Added dotfile"
 }
 
-teardown() {
-  rm -rf $PWD/tmp
+@test "remove a dotfile from the home dir" {
+  $HOMER init
+  run $HOMER save README.md -r -m "Removed README"
+
+  assert_success
+  assert_line --partial "Removed README"
 }
 
-#@test "saves a dotfile to the home dir" {
-#  export HOME="$PWD/tmp"
-#  touch $HOME/.dotfile
-#  ./bin/homer save .dotfile -m "dot file created"
-#}
-#
-#@test "removes a dotfile from the home dir" {
-#  export HOME="$PWD/tmp"
-#  touch $HOME/.dotfile
-#  pushd $HOME
-#  git add .dotfile
-#  git commit -m "dot file created"
-#  popd $HOME
-#  ./bin/homer save .dotfile -r -m "dot file destroyed"
-#}
+@test "prevent saving dotfile without a commit message" {
+  $HOMER init
+  touch $HOMER_HOME/.dotfile
+  run $HOMER save .dotfile
+
+  assert_failure
+  assert_output "You must enter a message."
+}
