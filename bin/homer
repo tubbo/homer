@@ -11,7 +11,7 @@ esac
 
 # Load global configuration
 export HOMER_SCRIPT_PATH=$(dirname $HOMER_SCRIPT_FILE)
-export HOMER_PATH=$HOMER_SCRIPT_PATH/..
+export HOMER_PATH=$(dirname $HOMER_SCRIPT_PATH)
 export HOMER_COMMAND=$1
 export HOMER_EXECUTABLE=$HOMER_SCRIPT_PATH/homer-$HOMER_COMMAND
 
