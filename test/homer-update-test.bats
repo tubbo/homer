@@ -7,7 +7,7 @@ load test_helper
   git init $BATS_TMPDIR/remote --bare
   pushd $HOMER_HOME
   git remote add origin $BATS_TMPDIR/remote
-  git push origin
+  git push origin master
   popd
 
   run $HOMER update
