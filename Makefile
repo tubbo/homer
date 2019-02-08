@@ -53,7 +53,7 @@ install:
 
 # Remove scripts from /usr/local. Typically requires `sudo` access.
 uninstall:
-	@rm -rf $(PREFIX)/$(DIRS)/$(PROGRAM)
+	@rm -rf $(PREFIX)/$(DIRS)*$(PROGRAM)*
 
 # Generate a new command
 command:

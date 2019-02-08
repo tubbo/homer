@@ -124,19 +124,49 @@ copy in the home directory rather than in the place it was checked out.
 
 ## Usage
 
-Homer can save your dotfiles.
+Homer is primarily used to track files which are located in your home
+directory to your Git repository. You can add files that are currently
+untracked with the `homer save` command:
 
 ```bash
 $ homer save .vimrc -m "Removed vim-rails"
 ```
 
-Homer can sync with your remote Git repo.
+This will begin tracking the file at `~/.vimrc` in your home directory
+repo. A commit will be added using the message in `-m`, and you can run
+`homer update` to sync with the remote at any time.
+
+If you wish to stop tracking a given configuration file, run `homer
+save` with the `-r` flag:
+
+```bash
+$ homer save -r .vimrc
+```
+
+This removes the `~/.vimrc` file from your repo (but retains it in your
+home directory) and stops tracking it. When no `-m` is given for a
+message, the message is derived from the action, command, and filename.
+
+### Idempotency
+
+Homer is designed to keep your local machine's configuration in sync
+with the configuration that may be stored on a remote Git repository.
+This could have changes that are not yet on your machine, and Homer
+can pull those changes down, cleanly, without affecting any files that
+you may have locally edited.
+
+To update the current home directory with the remote:
 
 ```bash
 $ homer update
 ```
 
-(To update Homer itself, run `homer upgrade`)
+You can also update Homer itself, which is basically re-running the
+installer script. To do so, run:
+
+```bash
+$ homer upgrade
+```
 
 ### Plugins
 
@@ -205,14 +235,14 @@ $ homer script bin/find-and-replace-in-project -r
 ### Conventions
 
 Homer establishes useful conventions on your home directory. It
-uses the **bin/** directory to store user-made scripts which are
-available in the path. It creates an **etc/** directory and uses that to
-store files such as **etc/plugins.zsh** for defining shell plugins and
-**etc/aliases.zsh** for storing shell aliases you wish to recall later.
+uses the **~/bin/** directory to store user-made scripts which are
+available in the `$PATH`. It creates an **~/etc/** directory and uses that to
+store files such as **~/etc/plugins.zsh** for defining shell plugins and
+**~/etc/aliases.zsh** for storing shell aliases you wish to recall later.
 Note that you should not edit the manifest files mentioned above manually, the
 `homer alias` and `homer plugin` tools should manage the files for
 you. Place any ZSH code you wish to load when the shell launches
-in initializer files within **etc/profile.d**, keeping **~/.zshrc** and
+in "initializer" files within **~/etc/profile.d**, keeping **~/.zshrc** and
 **~/.zshenv** clear.
 
 As well as creating these initial files, it also runs `git init` in your

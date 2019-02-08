@@ -3,7 +3,7 @@ title: homer
 layout: default
 ---
 
-Homer is a home directory manager for your shell. Using [Git][git], it
+Homer is a home directory manager for your shell. Using Git, it
 tracks changes in your home directory configuration from anywhere on
 your machine. Its goal is to uncover the IDE-like possibilities of the
 shell and make such features more approachable to newer users, while
@@ -15,6 +15,36 @@ framework, it attempts to assume little about your system, instead
 allowing you to customize your shell the way you see fit. Homer's main
 philosophy is that having a stellar shell configuration should be
 much easier.
+
+The only requirement to run Homer is that you have the [Z Shell][zsh]
+installed. Homer is written entirely in ZSH shell script, and works best
+in a ZSH environment since it takes advantage of a number of its
+features.
+
+## Features
+
+- **Conventional Directories:** Homer establishes a number of
+  directories in your home directory, like `~/bin` and `~/etc`, for
+  storing executable scripts and shell configuration. Drop new `.zsh` files in
+  `~/etc/profile.d` to have them apply automatically when your shell is
+  loaded. Homer ensures that `~/bin` is in your `$PATH` so the
+  executable scripts in that directory are always available as extra
+  commands in your shell.
+- **Dotfiles:** Save your configuration files directly where they need
+  to be in your home directory from anywhere on the system. No need to
+  mess around with symlink.
+- **Aliases:** Remembering long commands can be tough, and shell aliases
+  are a built-in solution to that problem. Homer makes it easier to
+  manage aliases from the `~/etc/aliases.zsh` directory, loaded in your
+  shell automatically.
+- **ZSH Plugins:** One benefit to using ZSH is the vast amount of
+  plugins that can be installed using Antigen, but managing these
+  plugins can be somewhat difficult. Homer comes bundled with Antigen
+  and manages the plugins you wish to install from your `~/etc/plugins.zsh`
+  manifest file.
+- **Idempotency:** Homer can self-update, sync with a remote repository,
+  and cleanly rehydrate the contents of a cloned repository into your home
+  directory upon new installations.
 
 ## Installation
 
@@ -47,7 +77,7 @@ $ homer init
 Otherwise, provide the URL to your existing home directory repo:
 
 ```bash
-$ homer init -c https://github.com/your/home-dir.git
+$ homer init https://github.com/your/home-dir.git
 ```
 
 After these commands are run, your home directory will be set up for use
