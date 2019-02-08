@@ -12,9 +12,9 @@ if [[ -z $name || -z $cmd ]]; then
   exit 1
 fi
 
-zparseopts -K -- r:=remove m:=message
+zparseopts -D -E -- r=remove m:=message
 
-if [ -n "${remove+x}" ]; then
+if [[ "$remove" == "-r" ]]; then
   action='Remove'
 else
   action='Add'
@@ -27,12 +27,12 @@ fi
 case "$action" in
   Add)
     line="alias ${name}='${cmd}'"
-    echo "${line}" >> $HOME/etc/aliases.zsh
-    homer_add $HOME/etc/aliases.zsh $message
+    echo "${line}" >> $HOMER_HOME/etc/aliases.zsh
+    homer_add $HOMER_HOME/etc/aliases.zsh $message
     ;;
   Remove)
-    sed "s/alias ${line}=.*$//" $HOME/etc/aliases.zsh > /tmp/aliases
-    mv /tmp/aliases $HOME/aliases.zsh
-    homer_add $HOME/etc/aliases.zsh $message
+    sed "s/alias ${line}=.*$//" $HOMER_HOME/etc/aliases.zsh > /tmp/aliases
+    mv /tmp/aliases $HOMER_HOME/aliases.zsh
+    homer_add $HOMER_HOME/etc/aliases.zsh $message
     ;;
 esac
