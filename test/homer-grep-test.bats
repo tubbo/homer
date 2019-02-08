@@ -13,6 +13,6 @@ load test_helper
   run $HOMER grep page
 
   assert_success
-  assert_line --index 0 --partial ".dotfile"
-  assert_line --index 1 --partial "/usr/local/share/homer/editing.zsh"
+  assert_output --partial ".dotfile"
+  assert_output --partial "share/homer/editing.zsh"
 }
