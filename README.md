@@ -94,7 +94,7 @@ Once they're all installed, run the following commands to install to
 ```bash
 $ git clone https://github.com/tubbo/homer.git
 $ cd homer
-$ sudo make
+$ make && sudo make install
 ```
 
 When its installed, run the setup command:
@@ -106,8 +106,6 @@ $ homer init
 This will create a Git repo in your home directory, add
 a `~/.gitignore` file to control it, and some
 default ZSH configuration.
-
-**Make sure you `git add` any files you wish to keep in your dotfiles repo when homer initializes.**
 
 If you already have a home directory repo that was initialized using
 Homer, you can copy it down to your machine with the following command:
@@ -121,6 +119,9 @@ actually checking out a working copy. After copying the `.git` directory
 (the actual data contents of the repo) to your home directory, it will
 run `git reset --hard HEAD` to "rehydrate" all the files of the working
 copy in the home directory rather than in the place it was checked out.
+This is to ensure that any overwritten files will have a diff to show
+you what changed, and none of your files that currently exist in the
+home directory will be accidentally deleted.
 
 ## Usage
 
@@ -230,6 +231,35 @@ You can also remove commands from this directory:
 
 ```bash
 $ homer script bin/find-and-replace-in-project -r
+```
+
+### Text Editing and Paging
+
+Homer uses the `$EDITOR` and `$PAGER` variables as the backbone for the
+`edit` and `page` (or `e` and `v`) commands used to edit and view text
+files, respectively. Text editing and viewing files with a page are two
+of the most common tasks performed within the shell, and Homer helps
+integrate whatever editor you choose to use seamlessly within your shell
+environment.
+
+To edit text with your `$EDITOR`, run:
+
+```bash
+$ edit some/file.txt
+```
+
+You can also view files with the `$PAGER` by running:
+
+```bash
+$ page /var/log/system.log
+```
+
+The `$EDITOR` is set to `vi` by default, and the `$PAGER` is set to
+`less`, but you can change these values in your **~/.zshenv**:
+
+```bash
+export EDITOR='vim'
+export PAGER='less -r'
 ```
 
 ### Conventions
