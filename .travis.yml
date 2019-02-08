@@ -1,3 +1,4 @@
+language: c
 env:
   matrix:
   - HOMER_PREFIX=$PWD
