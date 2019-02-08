@@ -16,5 +16,5 @@ setup() {
 }
 
 teardown() {
-  rm -rf $HOMER_HOME $BATS_TMPDIR/remote $BATS_TMPDIR/repo
+  rm -rf $HOMER_HOME $BATS_TMPDIR/remote $BATS_TMPDIR/repo $BATS_TMPDIR/foo
 }

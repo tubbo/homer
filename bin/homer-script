@@ -6,9 +6,9 @@ source "$HOMER_PATH/share/homer/cli.zsh"
 
 script=$2
 
-zparseopts -E -- m:=message r=remove
+zparseopts -D -E -- r=remove m:=message
 
-if [ $remove ]; then
+if [[ $remove == "-r" ]]; then
   action='Remove'
 else
   action='Add'
@@ -21,6 +21,8 @@ fi
 
 name=$(basename $script)
 
+echo "msg: $message[2]"
+
 if [[ -z $message ]]; then
   message="${action} script ${name}"
 fi
@@ -29,7 +31,7 @@ case "$action" in
   Add)
     cp $script $HOMER_HOME/bin/$name
     chmod +x $HOMER_HOME/bin/$name
-    homer_add bin/$name -m $message
+    homer_add bin/$name $message
     ;;
   Remove)
     homer_remove bin/$name $message
