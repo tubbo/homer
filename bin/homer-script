@@ -1,36 +1,37 @@
 #!/bin/zsh
 #
-# Copy a script to your $PATH
+# Copy a script to an executable $PATH
 
 source "$HOMER_PATH/share/homer/cli.zsh"
 
 script=$2
 
-zparseopts -K -- m:=message r:=remove
+zparseopts -E -- m:=message r=remove
 
-if [ -n "${remove+x}" ]; then
+if [ $remove ]; then
   action='Remove'
 else
   action='Add'
 fi
 
 if [[ -z $script ]]; then
-  homer_error "You must enter a script name"
+  homer_error "You must enter the path to a script"
   exit 1
 fi
 
+name=$(basename $script)
+
 if [[ -z $message ]]; then
-  message="${action} script ${plugin}"
+  message="${action} script ${name}"
 fi
 
 case "$action" in
   Add)
-    rm $HOME/bin/$script
-    homer_remove bin/$script $message
+    cp $script $HOMER_HOME/bin/$name
+    chmod +x $HOMER_HOME/bin/$name
+    homer_add bin/$name -m $message
     ;;
   Remove)
-    scriptname=$(basename $script)
-    cp $script $HOME/bin/$scriptname
-    homer_add bin/$scriptname -m $message
+    homer_remove bin/$name $message
     ;;
 esac

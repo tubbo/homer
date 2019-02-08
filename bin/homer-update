@@ -7,4 +7,4 @@ source "$HOMER_PATH/share/homer/cli.zsh"
 
 homer_update_repo
 
-echo "Updated home directory $HOME_DIR with the latest changes."
+echo "Updated home directory $HOMER_HOME with the latest changes."
