@@ -14,5 +14,5 @@ load test_helper
 
   assert_success
   assert_output --partial ".dotfile"
-  assert_output --partial "share/homer/editing.zsh"
+  assert_output --partial "share/homer/profile.d/editing.zsh"
 }

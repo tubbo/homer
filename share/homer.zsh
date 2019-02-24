@@ -7,8 +7,10 @@ if [ -z $HOMER_PREFIX ]; then
   export HOMER_PREFIX="/usr/local"
 fi
 
-# Set the version
-export HOMER_VERSION="0.0.4.pre"
+# Use a copy of the $HOME alias if no home path defined
+if [ -z $HOMER_HOME ]; then
+  export HOMER_HOME=$HOME
+fi
 
 # Configure a basic prompt string
 export PROMPT="♬  "
@@ -18,17 +20,17 @@ export PATH=$HOME/bin:$PATH
 export HOMER_PATH=$HOMER_PREFIX/share/homer
 
 # Load the framework
-for filepath in `ls $HOMER_PATH/*.zsh`; do
+for filepath in `ls $HOMER_PATH/profile.d/`; do
   source "$filepath"
 done
 
 # Load user plugins
-source "$HOME/etc/plugins.zsh"
+source "$HOMER_HOME/etc/plugins.zsh"
 
 # Load user aliases
-source "$HOME/etc/aliases.zsh"
+source "$HOMER_HOME/etc/aliases.zsh"
 
 # Load user profile configuration
-for file in `ls $HOME/etc/profile.d`; do
-  source "$HOME/etc/profile.d/$file"
+for file in `ls $HOMER_HOME/etc/profile.d`; do
+  source "$HOMER_HOME/etc/profile.d/$file"
 done
