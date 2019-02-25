@@ -5,7 +5,7 @@
 # Shoutouts to @postmodern and @isaacs, I lifted most of their ideas to
 # make this...
 
-.PHONY: build test check install uninstall clean command release verify
+.PHONY: build test check install uninstall clean clobber command release verify
 
 PROGRAM=homer
 SHELL=/usr/bin/env zsh
@@ -17,6 +17,7 @@ INSTALL_DIRS=`find $(DIRS) -type d`
 INSTALL_FILES=`find $(DIRS) -type f`
 VERSION_FILE=$(SOURCE_PATH)/share/homer/VERSION
 VERSION=$(shell cat ${VERSION_FILE})
+DOCS=$(shell find share/doc/man/*.md -type f | sed 's/doc\/man/man\/man1/g' | sed 's/\.md//g')
 
 PKG_DIR=dist
 PKG_NAME=$(PROGRAM)-$(VERSION)
@@ -25,26 +26,33 @@ TAG=.git/refs/tags/$(VERSION)
 SIG=$(PKG).asc
 
 # Install this script to /usr/local
-build: share/man/man1/homer.1 $(PKG) $(SIG)
+build: $(DOCS) $(PKG) $(SIG)
 
 # Install gem dependencies
 vendor/bundle:
 	@bundle check || bundle install
 
 # Remove generated files
+clobber: clean
+	@rm -rf dist
+
 clean:
-	@rm -rf tmp dist share/man/man1
+	@rm -rf tmp share/man/man1
 
 # Run BATS tests on Homer
 test:
 	@bats test
 check: test
 
-# Generate the man page from markdown
+# Generate man pages from markdown
 share/man/man1:
 	@mkdir -p share/man/man1
-share/man/man1/homer.1: vendor/bundle share/doc/man/homer.1.md share/man/man1
-	@bundle exec kramdown-man share/doc/man/homer.1.md > share/man/man1/homer.1
+docs/manual:
+	@mkdir -p docs/manual
+share/man/man1/%.1: vendor/bundle share/man/man1 docs/manual
+	@bundle exec ronn --date="2014-11-01" --manual="User Manual" --organization="homer" --style=dark share/doc/man/$(@F).md
+	@mv share/doc/man/$(@F) share/man/man1/$(@F)
+	@mv share/doc/man/$(@F).html docs/manual/$(@F).html
 
 # Move scripts to /usr/local. Typically requires `sudo` access.
 install:
@@ -65,6 +73,10 @@ command:
 # Tag the current state of the codebase as a released version
 $(TAG):
 	@git tag v$(VERSION)
+
+# Generate ctags
+tags:
+	@ctags -R .
 
 # Create a package for the current version of the codebase. This
 # omits developer-centric files like tests and build manifests for the

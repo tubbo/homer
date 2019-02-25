@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv='content-type' value='text/html;charset=utf8'>
+  <meta name='generator' value='Ronn/v0.7.3 (http://github.com/rtomayko/ronn/tree/0.7.3)'>
+  <title>homer(1) - your home directory manager</title>
+  <style type='text/css' media='all'>
+  /* style: man */
+  body#manpage {margin:0}
+  .mp {max-width:100ex;padding:0 9ex 1ex 4ex}
+  .mp p,.mp pre,.mp ul,.mp ol,.mp dl {margin:0 0 20px 0}
+  .mp h2 {margin:10px 0 0 0}
+  .mp > p,.mp > pre,.mp > ul,.mp > ol,.mp > dl {margin-left:8ex}
+  .mp h3 {margin:0 0 0 4ex}
+  .mp dt {margin:0;clear:left}
+  .mp dt.flush {float:left;width:8ex}
+  .mp dd {margin:0 0 0 9ex}
+  .mp h1,.mp h2,.mp h3,.mp h4 {clear:left}
+  .mp pre {margin-bottom:20px}
+  .mp pre+h2,.mp pre+h3 {margin-top:22px}
+  .mp h2+pre,.mp h3+pre {margin-top:5px}
+  .mp img {display:block;margin:auto}
+  .mp h1.man-title {display:none}
+  .mp,.mp code,.mp pre,.mp tt,.mp kbd,.mp samp,.mp h3,.mp h4 {font-family:monospace;font-size:14px;line-height:1.42857142857143}
+  .mp h2 {font-size:16px;line-height:1.25}
+  .mp h1 {font-size:20px;line-height:2}
+  .mp {text-align:justify;background:#fff}
+  .mp,.mp code,.mp pre,.mp pre code,.mp tt,.mp kbd,.mp samp {color:#131211}
+  .mp h1,.mp h2,.mp h3,.mp h4 {color:#030201}
+  .mp u {text-decoration:underline}
+  .mp code,.mp strong,.mp b {font-weight:bold;color:#131211}
+  .mp em,.mp var {font-style:italic;color:#232221;text-decoration:none}
+  .mp a,.mp a:link,.mp a:hover,.mp a code,.mp a pre,.mp a tt,.mp a kbd,.mp a samp {color:#0000ff}
+  .mp b.man-ref {font-weight:normal;color:#434241}
+  .mp pre {padding:0 4ex}
+  .mp pre code {font-weight:normal;color:#434241}
+  .mp h2+pre,h3+pre {padding-left:0}
+  ol.man-decor,ol.man-decor li {margin:3px 0 10px 0;padding:0;float:left;width:33%;list-style-type:none;text-transform:uppercase;color:#999;letter-spacing:1px}
+  ol.man-decor {width:100%}
+  ol.man-decor li.tl {text-align:left}
+  ol.man-decor li.tc {text-align:center;letter-spacing:4px}
+  ol.man-decor li.tr {text-align:right;float:right}
+  </style>
+  <style type='text/css' media='all'>
+  /* style: dark */
+  .mp,body#manpage {background:#080706;color:#888}
+  .mp,.mp code,.mp pre,.mp pre code,.mp tt,.mp kbd,.mp samp {color:#aaa}
+  .mp h1,.mp h2,.mp h3,.mp h4 {color:#fff}
+  .man-decor,.man-decor ol li {color:#666}
+  .mp code,.mp strong,.mp b {color:#fff}
+  .mp em,.mp var,.mp u {color:#ddd}
+  .mp pre code {color:#ddd}
+  .mp a,.mp a:link,.mp a:hover,.mp a code,.mp a pre,.mp a tt,.mp a kbd,.mp a samp {color:#fff}
+  </style>
+</head>
+<!--
+  The following styles are deprecated and will be removed at some point:
+  div#man, div#man ol.man, div#man ol.head, div#man ol.man.
+
+  The .man-page, .man-decor, .man-head, .man-foot, .man-title, and
+  .man-navigation should be used instead.
+-->
+<body id='manpage'>
+  <div class='mp' id='man'>
+
+  <div class='man-navigation' style='display:none'>
+    <a href="#NAME">NAME</a>
+    <a href="#SYNOPSIS">SYNOPSIS</a>
+    <a href="#DESCRIPTION">DESCRIPTION</a>
+    <a href="#ARGUMENTS">ARGUMENTS</a>
+    <a href="#EXAMPLES">EXAMPLES</a>
+    <a href="#GENERATED-FILES">GENERATED FILES</a>
+    <a href="#AUTHOR">AUTHOR</a>
+    <a href="#SEE-ALSO">SEE ALSO</a>
+  </div>
+
+  <ol class='man-decor man-head man head'>
+    <li class='tl'>homer(1)</li>
+    <li class='tc'>User Manual</li>
+    <li class='tr'>homer(1)</li>
+  </ol>
+
+  <h2 id="NAME">NAME</h2>
+<p class="man-name">
+  <code>homer</code> - <span class="man-whatis">your home directory manager</span>
+</p>
+
+<h2 id="SYNOPSIS">SYNOPSIS</h2>
+
+<p><code>homer</code> COMMAND <a href="#ARGUMENTS" title="ARGUMENTS" data-bare-link="true">ARGUMENTS</a></p>
+
+<h2 id="DESCRIPTION">DESCRIPTION</h2>
+
+<p>Homer is a command-line utility to manage your shell's home directory.
+It turns your entire home directory into a Git repo so you can
+version control non-sensitive configuration and data and synchronize
+them across machines. It also includes provisions for installing custom
+shell scripts, aliases and hooks for package management tooling. Homer
+is designed around the Unix philosophy, and stays out of your way as
+much as possible. It is written entirely in ZSH shell script.</p>
+
+<p>For more information, check out:</p>
+
+<p>https://github.com/tubbo/homer#readme</p>
+
+<h2 id="ARGUMENTS">ARGUMENTS</h2>
+
+<p><em>COMMAND</em>
+  The command you wish to run.</p>
+
+<p><em>ARGUMENTS</em>
+  Arguments for said command.</p>
+
+<h2 id="EXAMPLES">EXAMPLES</h2>
+
+<p>Initialize your home directory as a new repo:</p>
+
+<pre><code>homer init
+</code></pre>
+
+<p>Or, clone an existing home directory repo:</p>
+
+<pre><code>homer init -c https://github.com/me/home.git
+</code></pre>
+
+<p>You can now save dotfiles to the repo:</p>
+
+<pre><code>homer save .vimrc -m "Removed vim-rails"
+</code></pre>
+
+<p>Or, sync with your Git repo if you made changes elsewhere:</p>
+
+<pre><code>homer update
+</code></pre>
+
+<p>Homer can even upgrade itself using the latest GitHub release:</p>
+
+<pre><code>homer upgrade
+</code></pre>
+
+<h3 id="Shell-Plugins">Shell Plugins</h3>
+
+<p>Homer also provides an easy way to manage ZSH plugins with Antigen.
+These plugins are automatically installed when you <code>init</code> your home
+directory on a new machine.</p>
+
+<pre><code>homer plugin zsh-users/zsh-syntax-highlighting
+</code></pre>
+
+<p>You can also remove shell plugins from the manifest:</p>
+
+<pre><code>homer plugin zsh-users/zsh-syntax-highlighting -r
+</code></pre>
+
+<p>Homer manages an <code>~/etc/aliases</code> file that includes your shell aliases.
+To add one, run the following command:</p>
+
+<pre><code>homer alias gc 'git commit'
+</code></pre>
+
+<p>Or, forget an alias:</p>
+
+<pre><code>homer alias gc -r
+</code></pre>
+
+<p><strong>NOTE:</strong> The shell will need to be reloaded in order for alias changes
+          to take effect.</p>
+
+<h3 id="User-Scripts">User Scripts</h3>
+
+<p>Homer establishes a <code>~/bin</code> directory for useful scripts that you might
+need access to as commands. This directory is added to <code>$PATH</code> so that
+its executable contents can be used as commands across the system.</p>
+
+<p>Adding a new command</p>
+
+<pre><code>homer script path/to/your/script/find-and-replace-in-project
+</code></pre>
+
+<p>You can now use the script as if it was a command:</p>
+
+<pre><code>find-and-replace-in-project
+</code></pre>
+
+<p>To remove the script from <code>~/bin</code>:</p>
+
+<pre><code>homer script find-and-replace-in-project -r
+</code></pre>
+
+<h2 id="GENERATED-FILES">GENERATED FILES</h2>
+
+<p>The following files are generated when you run the <code>homer init</code>
+command...</p>
+
+<p><em>~/bin:</em> User scripts directory. Added to your <code>$PATH</code> automatically.</p>
+
+<p><em>~/etc/profile.d/:</em> User configs directory</p>
+
+<p><em>~/etc/plugins.zsh:</em> Plugins configuration</p>
+
+<p><em>~/etc/aliases.zsh:</em> User aliases configuration</p>
+
+<h2 id="AUTHOR">AUTHOR</h2>
+
+<p>Tom Scott <a href="http://psychedeli.ca" data-bare-link="true">http://psychedeli.ca</a></p>
+
+<h2 id="SEE-ALSO">SEE ALSO</h2>
+
+<p><span class="man-ref">antigen<span class="s">(1)</span></span>
+<span class="man-ref">zsh<span class="s">(1)</span></span>
+<span class="man-ref">git<span class="s">(1)</span></span></p>
+
+
+  <ol class='man-decor man-foot man foot'>
+    <li class='tl'>homer</li>
+    <li class='tc'>November 2014</li>
+    <li class='tr'>homer(1)</li>
+  </ol>
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,57 @@
+.\" generated with Ronn/v0.7.3
+.\" http://github.com/rtomayko/ronn/tree/0.7.3
+.
+.TH "PAGE" "1" "November 2014" "homer" "User Manual"
+.
+.SH "NAME"
+\fBpage\fR \- Open files for viewing and reading in realtime
+.
+.SH "SYNOPSIS"
+\fBedit\fR \fIARGUMENTS\fR
+.
+.SH "DESCRIPTION"
+The \fBpage\fR command is used to open files for viewing using your configured pager program, such as \fBless\fR\. It\'s a quick time\-saver that uses the \fB$PAGER\fR variable in your shell for viewing files quickly, or in real\-time as they are updated\. All arguments passed into this utility will be passed onward to the configured shell editor program\.
+.
+.P
+\fBpage\fR is provided by \fBhomer\fR\. For more information, check out:
+.
+.P
+https://github\.com/tubbo/homer#readme
+.
+.SH "ARGUMENTS"
+\fIARGUMENTS\fR Arguments passed to the pager\.
+.
+.SH "EXAMPLES"
+Open a file with your pager:
+.
+.IP "" 4
+.
+.nf
+
+page /var/log/system\.log
+.
+.fi
+.
+.IP "" 0
+.
+.SH "CONFIGURATION"
+To configure which program is opened when the \fBedit\fR command is run, set the \fB$PAGER\fR variable in your shell like so:
+.
+.IP "" 4
+.
+.nf
+
+export PAGER="less \-r"
+.
+.fi
+.
+.IP "" 0
+.
+.P
+(Homer will do this for you in \fB~/\.zshenv\fR)
+.
+.SH "AUTHOR"
+Tom Scott \fIhttp://psychedeli\.ca\fR
+.
+.SH "SEE ALSO"
+homer(1) edit(1)

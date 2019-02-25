@@ -1,8 +1,5 @@
-# homer 1 "Nov 2014" homer "User Manuals"
-
-## NAME
-
-homer - your home directory manager
+homer(1) - your home directory manager
+======================================
 
 ## SYNOPSIS
 

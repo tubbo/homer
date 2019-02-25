@@ -85,7 +85,14 @@ with Homer!
 
 ## Usage
 
-To learn how to use Homer, check out the [README][] or run `man homer`
-to view command-line documentation.
+To learn how to use Homer, check out the [README][], run `man homer`
+to view command-line documentation, or view the manpages online:
+
+- [homer(1)][]
+- [edit(1)][]
+- [page(1)][]
 
 [README]: https://github.com/tubbo/homer#homer
+[homer(1)]: manual/homer.1.html
+[edit(1)]: manual/edit.1.html
+[page(1)]: manual/page.1.html

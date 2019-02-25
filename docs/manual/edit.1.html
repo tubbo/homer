@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv='content-type' value='text/html;charset=utf8'>
+  <meta name='generator' value='Ronn/v0.7.3 (http://github.com/rtomayko/ronn/tree/0.7.3)'>
+  <title>edit(1) - Open files for editing and manipulating</title>
+  <style type='text/css' media='all'>
+  /* style: man */
+  body#manpage {margin:0}
+  .mp {max-width:100ex;padding:0 9ex 1ex 4ex}
+  .mp p,.mp pre,.mp ul,.mp ol,.mp dl {margin:0 0 20px 0}
+  .mp h2 {margin:10px 0 0 0}
+  .mp > p,.mp > pre,.mp > ul,.mp > ol,.mp > dl {margin-left:8ex}
+  .mp h3 {margin:0 0 0 4ex}
+  .mp dt {margin:0;clear:left}
+  .mp dt.flush {float:left;width:8ex}
+  .mp dd {margin:0 0 0 9ex}
+  .mp h1,.mp h2,.mp h3,.mp h4 {clear:left}
+  .mp pre {margin-bottom:20px}
+  .mp pre+h2,.mp pre+h3 {margin-top:22px}
+  .mp h2+pre,.mp h3+pre {margin-top:5px}
+  .mp img {display:block;margin:auto}
+  .mp h1.man-title {display:none}
+  .mp,.mp code,.mp pre,.mp tt,.mp kbd,.mp samp,.mp h3,.mp h4 {font-family:monospace;font-size:14px;line-height:1.42857142857143}
+  .mp h2 {font-size:16px;line-height:1.25}
+  .mp h1 {font-size:20px;line-height:2}
+  .mp {text-align:justify;background:#fff}
+  .mp,.mp code,.mp pre,.mp pre code,.mp tt,.mp kbd,.mp samp {color:#131211}
+  .mp h1,.mp h2,.mp h3,.mp h4 {color:#030201}
+  .mp u {text-decoration:underline}
+  .mp code,.mp strong,.mp b {font-weight:bold;color:#131211}
+  .mp em,.mp var {font-style:italic;color:#232221;text-decoration:none}
+  .mp a,.mp a:link,.mp a:hover,.mp a code,.mp a pre,.mp a tt,.mp a kbd,.mp a samp {color:#0000ff}
+  .mp b.man-ref {font-weight:normal;color:#434241}
+  .mp pre {padding:0 4ex}
+  .mp pre code {font-weight:normal;color:#434241}
+  .mp h2+pre,h3+pre {padding-left:0}
+  ol.man-decor,ol.man-decor li {margin:3px 0 10px 0;padding:0;float:left;width:33%;list-style-type:none;text-transform:uppercase;color:#999;letter-spacing:1px}
+  ol.man-decor {width:100%}
+  ol.man-decor li.tl {text-align:left}
+  ol.man-decor li.tc {text-align:center;letter-spacing:4px}
+  ol.man-decor li.tr {text-align:right;float:right}
+  </style>
+  <style type='text/css' media='all'>
+  /* style: dark */
+  .mp,body#manpage {background:#080706;color:#888}
+  .mp,.mp code,.mp pre,.mp pre code,.mp tt,.mp kbd,.mp samp {color:#aaa}
+  .mp h1,.mp h2,.mp h3,.mp h4 {color:#fff}
+  .man-decor,.man-decor ol li {color:#666}
+  .mp code,.mp strong,.mp b {color:#fff}
+  .mp em,.mp var,.mp u {color:#ddd}
+  .mp pre code {color:#ddd}
+  .mp a,.mp a:link,.mp a:hover,.mp a code,.mp a pre,.mp a tt,.mp a kbd,.mp a samp {color:#fff}
+  </style>
+</head>
+<!--
+  The following styles are deprecated and will be removed at some point:
+  div#man, div#man ol.man, div#man ol.head, div#man ol.man.
+
+  The .man-page, .man-decor, .man-head, .man-foot, .man-title, and
+  .man-navigation should be used instead.
+-->
+<body id='manpage'>
+  <div class='mp' id='man'>
+
+  <div class='man-navigation' style='display:none'>
+    <a href="#NAME">NAME</a>
+    <a href="#SYNOPSIS">SYNOPSIS</a>
+    <a href="#DESCRIPTION">DESCRIPTION</a>
+    <a href="#ARGUMENTS">ARGUMENTS</a>
+    <a href="#EXAMPLES">EXAMPLES</a>
+    <a href="#CONFIGURATION">CONFIGURATION</a>
+    <a href="#AUTHOR">AUTHOR</a>
+    <a href="#SEE-ALSO">SEE ALSO</a>
+  </div>
+
+  <ol class='man-decor man-head man head'>
+    <li class='tl'>edit(1)</li>
+    <li class='tc'>User Manual</li>
+    <li class='tr'>edit(1)</li>
+  </ol>
+
+  <h2 id="NAME">NAME</h2>
+<p class="man-name">
+  <code>edit</code> - <span class="man-whatis">Open files for editing and manipulating</span>
+</p>
+
+<h2 id="SYNOPSIS">SYNOPSIS</h2>
+
+<p><code>edit</code> <a href="#ARGUMENTS" title="ARGUMENTS" data-bare-link="true">ARGUMENTS</a></p>
+
+<h2 id="DESCRIPTION">DESCRIPTION</h2>
+
+<p>The <strong>edit</strong> utility is used to open and edit files using your
+configured editor. It's a quick time-saver that uses the configured
+<strong>$EDITOR</strong> in your shell for editing files. All arguments passed into
+this utility will be passed onward to the configured shell editor
+program.</p>
+
+<p><strong>edit</strong> is provided by <strong>homer</strong>. For more information, check out:</p>
+
+<p>https://github.com/tubbo/homer#readme</p>
+
+<h2 id="ARGUMENTS">ARGUMENTS</h2>
+
+<p><em>ARGUMENTS</em>
+  Arguments passed to the editor.</p>
+
+<h2 id="EXAMPLES">EXAMPLES</h2>
+
+<p>Open a file with your editor:</p>
+
+<pre><code>edit path/to/my/file.txt
+</code></pre>
+
+<h2 id="CONFIGURATION">CONFIGURATION</h2>
+
+<p>To configure which program is opened when the <code>edit</code> command is run, set
+the <strong>$EDITOR</strong> variable in your shell like so:</p>
+
+<pre><code>export EDITOR=vim
+</code></pre>
+
+<p>(Homer will do this for you in <code>~/.zshenv</code>)</p>
+
+<h2 id="AUTHOR">AUTHOR</h2>
+
+<p>Tom Scott <a href="http://psychedeli.ca" data-bare-link="true">http://psychedeli.ca</a></p>
+
+<h2 id="SEE-ALSO">SEE ALSO</h2>
+
+<p><span class="man-ref">homer<span class="s">(1)</span></span>
+<span class="man-ref">page<span class="s">(1)</span></span></p>
+
+
+  <ol class='man-decor man-foot man foot'>
+    <li class='tl'>homer</li>
+    <li class='tc'>November 2014</li>
+    <li class='tr'>edit(1)</li>
+  </ol>
+
+  </div>
+</body>
+</html>
