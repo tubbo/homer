@@ -15,7 +15,7 @@ SOURCE_PATH=$(PWD)
 DIRS=bin share
 INSTALL_DIRS=`find $(DIRS) -type d`
 INSTALL_FILES=`find $(DIRS) -type f`
-VERSION_FILE=$(SOURCE_PATH)/share/homer/VERSION
+VERSION_FILE=$(SOURCE_PATH)/share/$(PROGRAM)/VERSION
 VERSION=$(shell cat ${VERSION_FILE})
 DOCS=$(shell find share/doc/man/*.md -type f | sed 's/doc\/man/man\/man1/g' | sed 's/\.md//g')
 
@@ -39,7 +39,7 @@ clobber: clean
 clean:
 	@rm -rf tmp share/man/man1
 
-# Run BATS tests on Homer
+# Run BATS tests
 test:
 	@bats test
 check: test
@@ -50,7 +50,7 @@ share/man/man1:
 docs/manual:
 	@mkdir -p docs/manual
 share/man/man1/%.1: vendor/bundle share/man/man1 docs/manual
-	@bundle exec ronn --date="2014-11-01" --manual="User Manual" --organization="homer" --style=dark share/doc/man/$(@F).md
+	@bundle exec ronn --date="2014-11-01" --manual="User Manual" --organization="$(PROGRAM)" --style=dark share/doc/man/$(@F).md
 	@mv share/doc/man/$(@F) share/man/man1/$(@F)
 	@mv share/doc/man/$(@F).html docs/manual/$(@F).html
 
