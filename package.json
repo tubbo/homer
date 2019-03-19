@@ -1,4 +1,8 @@
 {
+  "name": "homer",
+  "version": "0.1.1",
+  "description": "The home directory manager and ZSH framework",
+  "install": "make install",
   "dependencies": {
     "bats-assert": "https://github.com/ztombol/bats-assert",
     "bats-file": "https://github.com/ztombol/bats-file",
