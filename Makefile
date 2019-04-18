@@ -15,8 +15,7 @@ SOURCE_PATH=$(PWD)
 DIRS=bin share
 INSTALL_DIRS=`find $(DIRS) -type d`
 INSTALL_FILES=`find $(DIRS) -type f`
-VERSION_FILE=$(SOURCE_PATH)/share/$(PROGRAM)/VERSION
-VERSION=$(shell cat ${VERSION_FILE})
+VERSION=v0.1.1
 DOCS=$(shell find share/doc/man/*.md -type f | sed 's/doc\/man/man\/man1/g' | sed 's/\.md//g')
 
 PKG_DIR=dist
