@@ -75,7 +75,9 @@ command:
 
 # Tag the current state of the codebase as a released version
 $(TAG):
-	@git tag v$(VERSION)
+	@git add dist
+	@git commit -am "Release ${VERSION}"
+	@git tag $(VERSION)
 
 # Generate ctags
 tags:
@@ -95,8 +97,9 @@ $(SIG): $(PKG)
 	@gpg --sign --detach-sign --armor $(PKG)
 
 # Release the latest version of Homer to GitHub
-release: $(TAG) $(PKG) $(SIG)
-	@git push --all --tags
+release: $(PKG) $(SIG) $(TAG)
+	@git push origin --tags
+	@git push origin master
 
 # Verify the contents of a package
 verify: $(PKG) $(SIG)
