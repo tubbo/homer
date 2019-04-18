@@ -10,7 +10,7 @@ before_install:
 - sudo add-apt-repository ppa:duggan/bats --yes
 - sudo apt-get update -qq
 - sudo apt-get install -qq bats zsh
-install: yarn
+install: make node_modules
 before_script: make clean
 script: make test
 before_deploy: make

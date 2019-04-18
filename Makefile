@@ -39,8 +39,11 @@ clobber: clean
 clean:
 	@rm -rf tmp share/man/man1
 
+node_modules:
+	@yarn
+
 # Run BATS tests
-test:
+test: node_modules
 	@bats test
 check: test
 
