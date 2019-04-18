@@ -61,7 +61,7 @@ install:
 
 # Remove scripts from /usr/local. Typically requires `sudo` access.
 uninstall:
-	@rm -rf $(PREFIX)/$(DIRS)*$(PROGRAM)*
+	@for file in $(INSTALL_FILES); do echo $$file; done
 
 # Generate a new command
 command:
