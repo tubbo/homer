@@ -12,7 +12,7 @@ FROM ubuntu:latest
 RUN apt-get update -qq && apt-get install build-essential sudo curl zsh -yy
 
 # Ensure the $PATH has /usr/local at the beginning
-ENV PATH=/usr/local/bin:$PATH
+ENV PATH=/usr/local/bin:$PATH PREFIX=/usr/local
 
 # Install Homer
 COPY docs/install.sh install.sh

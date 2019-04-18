@@ -5,16 +5,10 @@
 # sure that Bash will be there, though, so that's why this script is
 # written in Bash instead of ZSH.
 
-if [[ $(uname) == 'Darwin' ]]; then
-  mktmp="mktemp"
-else
-  mktmp="mktmp"
-fi
-
 # Find latest released version from GitHub API
 repo="https://api.github.com/repos/tubbo/homer/releases/latest"
 version=$(curl --silent "$repo" | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/')
-tmpdir=$($mktmp -d)
+tmpdir=$(mktemp -d)
 sourcedir="homer-${version:1}"
 filename="homer-$version.tar.gz"
 
