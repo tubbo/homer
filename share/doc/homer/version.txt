@@ -1,0 +1,3 @@
+homer version
+
+Print the current version of Homer.
