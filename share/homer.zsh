@@ -20,7 +20,7 @@ export PATH=$HOME/bin:$PATH
 export HOMER_PATH=$HOMER_PREFIX/share/homer
 
 # Load the framework
-for filepath in `ls $HOMER_PATH/profile.d/`; do
+for filepath in `find $HOMER_PATH/profile.d -type f`; do
   source "$filepath"
 done
 
