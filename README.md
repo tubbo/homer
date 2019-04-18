@@ -305,8 +305,9 @@ This will generate `bin/homer-foo`, `share/doc/homer/foo.txt`, and
 `test/homer-foo-test.bats` with given templates.
 
 The Makefile is also used to create releases. Change the version in
-`share/homer/VERSION` and run `make release` to generate a new tarball,
-sign it, tag the latest version with Git, and push changes to GitHub.
+`share/homer/VERSION` as well as the `VERSION=` environment variable,
+run `make` to build the docs and signed package files, then run
+`make release` to tag with Git and push to GitHub.
 
 ### License
 

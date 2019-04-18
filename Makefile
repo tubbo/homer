@@ -96,7 +96,7 @@ $(SIG): $(PKG)
 	@gpg --sign --detach-sign --armor $(PKG)
 
 # Release the latest version of Homer to GitHub
-release: $(PKG) $(SIG) $(TAG)
+release: $(TAG)
 	@git push origin --tags
 	@git push origin master
 
