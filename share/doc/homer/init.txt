@@ -1,13 +1,12 @@
-homer init [DIRECTORY] [options]
+homer init [REPOSITORY] [options]
 
-Sets up your home directory for use with Homer. By default, it simply
-initializes a new Git repo in $HOME and copies template files into it,
-but you can optionally pass in a Git repo to use as an existing store
-for your home directory.
+Sets up your home directory for use with Homer. By default, it
+initializes a new Git repo in $HOME and copies in the base template
+files/directories, but you can optionally pass in a remote Git repo URL
+to form the base for your home directory configuration. This is useful
+if you maintain a "dotfiles" repo and want to copy your configuration
+between machines.
 
 OPTIONS:
-
-  -c    Instead of initializing a new Git repo, clones the existing one
-        to /tmp and merges your $HOME directory with it.
 
   -m MESSAGE    Customize the initial message when committing to Git.
