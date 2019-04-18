@@ -1,3 +1,5 @@
 homer update
 
-Sync this repo with the one stored on GitHub.
+Synchronizes your home directory repo with its 'origin' remote. Stashes
+any unsaved changes, pulls (with rebase) from 'origin/master', then pops
+the changes saved in stash out so they can be committed if necessary.
