@@ -53,8 +53,8 @@ jobs:
       - name: Download Signature
         uses: actions/download-artifact@v1
         with:
-          path: dist/homer-${{ steps.get_version.outputs.VERSION }}.asc
-          name: homer-${{ steps.get_version.outputs.VERSION }}.asc
+          path: dist/homer-${{ steps.get_version.outputs.VERSION }}.tar.gz.asc
+          name: homer-${{ steps.get_version.outputs.VERSION }}.tar.gz.asc
       - name: Create GitHub Release
         id: create_release
         uses: actions/create-release@v1.0.0
