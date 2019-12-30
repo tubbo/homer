@@ -19,7 +19,7 @@ teardown() {
     skip "Install Docker to run integration tests"
   fi
 
-  run docker run --rm -it homer:latest homer
+  run docker run --rm homer:latest homer
 
   assert_success
   assert_line --partial "Usage: homer COMMAND [ARGUMENTS]"

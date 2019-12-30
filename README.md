@@ -1,6 +1,6 @@
 # Homer
 
-[![Build Status](https://travis-ci.org/tubbo/homer.svg?branch=master)][ci]
+[![Build Status](https://github.com/tubbo/homer/workflows/ci/badge.svg)][ci]
 
 ![Homer Thinking](http://i.giphy.com/JDHMwstcLRza0.gif)
 
@@ -341,7 +341,7 @@ THE SOFTWARE.
 [brew]: http://brew.sh
 [bats]: https://github.com/sstephenson/bats
 [stow]: http://www.gnu.org/software/stow/
-[ci]: https://travis-ci.org/tubbo/homer
+[ci]: https://github.com/tubbo/homer/actions
 [Antigen]: https://github.com/zsh-users/antigen
 [ZSH]: http://zsh.sourceforge.net/
 [installer]: https://github.com/tubbo/homer/blob/master/docs/install.sh

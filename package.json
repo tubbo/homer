@@ -4,6 +4,7 @@
   "description": "The home directory manager and ZSH framework",
   "install": "make install",
   "dependencies": {
+    "bats": "^1.1.0",
     "bats-assert": "https://github.com/ztombol/bats-assert",
     "bats-file": "https://github.com/ztombol/bats-file",
     "bats-support": "https://github.com/ztombol/bats-support"

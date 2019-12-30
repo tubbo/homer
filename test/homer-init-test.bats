@@ -7,7 +7,7 @@ assert_error() {
 }
 
 if [ -z "$HOMER_TEST_REPO_URL" ]; then
-  HOMER_TEST_REPO_URL=https://github.com/tubbo/home.git
+  HOMER_TEST_REPO_URL=https://github.com/tubbo/homer-example.git
 fi
 
 @test "initialize a git repo as the home dir" {

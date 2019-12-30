@@ -1,0 +1,39 @@
+name: Build
+on:
+  push:
+    branches: [master]
+jobs:
+  build:
+    name: Build Signed Package
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Source Code
+        uses: actions/checkout@v1
+      - name: Setup Ruby
+        uses: actions/setup-ruby@v1
+      - name: Install Dependencies
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -qqyy zsh
+          gem install bundler
+      - name: Configure GPG
+        run: |
+          echo "${{ secrets.gpg_public_key }}" | gpg --import
+          echo "${{ secrets.gpg_private_key }}" | gpg --import
+      - name: Find Current Version
+        id: get_version
+        run: echo ::set-output name=VERSION::$(echo $GITHUB_REF | cut -d / -f 3)
+      - name: Build Project
+        run: make
+        env:
+          BUNDLE_PATH: vendor/bundle
+      - name: Upload Tarball
+        uses: actions/upload-artifact@v1
+        with:
+          path: dist/homer-${{ steps.get_version.outputs.VERSION }}.tar.gz
+          name: homer-${{ steps.get_version.outputs.VERSION }}.tar.gz
+      - name: Upload Signature
+        uses: actions/upload-artifact@v1
+        with:
+          path: dist/homer-${{ steps.get_version.outputs.VERSION }}.tar.gz.asc
+          name: homer-${{ steps.get_version.outputs.VERSION }}.tar.gz.asc

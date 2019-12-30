@@ -1,0 +1,85 @@
+name: Publish
+on:
+  push:
+    tags: [v*]
+jobs:
+  build:
+    name: Build Signed Package
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Source Code
+        uses: actions/checkout@v1
+      - name: Setup Ruby
+        uses: actions/setup-ruby@v1
+      - name: Install Dependencies
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -qqyy zsh
+          gem install bundler
+      - name: Configure GPG
+        run: |
+          echo "${{ secrets.gpg_public_key }}" | gpg --import
+          echo "${{ secrets.gpg_private_key }}" | gpg --import
+      - name: Find Current Version
+        id: get_version
+        run: echo ::set-output name=VERSION::$(echo $GITHUB_REF | cut -d / -f 3)
+      - name: Build Project
+        run: make
+        env:
+          BUNDLE_PATH: vendor/bundle
+      - name: Upload Tarball
+        uses: actions/upload-artifact@v1
+        with:
+          path: dist/homer-${{ steps.get_version.outputs.VERSION }}.tar.gz
+          name: homer-${{ steps.get_version.outputs.VERSION }}.tar.gz
+      - name: Upload Signature
+        uses: actions/upload-artifact@v1
+        with:
+          path: dist/homer-${{ steps.get_version.outputs.VERSION }}.tar.gz.asc
+          name: homer-${{ steps.get_version.outputs.VERSION }}.tar.gz.asc
+  release:
+    name: Release Package to GitHub
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Find Current Version
+        id: get_version
+        run: echo ::set-output name=VERSION::$(echo $GITHUB_REF | cut -d / -f 3)
+      - name: Download Tarball
+        uses: actions/download-artifact@v1
+        with:
+          path: dist/homer-${{ steps.get_version.outputs.VERSION }}.tar.gz
+          name: homer-${{ steps.get_version.outputs.VERSION }}.tar.gz
+      - name: Download Signature
+        uses: actions/download-artifact@v1
+        with:
+          path: dist/homer-${{ steps.get_version.outputs.VERSION }}.asc
+          name: homer-${{ steps.get_version.outputs.VERSION }}.asc
+      - name: Create GitHub Release
+        id: create_release
+        uses: actions/create-release@v1.0.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ steps.get_version.outputs.VERSION }}
+          release_name: Release ${{ steps.get_version.outputs.VERSION }}
+          draft: false
+          prerelease: false
+      - name: Publish Tarball
+        uses: actions/upload-release-asset@v1.0.1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./dist/homer-${{ steps.get_version.outputs.VERSION }}.tar.gz
+          asset_name: homer-${{ steps.get_version.outputs.VERSION }}.tar.gz
+          asset_content_type: application/tar+gzip
+      - name: Publish Signature
+        uses: actions/upload-release-asset@v1.0.1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./signature.asc
+          asset_name: homer-${{ steps.get_version.outputs.VERSION }}.asc
+          asset_content_type: text/plain

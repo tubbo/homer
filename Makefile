@@ -5,7 +5,7 @@
 # Shoutouts to @postmodern and @isaacs, I lifted most of their ideas to
 # make this...
 
-.PHONY: build test check install uninstall clean clobber command release verify
+.PHONY: all build test check install uninstall clean command release verify
 
 PROGRAM=homer
 SHELL=/usr/bin/env zsh
@@ -15,7 +15,8 @@ SOURCE_PATH=$(PWD)
 DIRS=bin share
 INSTALL_DIRS=`find $(DIRS) -type d`
 INSTALL_FILES=`find $(DIRS) -type f`
-VERSION=v0.1.1
+GITHUB_REF?=$(shell git show-ref $(git branch | grep '*') | head -n 1 | awk '{ print $2 }')
+VERSION?=$(shell echo $(GITHUB_REF) | cut -d / -f 3)
 DOCS=$(shell find share/doc/man/*.md -type f | sed 's/doc\/man/man\/man1/g' | sed 's/\.md//g')
 
 PKG_DIR=dist
@@ -24,27 +25,26 @@ PKG=$(PKG_DIR)/$(PKG_NAME).tar.gz
 TAG=.git/refs/tags/$(VERSION)
 SIG=$(PKG).asc
 
-# Install this script to /usr/local
-build: $(DOCS) $(PKG) $(SIG)
+# Build the documentation and tarball, then sign the package with GPG
+all: $(DOCS) $(PKG) $(SIG)
+build: all
 
-# Install gem dependencies
+# Install manpages generator
 vendor/bundle:
 	@bundle check || bundle install
 
-# Remove generated files
-clobber: clean
-	@rm -rf dist
-
+# Remove all generated files
 clean:
-	@rm -rf tmp share/man/man1
+	@rm -rf tmp share/man/man1 dist
 
+# Install the testing framework
 node_modules:
 	@yarn
 
-# Run BATS tests
-test: node_modules
-	@bats test
-check: test
+# Run all tests
+check: node_modules
+	@node_modules/.bin/bats test
+test: check
 
 # Generate man pages from markdown
 share/man/man1:
@@ -74,9 +74,7 @@ command:
 
 # Tag the current state of the codebase as a released version
 $(TAG):
-	@git add dist
-	@git commit -am "Release ${VERSION}"
-	@git tag $(VERSION)
+	@git tag $(VERSION) -m "Release $(VERSION)"
 
 # Generate ctags
 tags:
@@ -93,9 +91,9 @@ $(PKG): $(PKG_DIR)
 # Cryptographically sign the package so its contents can be verified at
 # a later date
 $(SIG): $(PKG)
-	@gpg --sign --detach-sign --armor $(PKG)
+	@gpg --batch --sign --detach-sign --armor $(PKG)
 
-# Release the latest version of Homer to GitHub
+# Release the latest version of Homer to GitHub.
 release: $(TAG)
 	@git push origin --tags
 	@git push origin master

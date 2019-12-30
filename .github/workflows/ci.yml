@@ -1,0 +1,21 @@
+name: CI
+on: [push]
+jobs:
+  test:
+    name: Run Automated Tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Source Code
+        uses: actions/checkout@v1
+      - name: Setup NodeJS
+        uses: actions/setup-node@v1
+      - name: Install Dependencies
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -qqyy zsh
+      - name: Configure Git
+        run: |
+          git config --global user.email "test@example.com"
+          git config --global user.name "Lester Tester"
+      - name: Run Tests
+        run: make check

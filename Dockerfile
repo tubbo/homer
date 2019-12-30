@@ -9,10 +9,14 @@
 FROM ubuntu:latest
 
 # Build dependencies
-RUN apt-get update -qq && apt-get install build-essential sudo curl zsh -yy
+RUN apt-get update -qq && apt-get install build-essential sudo curl zsh git -yy
 
 # Ensure the $PATH has /usr/local at the beginning
 ENV PATH=/usr/local/bin:$PATH PREFIX=/usr/local
+
+# Configure Git
+RUN git config --global user.email "test@example.com"
+RUN git config --global user.name "Lester Tester"
 
 # Install Homer
 COPY docs/install.sh install.sh
