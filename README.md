@@ -306,10 +306,15 @@ $ make command NAME=foo
 This will generate `bin/homer-foo`, `share/doc/homer/foo.txt`, and
 `test/homer-foo-test.bats` with given templates.
 
-The Makefile is also used to create releases. Change the version in
-`share/homer/VERSION` as well as the `VERSION=` environment variable,
-run `make` to build the docs and signed package files, then run
-`make release` to tag with Git and push to GitHub.
+The Makefile is also used to create releases, which are mostly handled
+by [GitHub Actions][ci]. To create a new release, generate its tag by running:
+
+```bash
+$ make release VERSION=foo
+```
+
+This will create a new tag and push it to GitHub, where the package will
+be built, signed, and uploaded as an artifact to a new [GitHub Release][]
 
 ### License
 
@@ -347,3 +352,4 @@ THE SOFTWARE.
 [Antigen]: https://github.com/zsh-users/antigen
 [ZSH]: http://zsh.sourceforge.net/
 [installer]: https://github.com/tubbo/homer/blob/master/docs/install.sh
+[GitHub Release]: https://github.com/tubbo/homer/releases
