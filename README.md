@@ -1,6 +1,8 @@
 # Homer
 
-[![Build Status](https://github.com/tubbo/homer/workflows/CI/badge.svg)][ci]
+[![CI Status](https://github.com/tubbo/homer/workflows/CI/badge.svg)][ci]
+[![Build Status](https://github.com/tubbo/homer/workflows/Build/badge.svg)][ci]
+[![Publish Status](https://github.com/tubbo/homer/workflows/Publish/badge.svg)][ci]
 
 ![Homer Thinking](http://i.giphy.com/JDHMwstcLRza0.gif)
 
