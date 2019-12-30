@@ -1,6 +1,6 @@
 # Homer
 
-[![CI Status](https://github.com/tubbo/homer/workflows/CI/badge.svg)][ci]
+[![Test Status](https://github.com/tubbo/homer/workflows/Tests/badge.svg)][ci]
 [![Build Status](https://github.com/tubbo/homer/workflows/Build/badge.svg)][ci]
 [![Publish Status](https://github.com/tubbo/homer/workflows/Publish/badge.svg)][ci]
 
