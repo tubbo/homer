@@ -1,4 +1,4 @@
-name: CI
+name: Tests
 on: [push]
 jobs:
   test:
@@ -17,5 +17,5 @@ jobs:
         run: |
           git config --global user.email "test@example.com"
           git config --global user.name "Lester Tester"
-      - name: Run Tests
+      - name: Run BATS
         run: make check
