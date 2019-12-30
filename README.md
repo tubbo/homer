@@ -4,7 +4,7 @@
 [![Build Status](https://github.com/tubbo/homer/workflows/Build/badge.svg)][ci]
 [![Publish Status](https://github.com/tubbo/homer/workflows/Publish/badge.svg)][ci]
 
-![Homer Thinking](http://i.giphy.com/JDHMwstcLRza0.gif)
+![Homer Thinking](https://github.com/tubbo/homer/raw/master/docs/homer-thinking.gif)
 
 Homer is a home directory manager for your shell. Using [Git][git], it
 tracks changes in your home directory configuration from anywhere on
