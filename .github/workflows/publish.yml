@@ -63,6 +63,8 @@ jobs:
           release_name: Release ${{ steps.get_version.outputs.VERSION }}
           draft: false
           prerelease: false
+      - name: List Directory
+        run: ls -la
       - name: Publish Tarball
         uses: actions/upload-release-asset@v1.0.1
         env:
