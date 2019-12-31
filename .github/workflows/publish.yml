@@ -27,16 +27,11 @@ jobs:
         run: make
         env:
           BUNDLE_PATH: vendor/bundle
-      - name: Upload Tarball
+      - name: Upload Artifacts
         uses: actions/upload-artifact@v1
         with:
-          path: dist/homer-${{ steps.get_version.outputs.VERSION }}.tar.gz
-          name: homer-${{ steps.get_version.outputs.VERSION }}.tar.gz
-      - name: Upload Signature
-        uses: actions/upload-artifact@v1
-        with:
-          path: dist/homer-${{ steps.get_version.outputs.VERSION }}.tar.gz.asc
-          name: homer-${{ steps.get_version.outputs.VERSION }}.tar.gz.asc
+          path: dist
+          name: homer-${{ steps.get_version.outputs.VERSION }}
   release:
     name: Create New Release
     runs-on: ubuntu-latest
@@ -45,14 +40,10 @@ jobs:
       - name: Find Current Version
         id: get_version
         run: echo ::set-output name=VERSION::$(echo $GITHUB_REF | cut -d / -f 3)
-      - name: Download Tarball
+      - name: Download Artifacts
         uses: actions/download-artifact@v1
         with:
-          name: homer-${{ steps.get_version.outputs.VERSION }}.tar.gz
-      - name: Download Signature
-        uses: actions/download-artifact@v1
-        with:
-          name: homer-${{ steps.get_version.outputs.VERSION }}.tar.gz.asc
+          name: dist
       - name: Create GitHub Release
         id: create_release
         uses: actions/create-release@v1.0.0
@@ -63,15 +54,13 @@ jobs:
           release_name: Release ${{ steps.get_version.outputs.VERSION }}
           draft: false
           prerelease: false
-      - name: List Directory
-        run: ls -la
       - name: Publish Tarball
         uses: actions/upload-release-asset@v1.0.1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./homer-${{ steps.get_version.outputs.VERSION }}.tar.gz
+          asset_path: ./dist/homer-${{ steps.get_version.outputs.VERSION }}.tar.gz
           asset_name: homer-${{ steps.get_version.outputs.VERSION }}.tar.gz
           asset_content_type: application/tar+gzip
       - name: Publish Signature
@@ -80,6 +69,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./homer-${{ steps.get_version.outputs.VERSION }}.tar.gz.asc
+          asset_path: ./dist/homer-${{ steps.get_version.outputs.VERSION }}.tar.gz.asc
           asset_name: homer-${{ steps.get_version.outputs.VERSION }}.asc
           asset_content_type: text/plain
