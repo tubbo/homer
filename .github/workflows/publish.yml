@@ -43,7 +43,7 @@ jobs:
       - name: Download Artifacts
         uses: actions/download-artifact@v1
         with:
-          name: dist
+          name: homer-${{ steps.get_version.outputs.VERSION }}
       - name: Create GitHub Release
         id: create_release
         uses: actions/create-release@v1.0.0
@@ -60,7 +60,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./dist/homer-${{ steps.get_version.outputs.VERSION }}.tar.gz
+          asset_path: ./homer-${{ steps.get_version.outputs.VERSION }}.tar.gz
           asset_name: homer-${{ steps.get_version.outputs.VERSION }}.tar.gz
           asset_content_type: application/tar+gzip
       - name: Publish Signature
@@ -69,6 +69,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./dist/homer-${{ steps.get_version.outputs.VERSION }}.tar.gz.asc
+          asset_path: ./homer-${{ steps.get_version.outputs.VERSION }}.tar.gz.asc
           asset_name: homer-${{ steps.get_version.outputs.VERSION }}.asc
           asset_content_type: text/plain
