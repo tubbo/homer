@@ -24,7 +24,7 @@ tar -zxf "$filename"
 # Install homer from source to /usr/local and capture exit code
 pushd "$sourcedir" > /dev/null 2>&1
 echo "Installing Homer..."
-sudo make install
+make install
 code=$?
 
 # Print whether Homer was installed or not
