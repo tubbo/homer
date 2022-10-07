@@ -1,0 +1,13 @@
+[package]
+name = "homer"
+version = "1.0.0"
+edition = "2021"
+description = "The home directory repository manager."
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+clap = { version = "4.0.10", features = ["derive"] }
+dirs = "4.0.0"
+git2 = "0.15.0"
+home = "0.5.3"

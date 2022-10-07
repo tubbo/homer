@@ -1,0 +1,47 @@
+name: Publish
+on:
+  push:
+    tags:
+      - v*
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/create-release@v1
+        id: create
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: ${{ github.ref }}
+  build:
+    needs: [release]
+    strategy:
+      matrix:
+        os:
+          - ubuntu
+          - macos
+          - windows
+    runs-on: ${{ matrix.os }}-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+      - run: cargo build --release
+      - run: |
+          cd target/release
+          tar -czf homer-${{ matrix.os }}.tar.gz homer
+          shasum -a 256 homer-${{ matrix.os }}.tar.gz > homer-${{ matrix.os }}.tar.gz.sum
+      - uses: actions/upload-release-asset@v3
+        name: upload binary
+        with:
+          upload_url: ${{ needs.release.steps.create.outputs.upload_url }}
+          asset_path: target/release/homer-${{ matrix.os }}.tar.gz
+          asset_name: homer-${{ github.ref }}-${{ matrix.os }}.tar.gz
+          asset_type: application/gzip
+      - uses: actions/upload-release-asset@v3
+        name: upload checksum
+        with:
+          upload_url: ${{ needs.release.steps.create.outputs.upload_url }}
+          asset_path: target/release/homer-${{ matrix.os }}.tar.gz.sum
+          asset_name: homer-${{ github.ref }}-${{ matrix.os }}.tar.gz.sum
+          asset_type: application/gzip
