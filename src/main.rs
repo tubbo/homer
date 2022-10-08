@@ -1,21 +1,18 @@
 mod cli;
 mod git;
-mod shell;
-use cli::{Commands,parse_arguments};
-use git::{init,clone};
-use shell::run;
+mod zsh;
 
 fn main() {    
-    let cli = parse_arguments();
+    let cli = cli::parse();
 
     match &cli.command {
-        Commands::Init {} => {
-            init();
+        cli::Commands::Init {} => {
+            git::init();
             println!("Initialized new Homer repository.");
         },
-        Commands::Bootstrap { url } => {
-            clone(url);
-            run("zsh", "~/bin/bootstrap.zsh");
+        cli::Commands::Bootstrap { url } => {
+            git::clone(&url);
+            zsh::script("~/bin/bootstrap.zsh");
             println!("Bootstrapped existing Homer repository.");
         },
     };   

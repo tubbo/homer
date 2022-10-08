@@ -1,8 +1,14 @@
 use clap::{Parser, Subcommand};
 
+/// Command-line interface specification for `homer`. Implementation of Clap.
 #[derive(Parser)]
-#[command(about = "The home directory repository manager", long_about = "The home directory repository manager\n\nHomer is a tool for your shell that allows for fully checking in your home directory as a Git repository. Similar to GNU Stow, this helps track changes of your configuration as well as keep a backup in case one of your machines fail.\n\nHomer is designed for people who spend most of their time in the shell, and use tooling that doesn't always conform to the XDG config standard.\n\nMore info: https://tubbo.github.io/homer")]
-#[command(version = "1.0", long_version = "1.0.0", propagate_version = true)]
+#[command(
+    about = "The home directory repository manager",
+    long_about = "The home directory repository manager\n\nHomer is a tool for your shell that allows for fully checking in your home directory as a Git repository. Similar to GNU Stow, this helps track changes of your configuration as well as keep a backup in case one of your machines fail.\n\nHomer is designed for people who spend most of their time in the shell, and use tooling that doesn't always conform to the XDG config standard.\n\nMore info: https://tubbo.github.io/homer",
+    version = "1.0",
+    long_version = "1.0.0",
+    propagate_version = true
+)]
 pub struct Cli {
     #[command(subcommand)]
     pub command: Commands
@@ -26,8 +32,8 @@ pub enum Commands {
     }
 }
 
-// Parse the command-line arguments and return a `Cli` instance containing
-// its results.
-pub fn parse_arguments() -> Cli {
+/// Parse command-line arguments. This abstraction is so we don't need to
+/// pull in all the `derive()` magic into main. 
+pub fn parse() -> Cli {
     return Cli::parse();
 }
