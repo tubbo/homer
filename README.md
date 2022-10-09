@@ -1,43 +1,67 @@
 # Homer
 
-[![Test Status](https://github.com/tubbo/homer/workflows/Tests/badge.svg)][ci]
-[![Build Status](https://github.com/tubbo/homer/workflows/Build/badge.svg)][ci]
-[![Publish Status](https://github.com/tubbo/homer/workflows/Publish/badge.svg)][ci]
-
 ![Homer Thinking](https://github.com/tubbo/homer/raw/master/docs/homer-thinking.gif)
 
 Homer is a home directory manager for your shell. Using [Git][git], it
 tracks changes in your home directory configuration from anywhere on
-your machine. Its goal is to uncover the IDE-like possibilities of the
-shell and make such features more approachable to newer users, while
-still retaining its usefulness to power users.
+your machine. Its goal is to make shell portability a breeze, by simplifying
+the process for synchronizing shell configuration between multiple active machines
+or replacement computers.
 
-Homer is an opinionated, but minimal, framework. While most of what
-it assumes about your environment is strongly enforced across the
-framework, it attempts to assume little about your system, instead
-allowing you to customize your shell the way you see fit. Homer's main
-philosophy is that having a stellar shell configuration should be
-much easier than it is today.
+![...but why?](https://media.tenor.com/jGgmfDOxmuMAAAAC/ryan-reynolds-but-why.gif)
+
+As computer lifespans get shorter and shorter, and we've begun treating remote
+computers [more like cattle than pets][cattle], moving a bunch of configuration
+files around from machine to machine is still error-prone and a very manual
+process. Most developers who "live in the shell" have their own handrolled
+solution for this problem, but this doesn't scale when you're rapidly moving
+between laptops (either because you're moving jobs or just upgrading), trying
+to have the same experience on multiple active computers, or you're SSHing
+into remote machines and are constantly finding yourself doing "muscle memory"
+things that aren't configured on the server. **If you have found yourself doing
+this on more than one occasion, Homer was built for you.**
 
 ## How It Works
 
-Homer is effectively a Git repo and shell extension manager that is accessible
-from anywhere on the machine. It's written entirely in [ZSH][] shell
-script, but you don't have to use ZSH to gain its benefits. Homer is actually
-nothing more than a set of conventions, some shell scripts to make
-complex tasks easier, and some useful/sane defaults for ZSH. Homer's
-components are tools that wrap a Git repository and your ZSH
-configuration.
+Homer is effectively a Git repository manager that makes cloning a repository
+into your home directory easier, as well as setting that repository up with
+some useful conventions for maintainability and security. It's comparable with
+tools such as [GNU Stow][stow], but differs in that instead of symlinking files
+between a managed directory and their actual location, Homer puts the Git repo
+in your home directory itself. This allows tracking any file in `~` and makes
+synchronizing between running machines a painless (and possibly automatic)
+process. It also enables tracking files that may not play nice with symlinks,
+as there are quite a few applications which will not treat links the same as
+regular files, in addition to the myriad of permissions issues that can be
+encountered using this approach.
 
-Homer is comparable with tools like [GNU Stow][stow], its main
-difference is that instead of keeping a directory separate from
-`$HOME` and symlinking the necessary files over from some
-version-controlled directory when asked, Homer uses the home
-directory as a Git repository and ignores any files it doesn't explicitly
-track. It also provides ZSH-specific alias and plugin management, which
-Stow as a more generalized system does not do. Homer is essentially a tool for
-managing any file in your home directory you wish to keep with Git.
+Using a few "tricks" in Git's mechanics that aren't exactly intuitive to
+most developers (nor is it useful knowledge for most workflows), Homer allows
+tracking any file in the home directory. To do so, it initializes a Git repo
+in `$HOME`, but adds a `.gitignore` file at the root that ignores all files by
+default. This makes sure that you're only adding the files you actually want to
+track, rather than running `git add .` and accidentally committing all of the
+temporary files and data volumes in your home dir.
 
+This is all well and good for a single machine, but what happens when you
+move between them? A simple `git clone` into your existing home directory
+isn't going to work, because there are already files in there. Homer can solve
+this problem by "bootstrapping" your machine with the clone of a Git repo,
+as well as running useful scripts to install software and set up tooling on
+your new machine or user account. By cloning into a temporary directory and
+manipulating the worktree locations directly, Homer can checkout all of the
+files in your default branch without disturbing any of the files that already
+exist. This not only allows for setup on a brand new machine, but can also be
+used for "normalizing" your existing user account configuration. By running
+`homer bootstrap` in a working user account, you can clone your repository
+in and begin adding any additional files that may exist and/or reconcile the
+differences in configuration between machines. When everything is done, you can
+`homer update` and make sure those changes work everywhere else. This bootstrap
+process makes shell portability much easier to work out, as you don't have to
+`scp` files between machines and hope everything works, you can test things
+locally and only pull down on a remote machine when you're confident that it
+won't brick your shell account or something.
+ 
 ## Features
 
 - Syncs home directory configuration with a Git repository
@@ -48,37 +72,39 @@ managing any file in your home directory you wish to keep with Git.
 
 ## Installation
 
-Download a binary of Homer by visiting the [GitHub Releases][] page.
-
-### From a Package Manager
-
-As a package, Homer is available on [Homebrew][brew]:
+Homer is available on [Homebrew][brew] for both Linux and macOS systems:
 
 ```bash
 $ brew tap tubbo/homebrew-tap
 $ brew install homer
 ```
 
-You can also install the edge version of Homer, which is the latest
-commit of 'master' branch, by applying the **--HEAD** switch:
+For Windows systems, 
+
+You can also choose to download a release directly from the [GitHub Releases][]
+page:
 
 ```bash
-$ brew install homer --HEAD
+curl -sLO https://github.com/tubbo/homer/releases/download/latest/homer-windows.tar.gz
 ```
 
-### From Source
+If you have the [Rust][] toolchain installed, you can also opt to install Homer
+from its [Cargo][] crate:
 
-Homer is written in [Rust][], so make sure you have the toolchain all
-set up before cloning this repo.
+```bash
+$ cargo install homer
+```
 
-Once they're all installed, run the following commands to install to
-`/usr/local`...
+Finally, to install an unreleased version, you can build from source:
 
 ```bash
 $ git clone https://github.com/tubbo/homer.git
 $ cd homer
 $ cargo install
 ```
+
+For more build options when installing from source, see the **Development**
+section.
 
 ## Setup
 
@@ -109,11 +135,25 @@ home dir.
 ## Usage
 
 Homer is primarily used to track files which are located in your home
-directory to your Git repository. You can add files that are currently
-untracked with the `homer add` command:
+directory with a Git repository. As stated above, it's also used to initialize
+and synchronize this repository across machines so that your configuration
+can stay up-to-date when you move around computers or replace them. 
+
+### Adding and Removing Files
+
+When you initialize a new Homer repository, your entire home directory will be
+ignored by default. In order to begin tracking files, you'll need to add them
+manually, either by using `git` in the home directory or with `homer`'s
+convenience commands.
+
+You can add files that are currently untracked from anywhere on your machine
+with the `homer add` command:
 
 ```bash
-$ homer add .vimrc -m "Removed vim-rails"
+$ homer add ~/.vimrc -m "add vim config"
+$ homer add ~/.config -m "add xdg configs"
+$ homer add ~/.zshrc -m "add zsh config"
+$ homer add ~/.tmux.conf -m "add tmux config"
 ```
 
 This will begin tracking the file at `~/.vimrc` in your home directory
@@ -124,12 +164,44 @@ If you wish to stop tracking a given configuration file, run `homer rm`
 to delete it from the repo:
 
 ```bash
-$ homer rm .vimrc
+$ homer rm ~/.config/private -m "remove private config"
 ```
 
-This removes the `~/.vimrc` file from your repo (but retains it in your
+This removes the directory or file from your repo (but retains it in your
 home directory) and stops tracking it. When no `-m` is given for a
 message, the message is derived from the action, command, and filename.
+
+You can also pass `--clean` to remove the file in addition to untracking it. 
+
+#### Git Operations
+
+Since Homer is using [libgit2][] bindings instead of actually passing anything
+to the `git` binaries, it doesn't support any advanced (or future) "porcelain"
+features such as `git add -p` or `git commit --squash`. If you want to do
+anything out of the ordinary with your home directory Git repo, you'll need to
+`cd` in and perform the operations yourself.
+
+The `homer add` command is essentially "syntax sugar" for the following Git CLI
+operations:
+
+
+```bash
+$ git add -f ~/.vimrc
+$ git commit ~/.vimrc -m "add vim config"
+```
+
+Likewise, the `homer rm` command is analogous to this:
+
+```bash
+# if you want a `--clean` style experience, remove the `--cached` flag below:
+$ git rm --cached ~/.config/private
+$ git commit ~/.config/private -m "remove private config"
+```
+
+Given that `git`'s porcelain tooling is subject to change, the way Homer has
+implemented these features and the way Git implements them may change a bit,
+which is why you can always go into your home directory and make any required
+changes yourself.
 
 ### Idempotency
 
@@ -146,50 +218,59 @@ $ homer update
 ```
 
 This will not only `git pull` changes from the remote, but also `git push`
-local changes that have not been uploaded yet.
-
-### Conventions
-
-Homer establishes useful conventions on your home directory. It
-uses the **~/bin/** directory to store user-made scripts which are
-available in the `$PATH`. It creates an **~/etc/** directory and uses that to
-store files such as **~/etc/plugins.zsh** for defining shell plugins and
-**~/etc/aliases.zsh** for storing shell aliases you wish to recall later.
-Note that you should not edit the manifest files mentioned above manually, the
-`homer alias` and `homer plugin` tools should manage the files for
-you. Place any ZSH code you wish to load when the shell launches
-in "initializer" files within **~/etc/profile.d**, keeping **~/.zshrc** and
-**~/.zshenv** clear.
-
-As well as creating these initial files, it also runs `git init` in your
-home directory, effectively making the entire thing a Git repository. In order
-to prevent massive repo sizes and checking in unsafe credentials,
-Homer does not initially add any files to this repo, except for the ones
-it generates. One of these generated files is a `.gitignore`, which ignores all
-files in the home directory by default. To add files to the repo, you need to use
-`homer save` or run `git add -f` in your home directory.
+local changes that have not been uploaded yet. Changes that have not been
+committed will be stashed temporarily until the pull/push operations complete. 
 
 ## Development
 
 Homer is written entirely in [Rust][], and uses [Cargo][] for most package and
-build management.
+build management. As such, you'll need the Rust toolchain (among other things)
+to build this package.
 
-To run tests:
+You can install a development environment on macOS or Linux (if you're running
+Homebrew Linux) by running these commands:
+
+```bash
+$ git clone https://github.com/tubbo/homer.git
+$ cd homer
+$ brew bundle
+````
+
+This should install the Rust toolchain, including `cargo`. Make sure it all
+works by running type checks:
+
+```bash
+cargo check
+```
+
+If everything went well, you can run tests with the following command:
 
 ```bash
 $ cargo test
 ```
 
-To build the app locally in debug mode:
+Or, build `homer` locally in "debug" mode:
 
 ```bash
 $ cargo build
 ```
 
-To build a release version:
+The program will be located in `target/debug`.
+
+Release versions are typically built in [CI][] automatically, and distributed
+over [GitHub][GitHub Releases] and [Homebrew][], but you can also build for the
+release target manually by running:
 
 ```bash
 $ cargo build --release
+```
+
+The program will be located in `target/release`.
+
+Finally, if you want to clean everything off your system that was built, run:
+
+```bash
+$ cargo clean
 ```
 
 ### License
@@ -199,7 +280,7 @@ Homer uses the MIT License, as described below:
 ```
 The MIT License (MIT)
 
-Copyright (c) 2014-2019 Tom Scott
+Copyright (c) 2014-2022 Tom Scott
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -221,11 +302,10 @@ THE SOFTWARE.
 ```
 
 [git]: http://git-scm.com
-[brew]: http://brew.sh
-[bats]: https://github.com/sstephenson/bats
-[stow]: http://www.gnu.org/software/stow/
+[homebrew]: http://brew.sh
 [ci]: https://github.com/tubbo/homer/actions
-[Antigen]: https://github.com/zsh-users/antigen
-[ZSH]: http://zsh.sourceforge.net/
-[installer]: https://github.com/tubbo/homer/blob/master/docs/install.sh
-[GitHub Release]: https://github.com/tubbo/homer/releases
+[gitHub releases]: https://github.com/tubbo/homer/releases
+[rust]: https://www.rust-lang.org/
+[cargo]: https://doc.rust-lang.org/cargo/
+[cattle]: http://cloudscaling.com/blog/cloud-computing/the-history-of-pets-vs-cattle/
+[libgit2]: https://libgit2.org/
