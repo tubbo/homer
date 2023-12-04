@@ -1,9 +1,12 @@
-page(1) - Open files for viewing and reading in realtime
-========================================================
+# homer 1 "May 2020" Homer "User Manual"
+
+## NAME
+
+page - Open files for viewing and reading in realtime
 
 ## SYNOPSIS
 
-`page` [ARGUMENTS]
+`page` [*ARGUMENTS*]
 
 ## DESCRIPTION
 
@@ -20,7 +23,7 @@ https://github.com/tubbo/homer#readme
 ## ARGUMENTS
 
 *ARGUMENTS*
-  Arguments passed to the pager.
+: Arguments passed to the pager.
 
 ## EXAMPLES
 
@@ -47,5 +50,4 @@ Tom Scott <http://psychedeli.ca>
 
 ## SEE ALSO
 
-homer(1)
-edit(1)
+[homer(1)](homer.1.md) [edit(1)](edit.1.md)
