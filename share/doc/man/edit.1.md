@@ -1,9 +1,12 @@
-edit(1) - Open files for editing and manipulating
-=================================================
+# homer 1 "May 2020" Homer "User Manual"
+
+## NAME
+
+edit - Open files for editing and manipulating
 
 ## SYNOPSIS
 
-`edit` [ARGUMENTS]
+`edit` [*ARGUMENTS*]
 
 ## DESCRIPTION
 
@@ -20,7 +23,7 @@ https://github.com/tubbo/homer#readme
 ## ARGUMENTS
 
 *ARGUMENTS*
-  Arguments passed to the editor.
+: Arguments passed to the editor.
 
 ## EXAMPLES
 
@@ -47,5 +50,4 @@ Tom Scott <http://psychedeli.ca>
 
 ## SEE ALSO
 
-homer(1)
-page(1)
+[homer(1)](home.1.md) [page(1)](page.1.md)

@@ -1,9 +1,12 @@
-homer(1) - your home directory manager
-======================================
+# homer 1 "May 2020" Homer "User Manual"
+
+## NAME
+
+homer - your home directory manager
 
 ## SYNOPSIS
 
-`homer` COMMAND [ARGUMENTS]
+`homer` *COMMAND* [*ARGUMENTS*]
 
 ## DESCRIPTION
 
@@ -22,10 +25,10 @@ https://github.com/tubbo/homer#readme
 ## ARGUMENTS
 
 *COMMAND*
-  The command you wish to run.
+: The command you wish to run.
 
 *ARGUMENTS*
-  Arguments for said command.
+: Arguments for said command.
 
 ## EXAMPLES
 
@@ -121,14 +124,17 @@ homer script find-and-replace-in-project -r
 The following files are generated when you run the `homer init`
 command...
 
-*~/bin:* User scripts directory. Added to your `$PATH` automatically.
+*~/bin*
+: User scripts directory. Added to your `$PATH` automatically.
 
-*~/etc/profile.d/:* User configs directory
+*~/etc/profile.d/*
+: User configs directory
 
-*~/etc/plugins.zsh:* Plugins configuration
+*~/etc/plugins.zsh*
+: Plugins configuration
 
-*~/etc/aliases.zsh:* User aliases configuration
-
+*~/etc/aliases.zsh*
+: User aliases configuration
 
 ## AUTHOR
 
@@ -136,6 +142,4 @@ Tom Scott <http://psychedeli.ca>
 
 ## SEE ALSO
 
-antigen(1)
-zsh(1)
-git(1)
+[antigen(1)](man:antigen(1)) [zsh(1)](man:zsh(1)) [git(1)](man:git(1))

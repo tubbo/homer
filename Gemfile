@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 # Use Kramdown to generate Man pages.
-gem 'kramdown-man'
+gem 'kramdown-man', '~> 1.0'
 
 # Use ronn to convert Man pages into HTML
 gem 'ronn'
